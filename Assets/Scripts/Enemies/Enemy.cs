@@ -25,10 +25,8 @@ public class Enemy : ScriptableObject {
 
                 if (targetPath != null) {
                     // Move to target, position 0 is our own starting position, so skip
-                    controller.unitState = EnemyController.UnitState.Moving;
-
-                    controller.BaseMove(targetPath[1].x, targetPath[1].y);
-
+                    controller.moveable.BaseMove(targetPath[1].x, targetPath[1].y);
+					controller.moveable.isMoving = true;
                 } else {
                     //Debug.Log("No Path");
                 }

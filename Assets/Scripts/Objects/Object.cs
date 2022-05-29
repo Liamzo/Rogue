@@ -22,38 +22,14 @@ public abstract class Object : MonoBehaviour
 
         spriteRenderer = transform.Find("Sprite").GetComponent<SpriteRenderer>();
 
-        Move(x,y);
-
         if (blocking == true) {
             game.map.map[x,y].occupiedBy = this;
         }
-    }
-
-    public virtual void Move(int x, int y) {
-        if (blocking == true) {
-            game.map.map[this.x,this.y].occupiedBy = null;
-            game.map.map[x,y].occupiedBy = this;
-        }
-
-        this.x = x;
-        this.y = y;
-
-        gameObject.transform.position = new Vector3 (x,y,0);
 
         if (game.map.map[x,y].visible == false) {
             spriteRenderer.enabled = false;
         } else if (game.map.map[x,y].visible == true) {
             spriteRenderer.enabled = true;
         }
-    }
-
-    public virtual void BaseMove(int x, int y) {
-        if (blocking == true) {
-            game.map.map[this.x,this.y].occupiedBy = null;
-            game.map.map[x,y].occupiedBy = this;
-        }
-
-        this.x = x;
-        this.y = y;
     }
 }

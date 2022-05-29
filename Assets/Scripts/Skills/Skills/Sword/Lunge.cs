@@ -25,8 +25,8 @@ public class Lunge : Skill
                     int moveY = yDistance > 0 ? (int)Mathf.Ceil(yDistance / 2.0f) : (int)Mathf.Floor(yDistance / 2.0f);
 
                     if (Game.instance.map.IsPositionClear(new Vector2Int(baseSkill.owner.x + moveX, baseSkill.owner.y + moveY))) {
-                        baseSkill.owner.BaseMove(baseSkill.owner.x + moveX, baseSkill.owner.y + moveY);
-						baseSkill.owner.unitState = UnitController.UnitState.Moving;
+                        baseSkill.owner.GetComponent<Moveable>().BaseMove(baseSkill.owner.x + moveX, baseSkill.owner.y + moveY);
+						baseSkill.owner.GetComponent<Moveable>().isMoving = true;
 
                         baseSkill.owner.equipmentManager.GetMainWeapon().Attack((UnitController)tile.occupiedBy);
 

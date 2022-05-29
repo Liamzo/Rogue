@@ -25,8 +25,8 @@ public class Swipe : Skill
                     int moveY = yDistance * -1;
 
                     if (Game.instance.map.IsPositionClear(new Vector2Int(baseSkill.owner.x + moveX, baseSkill.owner.y + moveY))) {
-                        baseSkill.owner.BaseMove(baseSkill.owner.x + moveX, baseSkill.owner.y + moveY);
-						baseSkill.owner.unitState = UnitController.UnitState.Moving;
+                        baseSkill.owner.GetComponent<Moveable>().BaseMove(baseSkill.owner.x + moveX, baseSkill.owner.y + moveY);
+						baseSkill.owner.GetComponent<Moveable>().isMoving = true;
 
                         baseSkill.owner.equipmentManager.GetMainWeapon().Attack((UnitController)tile.occupiedBy);
 

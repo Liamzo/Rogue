@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class EnemyController : UnitController {
     public Enemy enemyType;
+    public Moveable moveable;
+
+    protected override void Start() {
+		base.Start();
+
+		moveable = GetComponent<Moveable>();
+	}
 
     public override void Turn() {
 		TurnStart();

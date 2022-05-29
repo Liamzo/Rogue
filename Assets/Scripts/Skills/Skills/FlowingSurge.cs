@@ -41,8 +41,8 @@ public class FlowingSurge : Skill
 						int dx = clickedPos.x - baseSkill.owner.x;
 						int dy = clickedPos.y - baseSkill.owner.y;
 
-						baseSkill.owner.BaseMove(targetUnit.x + dx, targetUnit.y + dy);
-						baseSkill.owner.unitState = UnitController.UnitState.Moving;
+						baseSkill.owner.GetComponent<Moveable>().BaseMove(targetUnit.x + dx, targetUnit.y + dy);
+						baseSkill.owner.GetComponent<Moveable>().isMoving = true;
 
 						baseSkill.Reset();
 						return false;
@@ -62,8 +62,9 @@ public class FlowingSurge : Skill
 					baseSkill.owner.equipmentManager.GetMainWeapon().Attack((UnitController)tile.occupiedBy);
 					baseSkill.closedTargerts.Add((UnitController)tile.occupiedBy);
 
-					baseSkill.owner.BaseMove(clickedPos.x, clickedPos.y);
-					baseSkill.owner.unitState = UnitController.UnitState.Moving;
+					baseSkill.owner.GetComponent<Moveable>().BaseMove(clickedPos.x, clickedPos.y);
+					baseSkill.owner.GetComponent<Moveable>().isMoving = true;
+					
 
 					baseSkill.Reset();
 					return false;

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(Moveable))]
 public class PlayerController : UnitController
 {
 	// Start is called before the first frame update
 	protected PlayerSkills playerSkills;
+	protected Moveable moveable;
 
 	public event System.Action TargetUnitChange;
 
@@ -29,6 +31,8 @@ public class PlayerController : UnitController
 
         unitStats = (PlayerStats) unitStats;
 		this.playerSkills = (PlayerSkills) base.unitSkills;
+
+        moveable = GetComponent<Moveable>();
 	}
 
 	public override void TurnStart()
@@ -173,9 +177,8 @@ public class PlayerController : UnitController
 		Object found;
 
 		if (game.map.IsPositionClear(position, out found)) {
-			unitState = UnitState.Moving;
-
-            BaseMove(position.x, position.y);
+            moveable.BaseMove(position.x, position.y);
+            moveable.isMoving = true;
 
 			return true;
 		} 

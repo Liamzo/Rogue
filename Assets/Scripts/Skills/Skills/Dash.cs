@@ -47,9 +47,8 @@ public class Dash : Skill
 
 
         if (Input.GetMouseButtonDown(0)) {
-            baseSkill.owner.BaseMove(targetCoords.x, targetCoords.y);
-
-            baseSkill.owner.unitState = UnitController.UnitState.Moving;
+            baseSkill.owner.GetComponent<Moveable>().BaseMove(targetCoords.x, targetCoords.y);
+			baseSkill.owner.GetComponent<Moveable>().isMoving = true;
 
             baseSkill.owner.unitStats.AddOrRemoveGrace(-cost);
 

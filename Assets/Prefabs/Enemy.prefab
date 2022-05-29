@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 1118905159591673170}
   - component: {fileID: 1118905159591673183}
   - component: {fileID: 1302891775132655262}
+  - component: {fileID: 2026859118851392670}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -144,8 +145,9 @@ MonoBehaviour:
   turnTimer: 0
   turn: 0
   unitState: 0
+  targetUnit: {fileID: 0}
   enemyType: {fileID: 11400000, guid: 879712f969a7618499f195ef06506da8, type: 2}
-  targetObject: {fileID: 0}
+  moveable: {fileID: 0}
 --- !u!114 &1118905159591673170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,3 +191,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitController: {fileID: 0}
+--- !u!114 &2026859118851392670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118905159591673171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3d8fcde725a13a4d99000ac24b77463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 0}
+  isMoving: 0
