@@ -20,4 +20,5 @@ MonoBehaviour:
   - stat: 5
     value: 2
   weaponType: 1
+  range: 1
   offHandDamage: 1

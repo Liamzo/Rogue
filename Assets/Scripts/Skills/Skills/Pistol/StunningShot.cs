@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "New StunningBlow", menuName = "Skills/StunBlow")]
-public class StunningBlow : Skill
+[CreateAssetMenu(fileName = "New StunningShot", menuName = "Skills/Pistol/StunBlow")]
+public class StunningShot : Skill
 {
     public int duration;
 
@@ -18,7 +18,12 @@ public class StunningBlow : Skill
             Tile tile = baseSkill.game.map.GetTile(worldPosition);
 
             if (tile != null) {
-                if (tile.occupiedBy != null) {
+                int xDistance = tile.x - baseSkill.owner.x;
+                int yDistance = tile.y - baseSkill.owner.y;
+                int dist = Mathf.Max(Mathf.Abs(xDistance), Mathf.Abs(yDistance));
+
+                if (tile.occupiedBy != null && dist <= baseSkill.owner.equipmentManager.GetRangedWeapon().item.range) {
+                    baseSkill.owner.equipmentManager.GetRangedWeapon().Attack(new Vector2Int(tile.x, tile.y));
                     BaseEffect effect = new StunEffect((UnitController)tile.occupiedBy, duration);
 
                     return true;

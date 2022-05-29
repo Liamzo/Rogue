@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63154ac1f7c8d234ba60bbede49d5844, type: 3}
   m_Name: Thorn Armour
   m_EditorClassIdentifier: 
-  name: New Skill
-  icon: {fileID: 0}
-  requiredSkills: []
-  graceCost: 0
+  name: Thorn Armour
+  icon: {fileID: -9031443015984524765, guid: 30c9f1deb9848bc4c9003ce89df2108d, type: 3}
+  requiredSkills:
+  - {fileID: 11400000, guid: 7fc8bc16347f45e4aa2f6f2afe18c122, type: 2}
+  graceCost: 1
   requiredWeapon: 0
-  power: 0
-  duration: 0
+  power: 3
+  duration: 5

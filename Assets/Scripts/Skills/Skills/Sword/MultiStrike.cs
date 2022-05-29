@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Multi Strike", menuName = "Skills/MultiStrike")]
+[CreateAssetMenu(fileName = "Multi Strike", menuName = "Skills/Sword/MultiStrike")]
 public class MultiStrike : Skill
 {
     public int attacks;
@@ -17,7 +17,11 @@ public class MultiStrike : Skill
             Tile tile = baseSkill.game.map.GetTile(worldPosition);
 
             if (tile != null) {
-                if (tile.occupiedBy != null) {
+                int xDistance = tile.x - baseSkill.owner.x;
+                int yDistance = tile.y - baseSkill.owner.y;
+                int dist = Mathf.Max(Mathf.Abs(xDistance), Mathf.Abs(yDistance));
+
+                if (tile.occupiedBy != null && dist <= baseSkill.owner.equipmentManager.GetMainWeapon().item.range) {
                     for (int i = 0; i < attacks; i++) {
                         baseSkill.owner.equipmentManager.GetMainWeapon().Attack((UnitController)tile.occupiedBy);
                     }

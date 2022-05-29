@@ -17,7 +17,7 @@ MonoBehaviour:
   isDefaultItem: 0
   equipSlot: 4
   stats:
-  - stat: 5
+  - stat: 6
     value: 3
   weaponType: 7
   range: 8

@@ -27,13 +27,19 @@ public class Skill : ScriptableObject
 	}
 
     public virtual bool CanActivate (BaseSkill baseSkill) {
-        bool canActivate = true;
+        // bool canActivate = true;
 
-        if (requiredWeapon != baseSkill.owner.equipmentManager.GetMainWeapon().item.weaponType && requiredWeapon != WeaponType.None) {
-            canActivate = false;
+        // if (requiredWeapon != baseSkill.owner.equipmentManager.GetMainWeapon().item.weaponType && requiredWeapon != WeaponType.None) {
+        //     canActivate = false;
+        // }
+
+        Debug.Log(baseSkill.owner.equipmentManager.GetMainWeapon());
+        Debug.Log(baseSkill.owner.equipmentManager.GetRangedWeapon());
+        if ( (requiredWeapon == baseSkill.owner.equipmentManager.GetMainWeapon().item.weaponType) || (requiredWeapon == baseSkill.owner.equipmentManager.GetRangedWeapon().item.weaponType) || (requiredWeapon == WeaponType.None) ) {
+            return true;
         }
 
-		return canActivate;
+		return false;
 	}
 
     public virtual void Activate(BaseSkill baseSkill) {

@@ -20,3 +20,4 @@ MonoBehaviour:
   sv:
     stat: 0
     value: 10
+  duration: 5

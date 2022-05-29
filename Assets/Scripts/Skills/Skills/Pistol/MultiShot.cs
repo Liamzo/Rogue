@@ -1,0 +1,35 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "Multi Shot", menuName = "Skills/Pistol/MultiShot")]
+public class MultiShot : Skill
+{
+    public int attacks;
+
+    public override bool Use (BaseSkill baseSkill) {
+        if (Input.GetMouseButtonDown(0)) {
+            // if (baseSkill.owner.IsPointerOverGameObject()) {     //Don't take input if mouse is over ui
+            //     return;
+            // }
+
+            Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Tile tile = baseSkill.game.map.GetTile(worldPosition);
+
+            if (tile != null) {
+                int xDistance = tile.x - baseSkill.owner.x;
+                int yDistance = tile.y - baseSkill.owner.y;
+                int dist = Mathf.Max(Mathf.Abs(xDistance), Mathf.Abs(yDistance));
+
+                if (tile.occupiedBy != null && dist <= baseSkill.owner.equipmentManager.GetRangedWeapon().item.range) {
+                    for (int i = 0; i < attacks; i++) {
+                        baseSkill.owner.equipmentManager.GetRangedWeapon().Attack(new Vector2Int(tile.x, tile.y));
+                    }
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+}

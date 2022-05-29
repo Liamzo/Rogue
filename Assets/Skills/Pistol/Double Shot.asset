@@ -9,15 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 589dd5c898b0be44797218025e754e98, type: 3}
-  m_Name: Sword
+  m_Script: {fileID: 11500000, guid: ef8849d2535d19f478f48433edbf5900, type: 3}
+  m_Name: Double Shot
   m_EditorClassIdentifier: 
-  name: Sword
-  icon: {fileID: 21300000, guid: 67b2c2e703b1d664aa12a9d01dc30339, type: 3}
-  isDefaultItem: 0
-  equipSlot: 3
-  stats:
-  - stat: 5
-    value: 3
-  weaponType: 2
-  range: 1
+  name: Double Shot
+  icon: {fileID: -2727657493149837164, guid: 30c9f1deb9848bc4c9003ce89df2108d, type: 3}
+  requiredSkills: []
+  graceCost: 2
+  requiredWeapon: 5
+  attacks: 2
