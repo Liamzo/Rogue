@@ -7762,6 +7762,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
   isMoving: 0
+--- !u!114 &2016171425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016171413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6308c54a01f8fa45878337f6c9e6191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visibleTargets: []
 --- !u!1 &2035115887
 GameObject:
   m_ObjectHideFlags: 0

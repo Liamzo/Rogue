@@ -8,7 +8,7 @@ public class Enemy : ScriptableObject {
 
     public void Controls(EnemyController controller) {
         if (controller.targetUnit == null) {
-			controller.FindTarget();
+			controller.targetUnit = controller.vision.FindTarget();
 		}
 
 		if (controller.targetUnit != null) {
@@ -21,7 +21,7 @@ public class Enemy : ScriptableObject {
 
 				controller.equipmentManager.GetMainWeapon().Attack((UnitController)controller.targetUnit);
 			} else {
-				List<Vector2Int> targetPath = controller.FindPathToTarget();
+				List<Vector2Int> targetPath = Game.instance.map.FindPath(new Vector2Int(controller.x, controller.y), new Vector2Int(controller.targetUnit.x, controller.targetUnit.y));
 
                 if (targetPath != null) {
                     // Move to target, position 0 is our own starting position, so skip
