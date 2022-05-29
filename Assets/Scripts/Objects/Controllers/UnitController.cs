@@ -69,7 +69,7 @@ public class UnitController : Object
 
 
 	public virtual void Turn() {
-		Debug.Log("Uni turn");
+		Debug.Log("Unit turn");
     }
 
 	public virtual void TurnEnd() {
