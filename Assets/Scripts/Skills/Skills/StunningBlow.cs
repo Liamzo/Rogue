@@ -6,6 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New StunningBlow", menuName = "Skills/StunBlow")]
 public class StunningBlow : Skill
 {
+    public int duration;
+
     public override bool Use (BaseSkill baseSkill) {
         if (Input.GetMouseButtonDown(0)) {
             // if (baseSkill.owner.IsPointerOverGameObject()) {     //Don't take input if mouse is over ui
@@ -17,7 +19,7 @@ public class StunningBlow : Skill
 
             if (tile != null) {
                 if (tile.occupiedBy != null) {
-                    BaseEffect effect = new StunEffect((UnitController)tile.occupiedBy, 2);
+                    BaseEffect effect = new StunEffect((UnitController)tile.occupiedBy, duration);
 
                     return true;
                 }

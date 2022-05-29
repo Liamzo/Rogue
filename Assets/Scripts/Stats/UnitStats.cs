@@ -15,6 +15,8 @@ public class UnitStats : MonoBehaviour {
 
     public event System.Action OnUIChange;
 
+    public event System.Action<Damage> OnTakeDamage = delegate { };
+
     void Awake() {
         unitName = baseUnitStats.unitName;
 
@@ -39,6 +41,8 @@ public class UnitStats : MonoBehaviour {
     }
 
     public void TakeDamge (Damage damage) {
+        OnTakeDamage(damage);
+
         damage.damage -=  stats[(int)Stats.Armour].GetValue();
         damage.damage = Mathf.Clamp(damage.damage, 0, int.MaxValue);
 
