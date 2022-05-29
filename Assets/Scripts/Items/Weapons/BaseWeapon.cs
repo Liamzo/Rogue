@@ -14,6 +14,12 @@ public class BaseWeapon : BaseEquipment {
 
     public virtual void Attack(UnitController target) {
         item.Attack(this, target, out bool killed);
+
+        if (killed == true && owner is PlayerController) {
+            owner.ChangeTargetUnit(null);
+            ((PlayerController)owner).KilledEnemy();
+        }
+
         Reset();
     }
 

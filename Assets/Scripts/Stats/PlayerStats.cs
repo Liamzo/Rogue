@@ -22,7 +22,8 @@ public class PlayerStats : UnitStats {
 
                 if (stats[slot] == null) {
                     Stat stat = new Stat();
-                    stat.SetBaseValue(sv.value);
+                    stat.SetBaseValue(0);
+                    stat.AddModifier(sv.value);
                     stats[slot] = stat;
                 } else {
                     stats[slot].AddModifier(sv.value);

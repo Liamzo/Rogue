@@ -24,7 +24,8 @@ public class RangedWeapon : Weapon {
             if (!baseWeapon.game.map.IsPositionClear(new Vector2Int(xPos, yPos) , out Object blocked)) {
                 if (blocked is UnitController) {
                     UnitController hit = (UnitController) blocked;
-                    hit.unitStats.TakeDamge(baseWeapon.owner.unitStats.stats[(int)Stats.Perception].GetValue() + baseWeapon.owner.unitStats.stats[(int)Stats.RangedDamge].GetValue());
+                    //hit.unitStats.TakeDamge(baseWeapon.owner.unitStats.stats[(int)Stats.Perception].GetValue() + baseWeapon.owner.unitStats.stats[(int)Stats.RangedDamge].GetValue());
+                    hit.unitStats.TakeDamge(new Damage(baseWeapon.owner, baseWeapon.owner.unitStats.stats[(int)Stats.Perception].GetValue() + baseWeapon.owner.unitStats.stats[(int)Stats.RangedDamge].GetValue()));
 
                     if (hit.unitStats.currentGrit <= 0) {
                         Debug.Log("Killed " + hit.name);

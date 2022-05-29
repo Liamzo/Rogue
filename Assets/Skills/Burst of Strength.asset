@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdbac9e2717885841a773f6315f47d98, type: 3}
+  m_Name: Burst of Strength
+  m_EditorClassIdentifier: 
+  name: Burst of Strength
+  icon: {fileID: -2750979441368654517, guid: 30c9f1deb9848bc4c9003ce89df2108d, type: 3}
+  requiredSkills: []
+  graceCost: 0
+  requiredWeapon: 0
+  sv:
+    stat: 0
+    value: 10

@@ -25,6 +25,7 @@ public class UnitStats : MonoBehaviour {
 
         for (int i = 0; i < stats.Length; i++) {
             stats[i] = new Stat();
+            stats[i].SetBaseValue(0);
         }
 
         // Set stats using BaseUnitStats
@@ -37,18 +38,18 @@ public class UnitStats : MonoBehaviour {
         currentGrace = stats[(int)Stats.Grace].GetValue();
     }
 
-    public void TakeDamge (int damage) {
-        damage -=  stats[(int)Stats.Armour].GetValue();
-        damage = Mathf.Clamp(damage, 0, int.MaxValue);
+    public void TakeDamge (Damage damage) {
+        damage.damage -=  stats[(int)Stats.Armour].GetValue();
+        damage.damage = Mathf.Clamp(damage.damage, 0, int.MaxValue);
 
         if (currentGrace > 0) {
-            AddOrRemoveGrace(-damage);
+            AddOrRemoveGrace(-damage.damage);
             Debug.Log(transform.name + " parries the blow");
             return;
         }
 
-        currentGrit -= damage;
-        Debug.Log(transform.name + " takes " + damage + " damage");
+        currentGrit -= damage.damage;
+        Debug.Log(transform.name + " takes " + damage.damage + " damage");
 
         if (OnUIChange != null) {
             OnUIChange();

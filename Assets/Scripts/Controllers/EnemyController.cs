@@ -5,17 +5,21 @@ using UnityEngine;
 public class EnemyController : UnitController {
     public Enemy enemyType;
 
-    public Object targetObject;
-
     public override void Turn() {
-		base.Turn();
+		TurnStart();
+
+        if (turn == false) {
+            return;
+        }
 
         enemyType.Controls(this);
+
+        TurnEnd();
     }
 
     public List<Vector2Int> FindPathToTarget() {
-        if (targetObject != null) {
-            return game.map.FindPath(new Vector2Int(this.x, this.y), new Vector2Int(targetObject.x,targetObject.y));
+        if (targetUnit != null) {
+            return game.map.FindPath(new Vector2Int(this.x, this.y), new Vector2Int(targetUnit.x,targetUnit.y));
         }
 
         return null;
@@ -25,7 +29,7 @@ public class EnemyController : UnitController {
         Object target  = FindObjectOfType<PlayerController>();
 
         if (target == null) {
-            targetObject = null;
+            targetUnit = null;
             return;
         }
 
@@ -35,10 +39,10 @@ public class EnemyController : UnitController {
         float dist = Mathf.Sqrt((dx * dx) + (dy * dy));
 
         if (dist < unitStats.stats[(int) Stats.Sight].GetValue()) {
-            targetObject = FindObjectOfType<PlayerController>();
+            targetUnit = FindObjectOfType<PlayerController>();
             return;
         } else {
-            targetObject = null;
+            targetUnit = null;
             return;
         }
     }

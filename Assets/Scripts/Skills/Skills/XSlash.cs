@@ -19,7 +19,7 @@ public class XSlash : Skill {
                 if (tile.occupiedBy != null) {
                     BaseDaggers weapon = (BaseDaggers) baseSkill.owner.equipmentManager.GetMainWeapon();
 
-                    ((UnitController)tile.occupiedBy).unitStats.TakeDamge(baseSkill.owner.unitStats.stats[(int)Stats.Strength].GetValue() + baseSkill.owner.unitStats.stats[(int)Stats.MeleeDamage].GetValue() + weapon.GetOffHandDamage() + bonusDamage);
+                    ((UnitController)tile.occupiedBy).unitStats.TakeDamge(new Damage(baseSkill.owner, baseSkill.owner.unitStats.stats[(int)Stats.Strength].GetValue() + baseSkill.owner.unitStats.stats[(int)Stats.MeleeDamage].GetValue() + weapon.GetOffHandDamage() + bonusDamage));
 
                     if (((UnitController)tile.occupiedBy).unitStats.currentGrit <= 0) {
                         Debug.Log("Killed " + ((UnitController)tile.occupiedBy).name);

@@ -6,15 +6,9 @@ public class BaseSkill {
     public Game game;
 
 	public UnitController owner;
-	public UnitController targetUnit;
-	public Vector2Int targetCoords;
-	public float xStep;
-    public float yStep;
 
 	public Skill skill;
 	public KeyCode hotKey;
-
-	public float clock;
 
 	// For Flowing Strike, need a better way to structure this
 	public List<Vector2Int> openTargerts;
@@ -23,7 +17,6 @@ public class BaseSkill {
     public BaseSkill (Skill skill) {
 		this.game = Game.instance;
 		this.skill = skill;
-		this.clock = 0;
 
 		openTargerts = new List<Vector2Int>();
 		closedTargerts = new List<UnitController>();
@@ -42,12 +35,6 @@ public class BaseSkill {
     }
 
 	public virtual void Reset() {
-		targetUnit = null;
-		targetCoords = Vector2Int.zero;
-		xStep = 0;
-		yStep = 0;
-
-		clock = 0;
 		openTargerts.Clear();
     }
 

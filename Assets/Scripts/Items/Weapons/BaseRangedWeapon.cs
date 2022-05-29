@@ -9,6 +9,11 @@ public class BaseRangedWeapon : BaseWeapon {
 
     public void Attack(Vector2Int target) {
         ((RangedWeapon)item).Attack(this, target, out bool killed);
+
+        if (killed == true && owner is PlayerController) {
+            ((PlayerController)owner).KilledEnemy();
+        }
+        
         Reset();
     }
 }

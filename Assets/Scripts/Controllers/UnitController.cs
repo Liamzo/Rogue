@@ -27,6 +27,11 @@ public class UnitController : Object
 
 	public BaseSkill usedSkill;
 
+	public event System.Action OnTurnStart = delegate { };
+	public event System.Action OnTurnEnd = delegate { };
+
+	public UnitController targetUnit;
+
 	// Start is called before the first frame update
 	protected override void Start() {
 		base.Start();
@@ -53,18 +58,27 @@ public class UnitController : Object
 		}
 	}
 
-
-	public virtual void Turn() {
+	public virtual void TurnStart() {
+		turn = true;
+		OnTurnStart();
 		if (unitStats.currentGrace < unitStats.stats[(int)Stats.Grace].GetValue()) {
 			unitStats.AddOrRemoveGrace(1);
 		}
 		turnTimer = turnTime;
+	}
+
+
+	public virtual void Turn() {
+		Debug.Log("Uni turn");
     }
 
-
-	protected virtual void Controls() {
-		// To be overridden
+	public virtual void TurnEnd() {
+		turn = false;
 	}
+
+	public virtual void ChangeTargetUnit(UnitController unit) {
+        targetUnit = unit;
+    }
 
 
 

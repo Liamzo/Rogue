@@ -8,7 +8,6 @@ public class PlayerController : UnitController
 	// Start is called before the first frame update
 	protected PlayerSkills playerSkills;
 
-	public UnitController targetUnit;
 	public event System.Action TargetUnitChange;
 
 	// For FOV
@@ -32,52 +31,39 @@ public class PlayerController : UnitController
 		this.playerSkills = (PlayerSkills) base.unitSkills;
 	}
 
-	new public bool Turn() {
+	public override void TurnStart()
+	{
+		base.TurnStart();
+
         foreach (Vector2Int v in visibleTiles) {
 			game.map.SetLightOff(v.x,v.y);
 		}
 		visibleTiles.Clear();
 
 		ComputeVisibility(game.map, new Vector2Int(this.x, this.y), unitStats.stats[(int)Stats.Sight].GetValue() + 0.5f);
+	}
+
+	new public bool Turn() {
+        if (turn == false) {
+            TurnEnd();
+            return true;
+        }
 
         if (state == State.Controls) {
             if (Controls()) {
-                base.Turn();
-
-                foreach (Vector2Int v in visibleTiles) {
-                    game.map.SetLightOff(v.x,v.y);
-                }
-                visibleTiles.Clear();
-
-                ComputeVisibility(game.map, new Vector2Int(this.x, this.y), unitStats.stats[(int)Stats.Sight].GetValue() + 0.5f);
+                TurnEnd();
 
                 return true;
             }
         } else if (state == State.Range) {
             if (RangedCheck()) {
-                base.Turn();
-                state = State.Controls;
-
-                foreach (Vector2Int v in visibleTiles) {
-                    game.map.SetLightOff(v.x,v.y);
-                }
-                visibleTiles.Clear();
-
-                ComputeVisibility(game.map, new Vector2Int(this.x, this.y), unitStats.stats[(int)Stats.Sight].GetValue() + 0.5f);
+                TurnEnd();
 
                 return true;
             }
         } else if (state == State.Skill) {
             if (SkillCheck()) {
-                base.Turn();
-                state = State.Controls;
-
-                foreach (Vector2Int v in visibleTiles) {
-                    game.map.SetLightOff(v.x,v.y);
-                }
-                visibleTiles.Clear();
-
-                ComputeVisibility(game.map, new Vector2Int(this.x, this.y), unitStats.stats[(int)Stats.Sight].GetValue() + 0.5f);
+                TurnEnd();
 
                 return true;
             }
@@ -86,8 +72,20 @@ public class PlayerController : UnitController
         return false;
 	}
 
+    public override void TurnEnd() {
+        base.TurnEnd();
+
+        state = State.Controls;
+
+        foreach (Vector2Int v in visibleTiles) {
+            game.map.SetLightOff(v.x,v.y);
+        }
+        visibleTiles.Clear();
+
+        ComputeVisibility(game.map, new Vector2Int(this.x, this.y), unitStats.stats[(int)Stats.Sight].GetValue() + 0.5f);
+    }
     
-	protected new bool Controls() {
+	protected bool Controls() {
 		if (Input.GetMouseButtonDown(0)) {
 			if (EventSystem.current.IsPointerOverGameObject()) {
 				return false;
@@ -97,18 +95,15 @@ public class PlayerController : UnitController
 
 			if (!game.map.IsPositionClear(tile, out Object blocked)) {
 				if (blocked is EnemyController) {
-					targetUnit = (UnitController) blocked;
-					TargetUnitChange();
+                    ChangeTargetUnit((UnitController) blocked);
 				}
 			} else {
-				targetUnit = null;
-				TargetUnitChange();
+				ChangeTargetUnit(null);
 			}
 		}
 
 		if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Keypad5)) {
 			return true;
-
 		}
 
 		// Check for movement input
@@ -190,6 +185,7 @@ public class PlayerController : UnitController
 				// Attack
 				//state = State.Attacking;
 
+                ChangeTargetUnit((EnemyController)found);
                 equipmentManager.GetMainWeapon().Attack((EnemyController)found);
 				return true;
 
@@ -244,7 +240,16 @@ public class PlayerController : UnitController
         }
 
         if (Input.GetMouseButtonDown(0)) {
+            Object found;
+		    game.map.IsPositionClear(new Vector2Int(targetCoords.x, targetCoords.y), out found);
+            if (found != null) {
+                if (found is EnemyController) {
+                    ChangeTargetUnit((UnitController)found);
+                }
+            }
+
             equipmentManager.GetRangedWeapon().Attack(new Vector2Int(targetCoords.x, targetCoords.y));
+
             return true;
         }
         return false;
@@ -282,7 +287,6 @@ public class PlayerController : UnitController
     }
     
 
-
 	bool GetItem() {
 		BaseItem item = game.GetItem(x,y);
 
@@ -302,8 +306,14 @@ public class PlayerController : UnitController
 		return EventSystem.current.IsPointerOverGameObject();		    
 	}
 
+    public override void ChangeTargetUnit(UnitController unit) {
+        base.ChangeTargetUnit(unit);
+		TargetUnitChange();
+    }
 
-
+    public void KilledEnemy() {
+        unitStats.AddOrRemoveGrace(1);
+    }
 
 
 	#region FOV

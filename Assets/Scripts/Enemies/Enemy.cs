@@ -7,19 +7,19 @@ public class Enemy : ScriptableObject {
     public BaseUnitStats stats;
 
     public void Controls(EnemyController controller) {
-        if (controller.targetObject == null) {
+        if (controller.targetUnit == null) {
 			controller.FindTarget();
 		}
 
-		if (controller.targetObject != null) {
-			int dx = controller.targetObject.x - controller.x;
-			int dz = controller.targetObject.y - controller.y;
+		if (controller.targetUnit != null) {
+			int dx = controller.targetUnit.x - controller.x;
+			int dz = controller.targetUnit.y - controller.y;
 
 			if (Mathf.Sqrt((dx * dx) + (dz * dz)) < 1.5f) {
                 // Attack
 				//controller.state = EnemyController.State.Attacking;
 
-				controller.equipmentManager.GetMainWeapon().Attack((UnitController)controller.targetObject);
+				controller.equipmentManager.GetMainWeapon().Attack((UnitController)controller.targetUnit);
 			} else {
 				List<Vector2Int> targetPath = controller.FindPathToTarget();
 
