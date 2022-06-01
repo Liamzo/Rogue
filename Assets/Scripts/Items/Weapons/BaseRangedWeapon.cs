@@ -7,6 +7,10 @@ public class BaseRangedWeapon : BaseWeapon {
 		this.item = item;
 	}
 
+    public Command Aim() {
+        return ((RangedWeapon)item).Aim(this);
+    }
+
     public void Attack(Vector2Int target) {
         ((RangedWeapon)item).Attack(this, target, out bool killed);
 

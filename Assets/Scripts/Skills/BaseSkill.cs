@@ -26,10 +26,17 @@ public class BaseSkill {
 		skill.OnUnlock();
 	}
 
-	public bool Use () {
-        bool done = skill.Use(this);
-		if (done) {
+	public CommandResult Use () {
+		// Do something here, CHECK FOR ESCAPE!!!
+		// Also move Mana Cost deduction here
+		if (Input.GetKeyDown(KeyCode.Escape)) {
+			return new CommandResult(CommandResult.CommandState.Failed, null);
+		}
+
+        CommandResult done = skill.Use(this);
+		if (done.state == CommandResult.CommandState.Succeeded) {
             Reset();
+			owner.unitStats.AddOrRemoveGrace(-skill.graceCost);
         }
         return done;
     }

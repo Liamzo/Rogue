@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Swipe", menuName = "Skills/Sword/Swipe")]
 public class Swipe : Skill
 {
-    public override bool Use (BaseSkill baseSkill) {
+    public override CommandResult Use (BaseSkill baseSkill) {
         if (Input.GetMouseButtonDown(0)) {
             // if (baseSkill.owner.IsPointerOverGameObject()) {     //Don't take input if mouse is over ui
             //     return;
@@ -18,7 +18,7 @@ public class Swipe : Skill
                 int xDistance = tile.x - baseSkill.owner.x;
                 int yDistance = tile.y - baseSkill.owner.y;
                 int dist = Mathf.Max(Mathf.Abs(xDistance), Mathf.Abs(yDistance));
-
+                
                 if (tile.occupiedBy != null && dist == baseSkill.owner.equipmentManager.GetMainWeapon().item.range) {
                     // Check the movement space is free
                     int moveX = xDistance * -1;
@@ -26,18 +26,15 @@ public class Swipe : Skill
 
                     if (Game.instance.map.IsPositionClear(new Vector2Int(baseSkill.owner.x + moveX, baseSkill.owner.y + moveY))) {
                         baseSkill.owner.GetComponent<Moveable>().BaseMove(baseSkill.owner.x + moveX, baseSkill.owner.y + moveY);
-						baseSkill.owner.GetComponent<Moveable>().isMoving = true;
+                        baseSkill.owner.GetComponent<Moveable>().isMoving = true;
 
                         baseSkill.owner.equipmentManager.GetMainWeapon().Attack((UnitController)tile.occupiedBy);
-
-                        return true;
-                    }
-
                     
+                        return new CommandResult(CommandResult.CommandState.Succeeded, null);
+                    }
                 }
             }
         }
-        
-        return false;
+        return new CommandResult(CommandResult.CommandState.Pending, null);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Dash", menuName = "Skills/Dash")]
 public class Dash : Skill
 {
-    public override bool Use (BaseSkill baseSkill) {    
+    public override CommandResult Use (BaseSkill baseSkill) {    
         // Find and highlight path
         Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2Int targetCoords = baseSkill.game.map.GetXY(worldPosition);
@@ -16,7 +16,7 @@ public class Dash : Skill
         int min = Mathf.Min(Mathf.Abs(xDistance), Mathf.Abs(yDistance));
 
         if (remaining + min > baseSkill.owner.unitStats.currentGrace) {
-            return false;
+            return new CommandResult(CommandResult.CommandState.Pending, null);
         }
 
         int max = Mathf.Max(Mathf.Abs(xDistance), Mathf.Abs(yDistance));
@@ -52,10 +52,10 @@ public class Dash : Skill
 
             baseSkill.owner.unitStats.AddOrRemoveGrace(-cost);
 
-            return true;
+            return new CommandResult(CommandResult.CommandState.Succeeded, null);
         }
         
 
-        return false;
+        return new CommandResult(CommandResult.CommandState.Pending, null);
     }
 }

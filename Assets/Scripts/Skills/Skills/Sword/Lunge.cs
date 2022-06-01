@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Lunge", menuName = "Skills/Sword/Lunge")]
 public class Lunge : Skill
 {
-    public override bool Use (BaseSkill baseSkill) {
+    public override CommandResult Use (BaseSkill baseSkill) {
         if (Input.GetMouseButtonDown(0)) {
             // if (baseSkill.owner.IsPointerOverGameObject()) {     //Don't take input if mouse is over ui
             //     return;
@@ -30,14 +30,12 @@ public class Lunge : Skill
 
                         baseSkill.owner.equipmentManager.GetMainWeapon().Attack((UnitController)tile.occupiedBy);
 
-                        return true;
+                        return new CommandResult(CommandResult.CommandState.Succeeded, null);
                     }
-
-                    
                 }
             }
         }
-        
-        return false;
+
+        return new CommandResult(CommandResult.CommandState.Pending, null);
     }
 }

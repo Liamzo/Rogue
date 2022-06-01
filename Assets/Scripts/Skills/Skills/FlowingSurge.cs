@@ -5,12 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Flowing Surge", menuName = "Skills/FlowingSurge")]
 public class FlowingSurge : Skill
 {
-    public override bool Use (BaseSkill baseSkill) {
+    public override CommandResult Use (BaseSkill baseSkill) {
         if (baseSkill.openTargerts.Count == 0) {
 			FindTargets(baseSkill);
 			if (baseSkill.openTargerts.Count == 0) {
 				baseSkill.closedTargerts.Clear();
-				return true;	
+				return new CommandResult(CommandResult.CommandState.Succeeded, null);	
 			}
 		}
 
@@ -45,7 +45,7 @@ public class FlowingSurge : Skill
 						baseSkill.owner.GetComponent<Moveable>().isMoving = true;
 
 						baseSkill.Reset();
-						return false;
+						return new CommandResult(CommandResult.CommandState.Pending, null);
 					}
 				} else {
 					// Find target unit
@@ -56,7 +56,7 @@ public class FlowingSurge : Skill
 					if (tile.occupiedBy == null) {
 						Debug.LogWarning("No target found, math gone wrong");
 						baseSkill.Reset();
-						return true;
+						return new CommandResult(CommandResult.CommandState.Succeeded, null);
 					}
 
 					baseSkill.owner.equipmentManager.GetMainWeapon().Attack((UnitController)tile.occupiedBy);
@@ -67,12 +67,12 @@ public class FlowingSurge : Skill
 					
 
 					baseSkill.Reset();
-					return false;
+					return new CommandResult(CommandResult.CommandState.Pending, null);
 				}
 			}
 		}
 
-		return false;
+		return new CommandResult(CommandResult.CommandState.Pending, null);
     }
 
     public override void Activate(BaseSkill baseSkill) {

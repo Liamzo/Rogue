@@ -33,6 +33,8 @@ public class Game : MonoBehaviour
 	};
 	State state;
 
+    public Command currentCommand;
+
     void Awake () {
         instance = this;
 
@@ -48,6 +50,7 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         state = State.TakingTurns;
+        currentCommand = null;
     }
 
     // Update is called once per frame
@@ -102,14 +105,48 @@ public class Game : MonoBehaviour
                 state = State.WaitingOnPlayer;
                 player.TurnStart();
             } else {
-                u.Turn();
+                currentCommand = u.Turn();
+
+                while (true) {
+                    CommandResult result = currentCommand.perform();
+
+                    if (result.state == CommandResult.CommandState.Alternative) {
+                        currentCommand = result.alternative;
+                    } else if (result.state == CommandResult.CommandState.Succeeded) {
+                        break;
+                    }
+                    // TODO: Failed
+                }
+
+                u.TurnEnd();
+                currentCommand = null;
             }
 		}
+
+
     }
 
     void WaitingOnPlayer() {
-        if (player.Turn()) {
-            state = State.TakingTurns;
+        if (currentCommand == null)
+            currentCommand = player.Turn();
+    
+        if (currentCommand != null) {
+            CommandResult result = currentCommand.perform();
+
+            if (result.state == CommandResult.CommandState.Alternative) {
+                currentCommand = result.alternative;
+                return;
+            } else if (result.state == CommandResult.CommandState.Succeeded) {
+                player.TurnEnd();
+                state = State.TakingTurns;
+                currentCommand = null;
+                return;
+            } else if (result.state == CommandResult.CommandState.Failed) {
+                currentCommand = null;
+                return;
+            } else if (result.state == CommandResult.CommandState.Pending) {
+                return;
+            }
 		}
     }
 

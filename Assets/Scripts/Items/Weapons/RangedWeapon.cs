@@ -3,7 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New RangedWeapom", menuName = "Inventory/RangedWeapom")]
-public class RangedWeapon : Weapon {
+public class RangedWeapon : Weapon 
+{
+    public virtual Command Aim (BaseWeapon baseWeapon) {
+        Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2Int targetCoords = baseWeapon.game.map.GetXY(worldPosition);
+
+        int xDistance = targetCoords.x - baseWeapon.owner.x;
+        int yDistance = targetCoords.y - baseWeapon.owner.y;
+        int max = Mathf.Max(Mathf.Abs(xDistance), Mathf.Abs(yDistance));
+
+        float xStep = xDistance / (float) max;
+        float yStep = yDistance / (float) max;
+
+        List<Vector2Int> path = new List<Vector2Int>();
+
+        for (int i = 1; i <= ((RangedWeapon)baseWeapon.owner.equipmentManager.GetRangedWeapon().item).range; i++) {
+            int xPos = Mathf.RoundToInt(xStep * i) + baseWeapon.owner.x;
+            int yPos = Mathf.RoundToInt(yStep * i) + baseWeapon.owner.y;
+
+            Vector2Int tPos = new Vector2Int(xPos,yPos);
+
+            if (!baseWeapon.game.map.IsWithinMap(tPos)) {
+                break;
+            }
+
+            path.Add(tPos);
+
+            if (tPos == targetCoords) {
+                break;
+            }
+        }
+
+        foreach(Vector2Int tPos in path) {
+            baseWeapon.game.highlightedTiles.Add(baseWeapon.game.map.GetTile(tPos.x,tPos.y));
+        }
+
+        if (Input.GetMouseButtonDown(0)) {
+            return new RangedAttackCommand(baseWeapon.owner, targetCoords, (BaseRangedWeapon)baseWeapon);
+        }
+        return null;
+    }
+
     public void Attack(BaseWeapon baseWeapon, Vector2Int target, out bool killed) {
         killed = false;
 

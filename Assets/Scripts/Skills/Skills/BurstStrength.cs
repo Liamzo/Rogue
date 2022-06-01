@@ -8,9 +8,9 @@ public class BurstStrength : Skill
     public StatValue sv;
     public int duration;
 
-    public override bool Use (BaseSkill baseSkill) {
+    public override CommandResult Use (BaseSkill baseSkill) {
         BaseEffect effect = new StatEffect(sv, baseSkill.owner, duration);
 
-        return true;
+        return new CommandResult(CommandResult.CommandState.Succeeded, null);
     }
 }

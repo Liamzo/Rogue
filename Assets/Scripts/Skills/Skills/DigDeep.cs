@@ -4,12 +4,12 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Dig Deep", menuName = "Skills/DigDeep")]
 public class DigDeep : Skill {
-    public override bool Use (BaseSkill baseSkill) {
+    public override CommandResult Use (BaseSkill baseSkill) {
         baseSkill.owner.unitStats.TakeTrueDamage(1);
 
         baseSkill.owner.unitStats.AddOrRemoveGrace(baseSkill.owner.unitStats.stats[(int)Stats.Grace].GetValue() * 2);
 
-        return true;
+        return new CommandResult(CommandResult.CommandState.Succeeded, null);
     }
 
 	public override bool CanActivate(BaseSkill baseSkill) {

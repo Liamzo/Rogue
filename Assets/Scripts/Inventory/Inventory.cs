@@ -25,6 +25,8 @@ public class Inventory : MonoBehaviour {
 
     public List<BaseItem> items = new List<BaseItem>();
 
+    public BaseItem usedItem = null;
+
     public bool Add (BaseItem item) {
         if (!item.item.isDefaultItem) {
             if (items.Count < space) {

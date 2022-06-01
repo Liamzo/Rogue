@@ -9,9 +9,9 @@ public class ThornArmour : Skill
     public int power;
     public int duration;
 
-    public override bool Use (BaseSkill baseSkill) {
+    public override CommandResult Use (BaseSkill baseSkill) {
         BaseEffect effect = new ThornsEffect(baseSkill.owner, duration, power);
 
-        return true;
+        return new CommandResult(CommandResult.CommandState.Succeeded, null);
     }
 }

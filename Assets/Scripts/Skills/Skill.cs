@@ -12,10 +12,10 @@ public class Skill : ScriptableObject
     public int graceCost;
     public WeaponType requiredWeapon;
 
-    public virtual bool Use (BaseSkill baseSkill) {
+    public virtual CommandResult Use (BaseSkill baseSkill) {
         Debug.Log("Using " + name);
 
-        return true;
+        return new CommandResult(CommandResult.CommandState.Succeeded, null);;
     }
 
     public virtual void Effects () {

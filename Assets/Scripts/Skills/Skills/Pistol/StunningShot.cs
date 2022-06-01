@@ -8,7 +8,7 @@ public class StunningShot : Skill
 {
     public int duration;
 
-    public override bool Use (BaseSkill baseSkill) {
+    public override CommandResult Use (BaseSkill baseSkill) {
         if (Input.GetMouseButtonDown(0)) {
             // if (baseSkill.owner.IsPointerOverGameObject()) {     //Don't take input if mouse is over ui
             //     return;
@@ -26,11 +26,11 @@ public class StunningShot : Skill
                     baseSkill.owner.equipmentManager.GetRangedWeapon().Attack(new Vector2Int(tile.x, tile.y));
                     BaseEffect effect = new StunEffect((UnitController)tile.occupiedBy, duration);
 
-                    return true;
+                    return new CommandResult(CommandResult.CommandState.Succeeded, null);
                 }
             }
         }
 
-        return false;
+        return new CommandResult(CommandResult.CommandState.Pending, null);
     }
 }

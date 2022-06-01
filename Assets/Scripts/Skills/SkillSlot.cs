@@ -16,7 +16,6 @@ public class SkillSlot : MonoBehaviour
             playerSkills = FindObjectOfType<PlayerSkills>();
         }
 
-        //Debug.Log(baseSkill.skill);
         baseSkill = new BaseSkill(skill);
 
         icon.sprite = baseSkill.skill.icon;

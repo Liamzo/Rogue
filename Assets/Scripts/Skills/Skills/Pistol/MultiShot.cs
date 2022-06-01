@@ -7,7 +7,7 @@ public class MultiShot : Skill
 {
     public int attacks;
 
-    public override bool Use (BaseSkill baseSkill) {
+    public override CommandResult Use (BaseSkill baseSkill) {
         if (Input.GetMouseButtonDown(0)) {
             // if (baseSkill.owner.IsPointerOverGameObject()) {     //Don't take input if mouse is over ui
             //     return;
@@ -25,11 +25,11 @@ public class MultiShot : Skill
                     for (int i = 0; i < attacks; i++) {
                         baseSkill.owner.equipmentManager.GetRangedWeapon().Attack(new Vector2Int(tile.x, tile.y));
                     }
-                    return true;
+                    return new CommandResult(CommandResult.CommandState.Succeeded, null);
                 }
             }
         }
         
-        return false;
+        return new CommandResult(CommandResult.CommandState.Pending, null);
     }
 }

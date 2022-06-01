@@ -16,15 +16,15 @@ public class EnemyController : UnitController {
 		vision = GetComponent<Vision>();
 	}
 
-    public override void Turn() {
+    public override Command Turn() {
 		TurnStart();
 
         if (turn == false) {
-            return;
+            return new Command(this);
         }
 
-        enemyType.Controls(this);
+        Command c = enemyType.Controls(this);
 
-        TurnEnd();
+        return c;
     }
 }

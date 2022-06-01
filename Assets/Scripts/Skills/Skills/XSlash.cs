@@ -6,7 +6,7 @@ using UnityEngine;
 public class XSlash : Skill {
     public int bonusDamage;
 
-    public override bool Use (BaseSkill baseSkill) {
+    public override CommandResult Use (BaseSkill baseSkill) {
         if (Input.GetMouseButtonDown(0)) {
             // if (baseSkill.owner.IsPointerOverGameObject()) {     //Don't take input if mouse is over ui
             //     return;
@@ -26,11 +26,11 @@ public class XSlash : Skill {
                         baseSkill.owner.unitStats.AddOrRemoveGrace(1);
                     }
 
-                    return true;
+                    return new CommandResult(CommandResult.CommandState.Succeeded, null);
                 }
             }
         }
 
-        return false;
+        return new CommandResult(CommandResult.CommandState.Pending, null);
     }
 }
