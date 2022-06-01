@@ -15,8 +15,6 @@ public class RangedAttackCommand : Command
 
 	public override CommandResult perform()
 	{
-        Debug.Log("Ranged Attack");
-
         rangedWeapon.Attack(target);
 
 		return new CommandResult(CommandResult.CommandState.Succeeded, null);

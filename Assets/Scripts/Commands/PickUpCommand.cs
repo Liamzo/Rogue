@@ -15,8 +15,6 @@ public class PickUpCommand : Command
 
 	public override CommandResult perform()
 	{
-        Debug.Log("Pick Up");
-
 		BaseItem item = Game.instance.GetItem(x,y);
 
 		if (item == null) {

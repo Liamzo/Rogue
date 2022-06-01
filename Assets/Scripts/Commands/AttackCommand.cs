@@ -13,8 +13,6 @@ public class AttackCommand : Command
 
 	public override CommandResult perform()
 	{
-        Debug.Log("Attack");
-
         owner.equipmentManager.GetMainWeapon().Attack(target);
 
 		return new CommandResult(CommandResult.CommandState.Succeeded, null);

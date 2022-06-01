@@ -11,8 +11,6 @@ public class UnequipCommand : Command
 
 	public override CommandResult perform()
 	{
-        Debug.Log("Unequip");
-
         owner.equipmentManager.UnequipAll();
 
 		return new CommandResult(CommandResult.CommandState.Succeeded, null);

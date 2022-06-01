@@ -15,8 +15,6 @@ public class MoveCommand : Command
 
 	public override CommandResult perform()
 	{
-        Debug.Log("Move");
-
         Object found;
 
 		if (Game.instance.map.IsPositionClear(new Vector2Int(x, y), out found)) {

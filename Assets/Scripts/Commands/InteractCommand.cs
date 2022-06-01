@@ -13,8 +13,6 @@ public class InteractCommand : Command
 
 	public override CommandResult perform()
 	{
-        Debug.Log("Interact");
-
 		interactable.interact();
 
 		return new CommandResult(CommandResult.CommandState.Succeeded, null);

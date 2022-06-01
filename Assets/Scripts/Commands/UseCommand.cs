@@ -13,8 +13,6 @@ public class UseCommand : Command
 
 	public override CommandResult perform()
 	{
-        Debug.Log("Use Item");
-
         item.Use();
 
 		return new CommandResult(CommandResult.CommandState.Succeeded, null);

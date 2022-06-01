@@ -13,8 +13,6 @@ public class SkillCommand : Command
 
 	public override CommandResult perform()
 	{
-        Debug.Log("Use Skill");
-
 		return skill.Use();
 	}
 }
