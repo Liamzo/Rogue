@@ -6,8 +6,15 @@ using UnityEngine;
 public class RangedWeapon : Weapon 
 {
     public virtual Command Aim (BaseWeapon baseWeapon) {
-        Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2Int targetCoords = baseWeapon.game.map.GetXY(worldPosition);
+        Vector2Int targetCoords;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit rayHit;
+        if (Physics.Raycast(ray, out rayHit, 1000.0f)){
+            targetCoords = baseWeapon.game.map.GetXY(rayHit.collider.transform.position);
+        } else {
+            return null;
+        }
 
         int xDistance = targetCoords.x - baseWeapon.owner.x;
         int yDistance = targetCoords.y - baseWeapon.owner.y;
@@ -60,7 +67,9 @@ public class RangedWeapon : Weapon
 			int yPos = Mathf.RoundToInt(yStep * i) + baseWeapon.owner.y;
 
             //Object blocked;
+            Debug.Log("checking range " + i);
             if (!baseWeapon.game.map.IsPositionClear(new Vector2Int(xPos, yPos) , out Object blocked)) {
+                Debug.Log("Hit something");
                 if (blocked is UnitController) {
                     UnitController hit = (UnitController) blocked;
                     if (hit.unitStats.currentGrit <= 0) {

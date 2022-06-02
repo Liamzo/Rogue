@@ -49,7 +49,7 @@ public class BaseItem {
 	}
 
 	public void Spawn () {
-		itemGO = GameObject.Instantiate(itemGOPrefab, new Vector3(x+0.5f, y+0.5f, -1f), Quaternion.Euler(0, 0, 0));
+		itemGO = GameObject.Instantiate(itemGOPrefab, new Vector3(x+0.5f, y+0.5f, -0.1f), Quaternion.Euler(0, 0, 0));
 		SpriteRenderer sr = itemGO.GetComponent<SpriteRenderer>();
 		sr.sprite = item.icon;
 

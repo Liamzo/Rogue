@@ -12,8 +12,7 @@ public class XSlash : Skill {
             //     return;
             // }
 
-            Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Tile tile = baseSkill.game.map.GetTile(worldPosition);
+            Tile tile = baseSkill.game.map.GetTileUnderMouse();
 
             if (tile != null) {
                 if (tile.occupiedBy != null) {

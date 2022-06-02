@@ -23,13 +23,11 @@ public class FlowingSurge : Skill
 			// if (baseSkill.owner.IsPointerOverGameObject()) {     //Don't take input if mouse is over ui
 			//     return;
 			// }
-
-			Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			Vector2Int clickedPos = baseSkill.game.map.GetXY(worldPosition);
+			
+			Tile tile = baseSkill.game.map.GetTileUnderMouse();
+        	Vector2Int clickedPos = new Vector2Int(tile.x, tile.y);
 
 			if (baseSkill.openTargerts.Contains(clickedPos)) {
-				Tile tile = baseSkill.game.map.GetTile(clickedPos.x,clickedPos.y);
-
 				if (tile.occupiedBy != null) {
 					if (tile.occupiedBy is UnitController) {
 						UnitController targetUnit = (UnitController)tile.occupiedBy;

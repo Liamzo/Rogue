@@ -64,13 +64,11 @@ public class PlayerController : UnitController
 			if (EventSystem.current.IsPointerOverGameObject()) {
 				return null;
 			}
-		 	Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		 	Vector2Int tile = game.map.GetXY(worldPosition);
 
-			if (!game.map.IsPositionClear(tile, out Object blocked)) {
-				if (blocked is EnemyController) {
-                    ChangeTargetUnit((UnitController) blocked);
-				}
+			Tile tile = game.map.GetTileUnderMouse();
+
+			if (tile.occupiedBy is EnemyController) {
+				ChangeTargetUnit((UnitController) tile.occupiedBy);
 			} else {
 				ChangeTargetUnit(null);
 			}

@@ -8,7 +8,7 @@ public class Tile
 	public int y;
 
 	public GameObject tilePrefab;
-	public SpriteRenderer tileSprite;
+	public MeshRenderer tileSprite;
 	public GameObject tile;
 
 	public bool isWalkable;
@@ -33,19 +33,17 @@ public class Tile
 		this.isWalkable = isWalkable;
 		this.isViewable = isViewable;
 
-		tile = GameObject.Instantiate(tilePrefab, new Vector2(x+0.5f, y+0.5f), Quaternion.Euler(0, 0, 0));
-		tileSprite = tile.GetComponent<SpriteRenderer>();
+		tile = GameObject.Instantiate(tilePrefab, new Vector3(x+0.5f, y+0.5f, 0), Quaternion.Euler(0, 0, 0));
+		tileSprite = tile.GetComponentInChildren<MeshRenderer>();
 		tileSprite.enabled = false;
 	}
 
 	public void SetHighlight(HighlightType highlight) {
-		if (highlight == HighlightType.none) {
-			tileSprite.color = Color.white;
-		} else if (highlight == HighlightType.red) {
-			tileSprite.color = Color.red;
-		}
-
-		
+		// if (highlight == HighlightType.none) {
+		// 	tileSprite.color = Color.white;
+		// } else if (highlight == HighlightType.red) {
+		// 	tileSprite.color = Color.red;
+		// }
 	}
 }
 

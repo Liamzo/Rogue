@@ -7,8 +7,8 @@ public class Dash : Skill
 {
     public override CommandResult Use (BaseSkill baseSkill) {    
         // Find and highlight path
-        Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2Int targetCoords = baseSkill.game.map.GetXY(worldPosition);
+        Tile tile = baseSkill.game.map.GetTileUnderMouse();
+        Vector2Int targetCoords = new Vector2Int(tile.x, tile.y);
 
         int xDistance = targetCoords.x - baseSkill.owner.x;
         int yDistance = targetCoords.y - baseSkill.owner.y;

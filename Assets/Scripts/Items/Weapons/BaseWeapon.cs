@@ -13,6 +13,7 @@ public class BaseWeapon : BaseEquipment {
 	}
 
     public virtual void Attack(UnitController target) {
+        owner.ChangeTargetUnit(target);
         item.Attack(this, target, out bool killed);
 
         if (killed == true && owner is PlayerController) {

@@ -89,7 +89,7 @@ public class Map
     public void CreateEnemy (Enemy enemyType, int x, int y) {
         game.enemyGOPrefab.SetActive(false);
 
-        GameObject enemy = GameObject.Instantiate(game.enemyGOPrefab, new Vector2(x, y), Quaternion.Euler(0, 0, 0));
+        GameObject enemy = GameObject.Instantiate(game.enemyGOPrefab, new Vector3(x, y, -0.5f), Quaternion.Euler(-23f, 0, 0));
         EnemyController ec = enemy.GetComponent<EnemyController>();
         ec.enemyType = enemyType;
         ec.x = x;
@@ -115,6 +115,15 @@ public class Map
         Vector2Int pos = GetXY(worldPosition);
 
         return GetTile(pos.x, pos.y);
+    }
+
+    public Tile GetTileUnderMouse() {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit rayHit;
+        if (Physics.Raycast(ray, out rayHit, 1000.0f)){
+            return GetTile(rayHit.collider.transform.position);
+        }
+        return null;
     }
 
 
@@ -422,7 +431,7 @@ public class Map
 		if (GetTile(x,y) != null) {
             // Make tile visible
 			map[x,y].tileSprite.enabled = true;
-            map[x,y].tileSprite.color = Color.white;
+            //map[x,y].tileSprite.color = Color.white;
 			map[x,y].visible = true;
             map[x,y].explored = true;
 
@@ -443,7 +452,7 @@ public class Map
     public void SetLightOff(int x, int y) {
 		if (GetTile(x,y) != null) {
 			map[x,y].visible = false;
-            map[x,y].tileSprite.color = Color.grey;
+            //map[x,y].tileSprite.color = Color.grey;
 
             // If an object is here, make invisible
             if (map[x,y].occupiedBy != null) {

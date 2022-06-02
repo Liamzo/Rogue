@@ -13,8 +13,7 @@ public class MultiStrike : Skill
             //     return;
             // }
 
-            Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Tile tile = baseSkill.game.map.GetTile(worldPosition);
+            Tile tile = baseSkill.game.map.GetTileUnderMouse();
 
             if (tile != null) {
                 int xDistance = tile.x - baseSkill.owner.x;
