@@ -431,7 +431,7 @@ public class Map
 		if (GetTile(x,y) != null) {
             // Make tile visible
 			map[x,y].tileSprite.enabled = true;
-            //map[x,y].tileSprite.color = Color.white;
+            map[x,y].tileSprite.material.color = map[x,y].baseColour;
 			map[x,y].visible = true;
             map[x,y].explored = true;
 
@@ -452,7 +452,7 @@ public class Map
     public void SetLightOff(int x, int y) {
 		if (GetTile(x,y) != null) {
 			map[x,y].visible = false;
-            //map[x,y].tileSprite.color = Color.grey;
+            map[x,y].tileSprite.material.color = new Color(0.18f, 0.18f, 0.18f);
 
             // If an object is here, make invisible
             if (map[x,y].occupiedBy != null) {

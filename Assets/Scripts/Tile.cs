@@ -9,6 +9,7 @@ public class Tile
 
 	public GameObject tilePrefab;
 	public MeshRenderer tileSprite;
+	public Color baseColour;
 	public GameObject tile;
 
 	public bool isWalkable;
@@ -35,15 +36,16 @@ public class Tile
 
 		tile = GameObject.Instantiate(tilePrefab, new Vector3(x+0.5f, y+0.5f, 0), Quaternion.Euler(0, 0, 0));
 		tileSprite = tile.GetComponentInChildren<MeshRenderer>();
+		baseColour = tileSprite.material.color;
 		tileSprite.enabled = false;
 	}
 
 	public void SetHighlight(HighlightType highlight) {
-		// if (highlight == HighlightType.none) {
-		// 	tileSprite.color = Color.white;
-		// } else if (highlight == HighlightType.red) {
-		// 	tileSprite.color = Color.red;
-		// }
+		if (highlight == HighlightType.none) {
+			tileSprite.material.color = baseColour;
+		} else if (highlight == HighlightType.red) {
+			tileSprite.material.color = Color.red;
+		}
 	}
 }
 
