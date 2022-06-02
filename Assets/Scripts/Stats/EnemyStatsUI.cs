@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class EnemyStatsUI : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class EnemyStatsUI : MonoBehaviour
     public Slider enemyGrace;
     public Text gritNum;
     public Text graceNum;
-    public Text enemyName;
+    public TextMeshProUGUI enemyName;
 
     public PlayerController player;
     public UnitStats enemyStats;
@@ -29,7 +30,7 @@ public class EnemyStatsUI : MonoBehaviour
         gritNum = enemyGrit.gameObject.transform.Find("GritNum").GetComponent<Text>();
         graceNum = enemyGrace.gameObject.transform.Find("GraceNum").GetComponent<Text>();
 
-        enemyName = targetParent.Find("EnemyName").GetComponent<Text>();
+        enemyName = targetParent.Find("EnemyName").GetComponent<TextMeshProUGUI>();
 
         enemyGrit.maxValue = 0;
         enemyGrace.maxValue = 0;
