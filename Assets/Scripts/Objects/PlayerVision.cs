@@ -8,6 +8,7 @@ public class PlayerVision : Vision
 
     public List<UnitController> visibleTargets = new List<UnitController>();
     public UnitController currentTarget;
+    public int currentIndex = -1;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -38,11 +39,18 @@ public class PlayerVision : Vision
                 visibleTargets.Add(unit);
             }
         }
+
+        visibleTargets.Sort((a,b) => ((a.x - parent.x) + (a.y - parent.y)).CompareTo(((b.x - parent.x) + (b.y - parent.y))));
+
+        if (currentIndex == -1 && visibleTargets.Count > 0) {
+            currentIndex = 0;
+            currentTarget = visibleTargets[currentIndex];
+        }
     }
 
     public override UnitController FindTarget() {
         // TODO: Cycle through visible targets using Tab
-        return null;
+        return currentTarget;
     }
 
     public void CheckTargetInput() {
@@ -53,12 +61,28 @@ public class PlayerVision : Vision
 
 			Tile tile = game.map.GetTileUnderMouse();
 
-			if (tile.occupiedBy is EnemyController) {
-				currentTarget = (UnitController)tile.occupiedBy;
-			} else {
+            if (tile != null) {
+                if (tile.occupiedBy is EnemyController) {
+                    currentTarget = (UnitController)tile.occupiedBy;
+                    if (visibleTargets.Contains(currentTarget)) {
+                        currentIndex = visibleTargets.IndexOf(currentTarget);
+                    } else {
+                        currentIndex = -1;
+                    }
+                } else {
+                    currentTarget = null;
+                    currentIndex = -1;
+                }
+            } else {
 				currentTarget = null;
+                currentIndex = -1;
 			}
 		}
+
+        if (Input.GetKeyDown(KeyCode.Tab)) {
+            currentIndex = (currentIndex + 1) % visibleTargets.Count;
+            currentTarget = visibleTargets[currentIndex];
+        }
     }
 
     #region FOV

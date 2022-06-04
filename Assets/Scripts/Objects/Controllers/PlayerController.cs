@@ -68,13 +68,16 @@ public class PlayerController : UnitController
 			}
 
 			Tile tile = game.map.GetTileUnderMouse();
-
-			if (tile.occupiedBy is EnemyController) {
-				ChangeTargetUnit((UnitController) tile.occupiedBy);
-			} else {
-				ChangeTargetUnit(null);
+			if (tile != null) {
+				if (tile.occupiedBy is EnemyController) {
+					ChangeTargetUnit((UnitController) tile.occupiedBy);
+				} else {
+					ChangeTargetUnit(null);
+				}
 			}
 		}
+
+		vision.CheckTargetInput();
 
 		if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Keypad5)) {
 			return new WaitCommand(this);

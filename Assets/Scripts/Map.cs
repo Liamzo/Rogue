@@ -121,7 +121,9 @@ public class Map
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit rayHit;
         if (Physics.Raycast(ray, out rayHit, 1000.0f)){
-            return GetTile(rayHit.collider.transform.position);
+            if (IsWithinMap(new Vector2Int((int)rayHit.collider.transform.position.x, (int)rayHit.collider.transform.position.y))) {
+                return GetTile(rayHit.collider.transform.position);
+            }
         }
         return null;
     }
