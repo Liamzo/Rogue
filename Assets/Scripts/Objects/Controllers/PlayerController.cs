@@ -10,6 +10,7 @@ public class PlayerController : UnitController
 	// Start is called before the first frame update
 	protected PlayerSkills playerSkills;
 	protected Moveable moveable;
+	protected PlayerVision vision;
 
 	public event System.Action TargetUnitChange;
 
@@ -31,6 +32,7 @@ public class PlayerController : UnitController
 		this.playerSkills = (PlayerSkills) base.unitSkills;
 
         moveable = GetComponent<Moveable>();
+		vision = GetComponent<PlayerVision>();
 	}
 
 	public override Command Turn() {

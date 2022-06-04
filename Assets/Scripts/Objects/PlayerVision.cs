@@ -7,6 +7,7 @@ public class PlayerVision : Vision
     List<Vector2Int> visibleTiles = new List<Vector2Int>();
 
     public List<UnitController> visibleTargets = new List<UnitController>();
+    public UnitController currentTarget;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -42,6 +43,22 @@ public class PlayerVision : Vision
     public override UnitController FindTarget() {
         // TODO: Cycle through visible targets using Tab
         return null;
+    }
+
+    public void CheckTargetInput() {
+        if (Input.GetMouseButtonDown(0)) {
+			// if (EventSystem.current.IsPointerOverGameObject()) {
+			// 	return null;
+			// }
+
+			Tile tile = game.map.GetTileUnderMouse();
+
+			if (tile.occupiedBy is EnemyController) {
+				currentTarget = (UnitController)tile.occupiedBy;
+			} else {
+				currentTarget = null;
+			}
+		}
     }
 
     #region FOV
