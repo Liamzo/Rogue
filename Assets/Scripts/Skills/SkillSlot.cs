@@ -23,6 +23,7 @@ public class SkillSlot : MonoBehaviour
     }
 
     public void ClickSlot () {
+        Debug.Log("click");
         if (baseSkill != null) {
             playerSkills.TryUnlockSkill(baseSkill);
         }

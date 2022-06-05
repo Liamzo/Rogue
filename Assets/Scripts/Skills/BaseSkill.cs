@@ -10,6 +10,8 @@ public class BaseSkill {
 	public Skill skill;
 	public KeyCode hotKey;
 
+	public Tile target;
+
 	// For Flowing Strike, need a better way to structure this
 	public List<Vector2Int> openTargerts;
 	public List<UnitController> closedTargerts;
@@ -18,6 +20,7 @@ public class BaseSkill {
 		this.game = Game.instance;
 		this.skill = skill;
 
+		target = null;
 		openTargerts = new List<Vector2Int>();
 		closedTargerts = new List<UnitController>();
 	}
@@ -27,13 +30,14 @@ public class BaseSkill {
 	}
 
 	public CommandResult Use () {
-		// Do something here, CHECK FOR ESCAPE!!!
-		// Also move Mana Cost deduction here
 		if (Input.GetKeyDown(KeyCode.Escape)) {
 			return new CommandResult(CommandResult.CommandState.Failed, null);
 		}
 
         CommandResult done = skill.Use(this);
+		if (done.state == CommandResult.CommandState.Pending) {
+
+		}
 		if (done.state == CommandResult.CommandState.Succeeded) {
             Reset();
 			owner.unitStats.AddOrRemoveGrace(-skill.graceCost);
@@ -42,6 +46,7 @@ public class BaseSkill {
     }
 
 	public virtual void Reset() {
+		target = null;
 		openTargerts.Clear();
     }
 

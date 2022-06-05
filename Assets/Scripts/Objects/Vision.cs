@@ -8,7 +8,13 @@ public abstract class Vision : MonoBehaviour
     protected UnitController parent;
     protected Game game;
 
+    public UnitController currentTarget;
+
     public abstract UnitController FindTarget();
+
+    public virtual void ChangeTargetUnit(UnitController unit) {
+        currentTarget = unit;
+    }
 
     protected virtual void Start() {
         parent = GetComponent<UnitController>();

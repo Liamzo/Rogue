@@ -5,11 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(UnitStats))]
 [RequireComponent(typeof(EquipmentManager))]
 [RequireComponent(typeof(UnitSkills))]
+[RequireComponent(typeof(Vision))]
 public class UnitController : Object
 {
 	public EquipmentManager equipmentManager;
 	public UnitSkills unitSkills;
 	public UnitStats unitStats;
+	public Vision vision;
 
 	public string unitName;
 
@@ -30,8 +32,6 @@ public class UnitController : Object
 	public event System.Action OnTurnStart = delegate { };
 	public event System.Action OnTurnEnd = delegate { };
 
-	public UnitController targetUnit;
-
 	// Start is called before the first frame update
 	protected override void Start() {
 		base.Start();
@@ -39,6 +39,7 @@ public class UnitController : Object
 		equipmentManager = GetComponent<EquipmentManager>();
 		unitSkills = GetComponent<UnitSkills>();
 		unitStats = GetComponent<UnitStats>();
+		vision = GetComponent<Vision>();
 		
 		equipmentManager.unitController = this;
 		unitSkills.unitController = this;
@@ -73,29 +74,4 @@ public class UnitController : Object
 	public virtual void TurnEnd() {
 		turn = false;
 	}
-
-	public virtual void ChangeTargetUnit(UnitController unit) {
-        targetUnit = unit;
-    }
-
-	// protected virtual void Skilling () {
-	// 	if (Input.GetKeyDown(KeyCode.Escape)) {
-	// 		state = State.Controls;
-	// 		return;
-	// 	}
-
-	// 	if (usedSkill == null) {
-	// 		Debug.Log("No used skill");
-	// 		state = State.Controls;
-	// 		return;
-	// 	}
-
-	// 	if (usedSkill.Use()) {
-	// 		unitStats.AddOrRemoveGrace(-usedSkill.skill.graceCost);
-
-	// 		usedSkill = null;
-	// 		TurnEnd();
-	// 		return;
-	// 	}
-	// }
 }

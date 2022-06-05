@@ -7,8 +7,10 @@ public class PlayerVision : Vision
     List<Vector2Int> visibleTiles = new List<Vector2Int>();
 
     public List<UnitController> visibleTargets = new List<UnitController>();
-    public UnitController currentTarget;
+
     public int currentIndex = -1;
+    public GameObject currentTargetHighlight;
+    public event System.Action TargetUnitChange;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -17,7 +19,7 @@ public class PlayerVision : Vision
 
         parent.OnTurnStart += OnTurnStartEnd;
         parent.OnTurnEnd += OnTurnStartEnd;
-
+        currentTargetHighlight.SetActive(false);
     }
 
     void OnTurnStartEnd() {
@@ -43,14 +45,23 @@ public class PlayerVision : Vision
         visibleTargets.Sort((a,b) => ((a.x - parent.x) + (a.y - parent.y)).CompareTo(((b.x - parent.x) + (b.y - parent.y))));
 
         if (currentIndex == -1 && visibleTargets.Count > 0) {
-            currentIndex = 0;
-            currentTarget = visibleTargets[currentIndex];
+            UpdateTargetUnit(0);
         }
     }
 
     public override UnitController FindTarget() {
         // TODO: Cycle through visible targets using Tab
         return currentTarget;
+    }
+
+    public override void ChangeTargetUnit(UnitController unit) {
+        if (unit == null) {
+            UpdateTargetUnit(-1);
+        } else if (visibleTargets.Contains(unit)) {
+            UpdateTargetUnit(visibleTargets.IndexOf(unit));
+        } else {
+            Debug.LogError("Clicked unit that was on screen but not in list of visibleUnits");
+        }
     }
 
     public void CheckTargetInput() {
@@ -63,26 +74,36 @@ public class PlayerVision : Vision
 
             if (tile != null) {
                 if (tile.occupiedBy is EnemyController) {
-                    currentTarget = (UnitController)tile.occupiedBy;
-                    if (visibleTargets.Contains(currentTarget)) {
-                        currentIndex = visibleTargets.IndexOf(currentTarget);
+                    if (visibleTargets.Contains((UnitController)tile.occupiedBy)) {
+                        UpdateTargetUnit(visibleTargets.IndexOf((UnitController)tile.occupiedBy));
                     } else {
-                        currentIndex = -1;
+                        Debug.LogError("Clicked unit that was on screen but not in list of visibleUnits");
                     }
-                } else {
-                    currentTarget = null;
-                    currentIndex = -1;
                 }
             } else {
-				currentTarget = null;
-                currentIndex = -1;
+				UpdateTargetUnit(-1);
 			}
 		}
 
         if (Input.GetKeyDown(KeyCode.Tab)) {
-            currentIndex = (currentIndex + 1) % visibleTargets.Count;
-            currentTarget = visibleTargets[currentIndex];
+            UpdateTargetUnit((currentIndex + 1) % visibleTargets.Count);
         }
+    }
+
+    public void UpdateTargetUnit(int index) {
+        currentIndex = index;
+
+        if (currentIndex == -1) {
+            currentTarget = null;
+            currentTargetHighlight.SetActive(false);
+            currentTargetHighlight.transform.SetParent(this.transform, false);
+        } else {
+            currentTarget = visibleTargets[currentIndex];
+            currentTargetHighlight.SetActive(true);
+            currentTargetHighlight.transform.SetParent(currentTarget.transform, false);
+        }
+
+        TargetUnitChange();
     }
 
     #region FOV

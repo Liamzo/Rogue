@@ -20,7 +20,7 @@ public class EnemyStatsUI : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<PlayerController>();
-        player.TargetUnitChange += UpdateEnemy;
+        player.GetComponent<PlayerVision>().TargetUnitChange += UpdateEnemy;
 
         enemyStats = null;
 
@@ -65,7 +65,7 @@ public class EnemyStatsUI : MonoBehaviour
     }
 
     public void UpdateEnemy () {
-        if (player.targetUnit == null) {
+        if (player.vision.currentTarget == null) {
             if (enemyStats != null) {
                 enemyStats.OnUIChange -= UpdateVisuals;
             }
@@ -75,7 +75,7 @@ public class EnemyStatsUI : MonoBehaviour
             return;
         }
 
-        enemyStats = player.targetUnit.unitStats;
+        enemyStats = player.vision.currentTarget.unitStats;
 
         enemyStats.OnUIChange += UpdateVisuals;
 

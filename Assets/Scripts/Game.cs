@@ -41,16 +41,16 @@ public class Game : MonoBehaviour
         items = new List<BaseItem>();
 
         map = new Map(mapImgFile,1f);
-
-        map.SpawnThings();
-
-        units = new List<UnitController>(FindObjectsOfType<UnitController>());
     }
 
     // Start is called before the first frame update
     void Start() {
         state = State.TakingTurns;
         currentCommand = null;
+
+        map.SpawnThings();
+
+        units = new List<UnitController>(FindObjectsOfType<UnitController>());
     }
 
     // Update is called once per frame

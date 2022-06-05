@@ -56,8 +56,12 @@ public class Map
         new BaseDaggers(game.itemGOPrefab, (Daggers)game.itemPrefabs[5], 1, 2).Spawn();
         new BaseEquipment(game.itemGOPrefab, (Equipment)game.itemPrefabs[1], 2, 2).Spawn();
         new BaseEquipment(game.itemGOPrefab, (Equipment)game.itemPrefabs[4], 1, 3).Spawn();
-        new BaseWeapon(game.itemGOPrefab, (MeleeWeapon)game.itemPrefabs[2], 2, 1).Spawn();
-        new BaseRangedWeapon(game.itemGOPrefab, (RangedWeapon)game.itemPrefabs[3], 3, 1).Spawn();
+        BaseWeapon sword = new BaseWeapon(game.itemGOPrefab, (MeleeWeapon)game.itemPrefabs[2], 2, 1);
+        sword.Spawn();
+        sword.PickUp(game.player);
+        BaseRangedWeapon pistol = new BaseRangedWeapon(game.itemGOPrefab, (RangedWeapon)game.itemPrefabs[3], 3, 1);
+        pistol.Spawn();
+        pistol.PickUp(game.player);
 
         // Initial
         CreateEnemy(game.enemyTypes[0], 2, 6);
@@ -89,7 +93,7 @@ public class Map
     public void CreateEnemy (Enemy enemyType, int x, int y) {
         game.enemyGOPrefab.SetActive(false);
 
-        GameObject enemy = GameObject.Instantiate(game.enemyGOPrefab, new Vector3(x, y, -0.5f), Quaternion.Euler(-23f, 0, 0));
+        GameObject enemy = GameObject.Instantiate(game.enemyGOPrefab, new Vector3(x, y, 0), Quaternion.Euler(0, 0, 0));
         EnemyController ec = enemy.GetComponent<EnemyController>();
         ec.enemyType = enemyType;
         ec.x = x;

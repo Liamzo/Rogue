@@ -9,27 +9,38 @@ public class StunningShot : Skill
     public int duration;
 
     public override CommandResult Use (BaseSkill baseSkill) {
-        if (Input.GetMouseButtonDown(0)) {
+        Tile target = null;
+        if (baseSkill.target != null) {
+            target = baseSkill.target;
+        }
+
+        if (Input.GetMouseButtonDown(0) && target == null) {
             // if (baseSkill.owner.IsPointerOverGameObject()) {     //Don't take input if mouse is over ui
             //     return;
             // }
 
-            Tile tile = baseSkill.game.map.GetTileUnderMouse();
+            target = baseSkill.game.map.GetTileUnderMouse();
 
-            if (tile != null) {
-                int xDistance = tile.x - baseSkill.owner.x;
-                int yDistance = tile.y - baseSkill.owner.y;
-                int dist = Mathf.Max(Mathf.Abs(xDistance), Mathf.Abs(yDistance));
-
-                if (tile.occupiedBy != null && dist <= baseSkill.owner.equipmentManager.GetRangedWeapon().item.range) {
-                    baseSkill.owner.equipmentManager.GetRangedWeapon().Attack(new Vector2Int(tile.x, tile.y));
-                    BaseEffect effect = new StunEffect((UnitController)tile.occupiedBy, duration);
-
-                    return new CommandResult(CommandResult.CommandState.Succeeded, null);
-                }
-            }
         }
 
+        if (target != null) {
+            int xDistance = target.x - baseSkill.owner.x;
+            int yDistance = target.y - baseSkill.owner.y;
+            int dist = Mathf.Max(Mathf.Abs(xDistance), Mathf.Abs(yDistance));
+
+            if (target.occupiedBy != null && dist <= baseSkill.owner.equipmentManager.GetRangedWeapon().item.range) {
+                baseSkill.owner.equipmentManager.GetRangedWeapon().Attack(target);
+                BaseEffect effect = new StunEffect((UnitController)target.occupiedBy, duration);
+
+                return new CommandResult(CommandResult.CommandState.Succeeded, null);
+            }
+        }
+        
+
+        if (baseSkill.target != null) {
+            // Failed with given target, so fail rather than check for input
+            return new CommandResult(CommandResult.CommandState.Failed, null);
+        }
         return new CommandResult(CommandResult.CommandState.Pending, null);
     }
 }

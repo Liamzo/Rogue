@@ -7,12 +7,11 @@ public class BaseRangedWeapon : BaseWeapon {
 		this.item = item;
 	}
 
-    public Command Aim() {
+    public Tile Aim() {
         return ((RangedWeapon)item).Aim(this);
     }
 
-    public void Attack(Vector2Int target) {
-        Debug.Log(target);
+    public void Attack(Tile target) {
         ((RangedWeapon)item).Attack(this, target, out bool killed);
 
         if (killed == true && owner is PlayerController) {

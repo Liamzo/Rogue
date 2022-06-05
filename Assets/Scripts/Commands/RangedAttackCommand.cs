@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class RangedAttackCommand : Command
 {
-    Vector2Int target;
+    Tile target;
     BaseRangedWeapon rangedWeapon;
 
-    public RangedAttackCommand (UnitController owner, Vector2Int target, BaseRangedWeapon rangedWeapon) : base(owner)
+    public RangedAttackCommand (UnitController owner, Tile target, BaseRangedWeapon rangedWeapon) : base(owner)
     {
         this.target = target;
         this.rangedWeapon = rangedWeapon;
@@ -15,8 +15,27 @@ public class RangedAttackCommand : Command
 
 	public override CommandResult perform()
 	{
-        rangedWeapon.Attack(target);
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+			return new CommandResult(CommandResult.CommandState.Failed, null);
+		}
 
-		return new CommandResult(CommandResult.CommandState.Succeeded, null);
+        Tile tempTarget = null;
+        if (target != null) {
+            tempTarget = target;
+        }
+        if (tempTarget == null) {
+            tempTarget = rangedWeapon.Aim();
+        }
+
+        if (tempTarget != null) {
+            rangedWeapon.Attack(tempTarget);
+            return new CommandResult(CommandResult.CommandState.Succeeded, null);
+        }
+
+		if (target != null) {
+            // Failed with given target, so fail rather than check for input
+            return new CommandResult(CommandResult.CommandState.Failed, null);
+        }
+        return new CommandResult(CommandResult.CommandState.Pending, null);
 	}
 }

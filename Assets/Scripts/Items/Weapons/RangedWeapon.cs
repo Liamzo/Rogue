@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New RangedWeapom", menuName = "Inventory/RangedWeapom")]
 public class RangedWeapon : Weapon 
 {
-    public virtual Command Aim (BaseWeapon baseWeapon) {
+    public virtual Tile Aim (BaseWeapon baseWeapon) {
         Vector2Int targetCoords;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -47,12 +47,13 @@ public class RangedWeapon : Weapon
         }
 
         if (Input.GetMouseButtonDown(0)) {
-            return new RangedAttackCommand(baseWeapon.owner, targetCoords, (BaseRangedWeapon)baseWeapon);
+            return baseWeapon.game.map.GetTile(path[path.Count-1]);
         }
         return null;
     }
 
-    public void Attack(BaseWeapon baseWeapon, Vector2Int target, out bool killed) {
+    public void Attack(BaseWeapon baseWeapon, Tile target, out bool killed) {
+        // MAYBE return bool if target is in range, so the player won't shoot at a target out of range. Would only happen with auto target, is sight > range
         killed = false;
 
         int xDistance = target.x - baseWeapon.owner.x;
@@ -67,21 +68,18 @@ public class RangedWeapon : Weapon
 			int yPos = Mathf.RoundToInt(yStep * i) + baseWeapon.owner.y;
 
             //Object blocked;
-            Debug.Log("checking range " + i);
             if (!baseWeapon.game.map.IsPositionClear(new Vector2Int(xPos, yPos) , out Object blocked)) {
-                Debug.Log("Hit something");
                 if (blocked is UnitController) {
                     UnitController hit = (UnitController) blocked;
                     if (hit.unitStats.currentGrit <= 0) {
                         continue;
                     }
-                    baseWeapon.owner.ChangeTargetUnit(hit);
+                    baseWeapon.owner.vision.ChangeTargetUnit(hit);
                     hit.unitStats.TakeDamge(new Damage(baseWeapon.owner, baseWeapon.owner.unitStats.stats[(int)Stats.Perception].GetValue() + baseWeapon.owner.unitStats.stats[(int)Stats.RangedDamge].GetValue()));
 
                     if (hit.unitStats.currentGrit <= 0) {
                         Debug.Log("Killed " + hit.name);
                         killed = true;
-                        //baseWeapon.owner.unitStats.AddOrRemoveGrace(1);
                     }
                 }
 

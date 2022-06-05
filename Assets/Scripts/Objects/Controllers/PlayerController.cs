@@ -4,15 +4,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Moveable))]
-[RequireComponent(typeof(Vision))]
 public class PlayerController : UnitController
 {
 	// Start is called before the first frame update
 	protected PlayerSkills playerSkills;
 	protected Moveable moveable;
-	protected PlayerVision vision;
-
-	public event System.Action TargetUnitChange;
+	public PlayerVision playerVision;
+	//public new PlayerVision vision;
 
     public enum State {
 		Controls,
@@ -26,13 +24,11 @@ public class PlayerController : UnitController
 
         state = State.Controls;
 
-		//equipmentManager.onEquipmentChanged += OnEquipmentChanged;
-
         unitStats = (PlayerStats) unitStats;
 		this.playerSkills = (PlayerSkills) base.unitSkills;
 
         moveable = GetComponent<Moveable>();
-		vision = GetComponent<PlayerVision>();
+		playerVision = (PlayerVision)vision;
 	}
 
 	public override Command Turn() {
@@ -42,11 +38,6 @@ public class PlayerController : UnitController
 
         if (state == State.Controls) {
 			Command c = Controls();
-            if (c != null) {
-                return c;
-            }
-        } else if (state == State.Range) {
-			Command c = RangedCheck();
             if (c != null) {
                 return c;
             }
@@ -62,22 +53,7 @@ public class PlayerController : UnitController
     }
     
 	protected Command Controls() {
-		if (Input.GetMouseButtonDown(0)) {
-			if (EventSystem.current.IsPointerOverGameObject()) {
-				return null;
-			}
-
-			Tile tile = game.map.GetTileUnderMouse();
-			if (tile != null) {
-				if (tile.occupiedBy is EnemyController) {
-					ChangeTargetUnit((UnitController) tile.occupiedBy);
-				} else {
-					ChangeTargetUnit(null);
-				}
-			}
-		}
-
-		vision.CheckTargetInput();
+		playerVision.CheckTargetInput();
 
 		if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Keypad5)) {
 			return new WaitCommand(this);
@@ -98,9 +74,15 @@ public class PlayerController : UnitController
 		}
 
 		if (Input.GetKeyDown(KeyCode.R)) {
+			if (Input.GetKeyDown(KeyCode.LeftControl)) {
+				Debug.Log("boop");
+			}
 			if (equipmentManager.GetRangedWeapon() != null) {
-				state = State.Range;
-				return null;
+				Tile target = null;
+				if (vision.currentTarget != null) {
+					target = game.map.GetTile(vision.currentTarget.x, vision.currentTarget.y);
+				}
+				return new RangedAttackCommand(this, target, equipmentManager.GetRangedWeapon());
 			}
 		}
 
@@ -153,22 +135,15 @@ public class PlayerController : UnitController
 	}
 
 
-    Command RangedCheck() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-			state = State.Controls;
-			return null;
-		}
-
-		return equipmentManager.GetRangedWeapon().Aim();
-    }
-
-
 	Command CheckSkillInput() {
 		BaseSkill skill = playerSkills.CheckSkillInput();
 
 		if (skill != null) {
 			usedSkill = skill;
-			skill.skill.Activate(skill);
+			if (vision.currentTarget != null) {
+				usedSkill.target = game.map.GetTile(vision.currentTarget.x, vision.currentTarget.y);
+			}
+			skill.skill.Activate(usedSkill);
 			return new SkillCommand(this, skill);
 		}
 
@@ -181,12 +156,13 @@ public class PlayerController : UnitController
 		return EventSystem.current.IsPointerOverGameObject();		    
 	}
 
-    public override void ChangeTargetUnit(UnitController unit) {
-        base.ChangeTargetUnit(unit);
-		TargetUnitChange();
-    }
+    // public override void ChangeTargetUnit(UnitController unit) {
+    //     base.ChangeTargetUnit(unit);
+	// 	TargetUnitChange();
+    // }
 
     public void KilledEnemy() {
         unitStats.AddOrRemoveGrace(1);
+		playerVision.UpdateTargetUnit(-1);
     }
 }
