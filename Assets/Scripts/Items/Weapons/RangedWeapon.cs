@@ -78,7 +78,6 @@ public class RangedWeapon : Weapon
                     hit.unitStats.TakeDamge(new Damage(baseWeapon.owner, baseWeapon.owner.unitStats.stats[(int)Stats.Perception].GetValue() + baseWeapon.owner.unitStats.stats[(int)Stats.RangedDamge].GetValue()));
 
                     if (hit.unitStats.currentGrit <= 0) {
-                        Debug.Log("Killed " + hit.name);
                         killed = true;
                     }
                 }

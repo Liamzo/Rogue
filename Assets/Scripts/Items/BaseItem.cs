@@ -24,11 +24,10 @@ public class BaseItem {
 
 	public virtual void PickUp (UnitController pickedUpBy) {
 		if (itemGO != null) {
-			Debug.Log("Picking up " + item.name);
 			bool wasPickedUp = Inventory.instance.Add(this);
 
 			if (wasPickedUp) {
-				Debug.Log("Was picked up " + item.name);
+				Logger.instance.AddLog("Picked up " + item.name);
 				game.items.Remove(this);
 				GameObject.Destroy(itemGO);
 				itemGO = null;
@@ -39,7 +38,7 @@ public class BaseItem {
 	}
 
 	public void Drop () {
-		Debug.Log("Dropping " + item.name);
+		Logger.instance.AddLog("Dropped " + item.name);
 		x = game.player.x;
 		y = game.player.y;
 		Spawn();

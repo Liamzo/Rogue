@@ -37,7 +37,7 @@ public class Inventory : MonoBehaviour {
                 }
                 return true;
             }
-            Debug.Log("Not enough room");
+            Logger.instance.AddLog("Not enough room in inventory");
         }
         return false;
     }

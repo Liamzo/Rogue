@@ -13,9 +13,9 @@ public class Skill : ScriptableObject
     public WeaponType requiredWeapon;
 
     public virtual CommandResult Use (BaseSkill baseSkill) {
-        Debug.Log("Using " + name);
+        //Debug.Log("Using " + name);
 
-        return new CommandResult(CommandResult.CommandState.Succeeded, null);;
+        return new CommandResult(CommandResult.CommandState.Succeeded, null);
     }
 
     public virtual void Effects () {
@@ -23,18 +23,10 @@ public class Skill : ScriptableObject
     }
 
     public virtual void OnUnlock () {
-		Debug.Log("Unlocked " + name);
+        Logger.instance.AddLog("Learned " + name);
 	}
 
     public virtual bool CanActivate (BaseSkill baseSkill) {
-        // bool canActivate = true;
-
-        // if (requiredWeapon != baseSkill.owner.equipmentManager.GetMainWeapon().item.weaponType && requiredWeapon != WeaponType.None) {
-        //     canActivate = false;
-        // }
-
-        Debug.Log(baseSkill.owner.equipmentManager.GetMainWeapon());
-        Debug.Log(baseSkill.owner.equipmentManager.GetRangedWeapon());
         if ( (requiredWeapon == baseSkill.owner.equipmentManager.GetMainWeapon().item.weaponType) || (requiredWeapon == baseSkill.owner.equipmentManager.GetRangedWeapon().item.weaponType) || (requiredWeapon == WeaponType.None) ) {
             return true;
         }
@@ -43,6 +35,6 @@ public class Skill : ScriptableObject
 	}
 
     public virtual void Activate(BaseSkill baseSkill) {
-        Debug.Log("Activated " + name);
+        //Debug.Log("Activated " + name);
     }
 }

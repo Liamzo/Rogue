@@ -9,7 +9,7 @@ public class Weapon : Equipment {
 
     public virtual void Attack(BaseWeapon baseWeapon, UnitController target, out bool killed) {
         killed = false;
-        Debug.Log("Attack");
+        //Debug.Log("Attack");
     }
 }
 

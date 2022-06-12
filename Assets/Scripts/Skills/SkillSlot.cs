@@ -11,7 +11,6 @@ public class SkillSlot : MonoBehaviour
     public static PlayerSkills playerSkills;
 
     void Start () {
-        //skill = new BaseSkill(Game.instance.allSkills[0]);
         if (playerSkills == null) {
             playerSkills = FindObjectOfType<PlayerSkills>();
         }
@@ -23,7 +22,6 @@ public class SkillSlot : MonoBehaviour
     }
 
     public void ClickSlot () {
-        Debug.Log("click");
         if (baseSkill != null) {
             playerSkills.TryUnlockSkill(baseSkill);
         }

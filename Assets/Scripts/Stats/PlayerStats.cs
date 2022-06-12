@@ -52,7 +52,6 @@ public class PlayerStats : UnitStats {
 
 
     public override void Die() {
-        // This should be overwritten
-        Debug.Log(transform.name + " died");
+        // TODO
     }
 }

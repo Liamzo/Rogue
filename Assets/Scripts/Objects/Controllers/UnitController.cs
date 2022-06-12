@@ -67,7 +67,7 @@ public class UnitController : Object
 
 
 	public virtual Command Turn() {
-		Debug.Log("Unit turn");
+		//Debug.Log("Unit turn");
 		return new Command(this);
     }
 

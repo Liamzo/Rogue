@@ -6,12 +6,10 @@ using UnityEngine;
 public class Equipment : Item {
     public EquipmentSlot equipSlot;
 
-    //public int armourModifier;
-    //public int damageModifier;
     public List<StatValue> stats;
 
 	public override void Use() {
-		base.Use();
+		Logger.instance.AddLog("Equipped " + name);
 	}
 }
 

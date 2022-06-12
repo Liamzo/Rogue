@@ -41,6 +41,7 @@ public class BaseSkill {
 		if (done.state == CommandResult.CommandState.Succeeded) {
             Reset();
 			owner.unitStats.AddOrRemoveGrace(-skill.graceCost);
+			Logger.instance.AddLog("Used " + skill.name);
         }
         return done;
     }

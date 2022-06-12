@@ -14,7 +14,7 @@ public class StatEffect : BaseEffect
 
 		owner.unitStats.stats[(int)sv.stat].AddModifier(sv.value);
 
-		Debug.Log("Created StatEffect");
+		//Debug.Log("Created StatEffect");
 
 		owner.OnTurnStart += OnTurn;
 	}

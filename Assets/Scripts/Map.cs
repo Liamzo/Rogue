@@ -57,11 +57,13 @@ public class Map
         new BaseEquipment(game.itemGOPrefab, (Equipment)game.itemPrefabs[1], 2, 2).Spawn();
         new BaseEquipment(game.itemGOPrefab, (Equipment)game.itemPrefabs[4], 1, 3).Spawn();
         BaseWeapon sword = new BaseWeapon(game.itemGOPrefab, (MeleeWeapon)game.itemPrefabs[2], 2, 1);
-        sword.Spawn();
-        sword.PickUp(game.player);
+        sword.owner = game.player;
+        sword.equipmentManager = game.player.equipmentManager;
+        Inventory.instance.Add(sword);
         BaseRangedWeapon pistol = new BaseRangedWeapon(game.itemGOPrefab, (RangedWeapon)game.itemPrefabs[3], 3, 1);
-        pistol.Spawn();
-        pistol.PickUp(game.player);
+        pistol.owner = game.player;
+        pistol.equipmentManager = game.player.equipmentManager;
+        Inventory.instance.Add(pistol);
 
         // Initial
         CreateEnemy(game.enemyTypes[0], 2, 6);

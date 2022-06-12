@@ -48,25 +48,26 @@ public class UnitStats : MonoBehaviour {
 
         if (currentGrace > 0) {
             AddOrRemoveGrace(-damage.damage);
-            Debug.Log(transform.name + " parries the blow");
+            Logger.instance.AddLog(unitName + " parries the blow");
             return;
         }
 
         currentGrit -= damage.damage;
-        Debug.Log(transform.name + " takes " + damage.damage + " damage");
+        Logger.instance.AddLog(unitName + " was hit for " + damage.damage + " damage");
 
         if (OnUIChange != null) {
             OnUIChange();
         }
 
         if (currentGrit <= 0) {
+            Logger.instance.AddLog(unitName + " was slain by " + damage.attacker.name);
             Die();
         }
     }
 
     public void TakeTrueDamage (int damage) {
         currentGrit -= damage;
-        Debug.Log(transform.name + " takes " + damage + " damage");
+        Debug.Log(unitName + " takes " + damage + " damage");
 
         if (OnUIChange != null) {
             OnUIChange();
@@ -91,7 +92,6 @@ public class UnitStats : MonoBehaviour {
 
     public virtual void Die() {
         // This should be overwritten
-        Debug.Log(transform.name + " died");
         Game.instance.units.Remove(GetComponent<UnitController>());
         Destroy(this.gameObject);
     }

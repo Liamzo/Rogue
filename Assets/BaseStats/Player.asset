@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f9656d3fb5f13a4a801a388c9dddec3, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  unitName: Player
+  unitName: Gunslinger
   sprite: {fileID: 21300000, guid: 72444cf8d17d6c249824fa2ad9f29b35, type: 3}
   stats:
   - stat: 0
-    value: 3
+    value: 5
   - stat: 1
-    value: 3
+    value: 5
   - stat: 3
     value: 1
   - stat: 4
