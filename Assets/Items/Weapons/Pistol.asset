@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Pistol
   icon: {fileID: 21300000, guid: fb5a3004447104a439af460f69067f92, type: 3}
   isDefaultItem: 0
-  equipSlot: 4
+  equipSlot: 3
   stats:
   - stat: 6
     value: 3

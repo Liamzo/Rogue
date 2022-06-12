@@ -103,8 +103,10 @@ public class PlayerController : UnitController
 			playerSkills.ToggleSkills();
 		}
 
-		if (Input.GetKeyDown(KeyCode.U)) {
-			return new UnequipCommand(this);
+		if (equipmentManager.toRemoveItem != null) {
+			BaseEquipment equipment = equipmentManager.toRemoveItem;
+			equipmentManager.toRemoveItem = null;
+			return new UnequipCommand(this, equipment);
 		}
 
         return null;

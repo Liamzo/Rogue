@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
 {
-    // #region Singleton
-    // public static EquipmentManager instance;
-    
-    // void Awake () {
-    //     if (instance != null) {
-    //         Debug.LogWarning("More than one EquipmentManager");
-    //         return;
-    //     }
-    //     instance = this;
-    // }
-    // #endregion
-
     Inventory inventory;
     public UnitController unitController;
 
@@ -28,6 +16,8 @@ public class EquipmentManager : MonoBehaviour
 
     public delegate void OnEquipmentChanged (BaseEquipment newItem, BaseEquipment oldItem);
     public OnEquipmentChanged onEquipmentChanged;
+
+    public BaseEquipment toRemoveItem = null;
 
     void Start () {
         inventory = Inventory.instance;

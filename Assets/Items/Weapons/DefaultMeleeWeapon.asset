@@ -15,7 +15,7 @@ MonoBehaviour:
   name: DefaultMeleeWeapon
   icon: {fileID: 0}
   isDefaultItem: 0
-  equipSlot: 3
+  equipSlot: 2
   stats:
   - stat: 5
     value: 0
