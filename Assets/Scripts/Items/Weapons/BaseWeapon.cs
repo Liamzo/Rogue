@@ -15,6 +15,8 @@ public class BaseWeapon : BaseEquipment {
     public virtual void Attack(UnitController target) {
         owner.vision.ChangeTargetUnit(target);
         item.Attack(this, target, out bool killed);
+        owner.GetComponent<ActionManager>().isAttacking = true;
+        owner.GetComponent<ActionManager>().SetAimPos(new Vector2Int(target.x, target.y));
 
         if (killed == true && owner is PlayerController) {
             owner.vision.ChangeTargetUnit(null);
