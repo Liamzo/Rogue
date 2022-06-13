@@ -13,10 +13,10 @@ public class BaseRangedWeapon : BaseWeapon {
 
     public void Attack(Tile target) {
         ((RangedWeapon)item).Attack(this, target, out bool killed);
-        owner.GetComponent<ActionManager>().isAttacking = true;
         owner.GetComponent<ActionManager>().SetAimPos(new Vector2Int(target.x, target.y));
 
         if (killed == true && owner is PlayerController) {
+            owner.vision.ChangeTargetUnit(null);
             ((PlayerController)owner).KilledEnemy();
         }
         

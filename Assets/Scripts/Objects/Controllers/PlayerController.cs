@@ -165,6 +165,5 @@ public class PlayerController : UnitController
 
     public void KilledEnemy() {
         unitStats.AddOrRemoveGrace(1);
-		playerVision.UpdateTargetUnit(-1);
     }
 }

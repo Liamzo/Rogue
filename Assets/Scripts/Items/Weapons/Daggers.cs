@@ -8,16 +8,10 @@ public class Daggers : Weapon
     public int offHandDamage;
 
     public override void Attack(BaseWeapon baseWeapon, UnitController target, out bool killed) {
-        killed = false;
         BaseDaggers baseDaggers = (BaseDaggers) baseWeapon;
         
-        target.unitStats.TakeDamge(new Damage(baseWeapon.owner, baseWeapon.owner.unitStats.stats[(int)Stats.Strength].GetValue() + baseWeapon.owner.unitStats.stats[(int)Stats.MeleeDamage].GetValue()));
-        
         target.unitStats.TakeDamge(new Damage(baseWeapon.owner, offHandDamage));
-            
-        if (target.unitStats.currentGrit <= 0) {
-            killed = true;
-        }
-        
+
+        base.Attack(baseWeapon, target, out killed);
     }
 }

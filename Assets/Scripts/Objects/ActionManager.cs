@@ -55,5 +55,6 @@ public class ActionManager : MonoBehaviour
         Vector2 dir = ((Vector2)(pos - new Vector2Int(parent.x, parent.y))).normalized;
         dir = dir / 3;
         aimPos = (Vector2)sprite.transform.localPosition + dir;
+        isAttacking = true;
     }
 }

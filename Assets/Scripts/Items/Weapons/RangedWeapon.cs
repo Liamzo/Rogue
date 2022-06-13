@@ -75,11 +75,8 @@ public class RangedWeapon : Weapon
                         continue;
                     }
                     baseWeapon.owner.vision.ChangeTargetUnit(hit);
-                    hit.unitStats.TakeDamge(new Damage(baseWeapon.owner, baseWeapon.owner.unitStats.stats[(int)Stats.Perception].GetValue() + baseWeapon.owner.unitStats.stats[(int)Stats.RangedDamge].GetValue()));
 
-                    if (hit.unitStats.currentGrit <= 0) {
-                        killed = true;
-                    }
+                    base.Attack(baseWeapon, hit, out killed);
                 }
 
                 break;

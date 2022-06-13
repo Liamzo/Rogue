@@ -9,7 +9,16 @@ public class Weapon : Equipment {
 
     public virtual void Attack(BaseWeapon baseWeapon, UnitController target, out bool killed) {
         killed = false;
-        //Debug.Log("Attack");
+        
+        if (equipSlot == EquipmentSlot.Melee) {
+            target.unitStats.TakeDamge(new Damage(baseWeapon.owner, baseWeapon.owner.unitStats.stats[(int)Stats.Strength].GetValue() + baseWeapon.owner.unitStats.stats[(int)Stats.MeleeDamage].GetValue()));
+        } else if (equipSlot == EquipmentSlot.Ranged) {
+            target.unitStats.TakeDamge(new Damage(baseWeapon.owner, baseWeapon.owner.unitStats.stats[(int)Stats.Perception].GetValue() + baseWeapon.owner.unitStats.stats[(int)Stats.RangedDamge].GetValue()));
+        }
+
+        if (target.unitStats.currentGrit <= 0) {
+            killed = true;
+        }
     }
 }
 
