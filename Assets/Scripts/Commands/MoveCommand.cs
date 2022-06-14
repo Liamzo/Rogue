@@ -19,7 +19,6 @@ public class MoveCommand : Command
 
 		if (Game.instance.map.IsPositionClear(new Vector2Int(x, y), out found)) {
             owner.GetComponent<Moveable>().BaseMove(x, y);
-		    owner.GetComponent<Moveable>().isMoving = true;
 
 			return new CommandResult(CommandResult.CommandState.Succeeded, null);
 		} 

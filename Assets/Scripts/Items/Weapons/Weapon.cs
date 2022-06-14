@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Inventory/Weapon")]
 public class Weapon : Equipment {
     public WeaponType weaponType;
+    public AudioManager.Sound soundType;
     public int range;
 
     public virtual void Attack(BaseWeapon baseWeapon, UnitController target, out bool killed) {
@@ -14,6 +15,10 @@ public class Weapon : Equipment {
             target.unitStats.TakeDamge(new Damage(baseWeapon.owner, baseWeapon.owner.unitStats.stats[(int)Stats.Strength].GetValue() + baseWeapon.owner.unitStats.stats[(int)Stats.MeleeDamage].GetValue()));
         } else if (equipSlot == EquipmentSlot.Ranged) {
             target.unitStats.TakeDamge(new Damage(baseWeapon.owner, baseWeapon.owner.unitStats.stats[(int)Stats.Perception].GetValue() + baseWeapon.owner.unitStats.stats[(int)Stats.RangedDamge].GetValue()));
+        }
+
+        if (baseWeapon.owner is PlayerController) {
+            Game.instance.TriggerShake();
         }
 
         if (target.unitStats.currentGrit <= 0) {

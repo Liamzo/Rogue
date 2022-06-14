@@ -51,6 +51,9 @@ public class Game : MonoBehaviour
         map.SpawnThings();
 
         units = new List<UnitController>(FindObjectsOfType<UnitController>());
+
+        // Should be moved, see at bottom
+        initialPosition = Camera.main.transform.localPosition;
     }
 
     // Update is called once per frame
@@ -72,6 +75,8 @@ public class Game : MonoBehaviour
 
         prevHighlightedTiles = new List<Tile>(highlightedTiles);
         highlightedTiles.Clear();
+
+        Shake();
     }
 
     void TakingTurns() {
@@ -152,9 +157,6 @@ public class Game : MonoBehaviour
 
 
 
-
-
-
     public BaseItem GetItem(int x, int y) {
         BaseItem item = null;
 
@@ -167,4 +169,34 @@ public class Game : MonoBehaviour
 
         return item;
     }
+
+
+
+
+    // Should probably be moved somewhere else
+    public float shakeDuration = 0f;
+    public float shakeMagnitude = 0.5f;
+    public float dampingSpeed = 2f;
+    Vector3 initialPosition;
+
+    void Shake()
+    {
+        if (shakeDuration > 0) {
+            //Camera.main.transform.localPosition = initialPosition + Random.insideUnitSphere * shakeMagnitude * shakeDuration;
+            Vector3 newPos = initialPosition + Random.insideUnitSphere * shakeMagnitude;
+
+            float step =  5f * Time.deltaTime;
+            Camera.main.transform.localPosition = Vector3.MoveTowards(Camera.main.transform.localPosition, newPos, step);
+            
+            shakeDuration -= Time.deltaTime * dampingSpeed;
+        } else {
+            shakeDuration = 0f;
+            Camera.main.transform.localPosition = initialPosition;
+        }
+    }
+
+    public void TriggerShake() {
+        shakeDuration = 0.2f;
+    }
+
 }

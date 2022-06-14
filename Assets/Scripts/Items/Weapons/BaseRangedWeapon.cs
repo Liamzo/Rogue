@@ -14,6 +14,7 @@ public class BaseRangedWeapon : BaseWeapon {
     public void Attack(Tile target) {
         ((RangedWeapon)item).Attack(this, target, out bool killed);
         owner.GetComponent<ActionManager>().SetAimPos(new Vector2Int(target.x, target.y));
+        AudioManager.instance.PlaySoundOnce(owner.gameObject, item.soundType);
 
         if (killed == true && owner is PlayerController) {
             owner.vision.ChangeTargetUnit(null);

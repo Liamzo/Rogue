@@ -30,6 +30,7 @@ public class Moveable : MonoBehaviour
         if (Vector2.Distance(transform.position, new Vector2(x,y)) < 0.001f) {
             // Swap the position of the unit
 			isMoving = false;
+            AudioManager.instance.StopSound(gameObject);
 			gameObject.transform.position = new Vector3 (x,y,0);
 
         	if (Game.instance.map.map[x,y].visible == false) {
@@ -48,5 +49,8 @@ public class Moveable : MonoBehaviour
 
         parent.x = x;
         parent.y = y;
+
+        isMoving = true;
+        AudioManager.instance.PlaySound(gameObject);
     }
 }

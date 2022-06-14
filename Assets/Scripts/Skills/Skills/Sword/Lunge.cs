@@ -36,7 +36,6 @@ public class Lunge : Skill
 
                 if (Game.instance.map.IsPositionClear(new Vector2Int(baseSkill.owner.x + moveX, baseSkill.owner.y + moveY))) {
                     baseSkill.owner.GetComponent<Moveable>().BaseMove(baseSkill.owner.x + moveX, baseSkill.owner.y + moveY);
-                    baseSkill.owner.GetComponent<Moveable>().isMoving = true;
 
                     baseSkill.owner.equipmentManager.GetMainWeapon().Attack(target);
 

@@ -6,7 +6,7 @@ public class Command
 {
     protected UnitController owner;
 
-    public Command (UnitController owner) 
+    public Command (UnitController owner, bool waitForAnimation = false) 
     {
         this.owner = owner;
     }

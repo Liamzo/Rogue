@@ -46,6 +46,16 @@ public class PlayerVision : Vision
 
         if (currentIndex == -1 && visibleTargets.Count > 0) {
             UpdateTargetUnit(0);
+        } else if (visibleTargets.Count == 0) {
+            UpdateTargetUnit(-1);
+        } else if (visibleTargets.Contains(currentTarget) == false) {
+            if (visibleTargets.Count == 0) {
+                UpdateTargetUnit(-1);
+            } else {
+                UpdateTargetUnit(0);
+            }
+        } else if (visibleTargets.Contains(currentTarget) == true) {
+            UpdateTargetUnit(visibleTargets.IndexOf(currentTarget));
         }
     }
 
@@ -86,7 +96,11 @@ public class PlayerVision : Vision
 		}
 
         if (Input.GetKeyDown(KeyCode.Tab)) {
-            UpdateTargetUnit((currentIndex + 1) % visibleTargets.Count);
+            if (visibleTargets.Count > 0) {
+                UpdateTargetUnit((currentIndex + 1) % visibleTargets.Count);
+            } else {
+                UpdateTargetUnit(-1);
+            }
         }
     }
 

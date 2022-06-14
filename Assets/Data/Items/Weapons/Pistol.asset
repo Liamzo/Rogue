@@ -20,4 +20,5 @@ MonoBehaviour:
   - stat: 6
     value: 3
   weaponType: 5
+  soundType: 1
   range: 6
