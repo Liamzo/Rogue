@@ -14,7 +14,6 @@ public class AudioManager : MonoBehaviour
     }
 
     public SoundAudioClip[] soundAudioClips;
-    public AudioClip test;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +36,12 @@ public class AudioManager : MonoBehaviour
 
         if (!source.isPlaying) {
             source.loop = true;
-            source.clip = test;
+            foreach(SoundAudioClip soundAudioClip in soundAudioClips) {
+                if (soundAudioClip.sound == Sound.MoveWalk) {
+                    source.clip = soundAudioClip.audioClip;
+                    source.Play();
+                }
+            }
             source.Play();
         }
     }
