@@ -66,10 +66,10 @@ public class Game : MonoBehaviour
         }
         prevHighlightedTiles.Clear();
 
-        // Command c = player.Controls();
-        // if (c != null) {
-        //     queuedCommand = c;
-        // }
+        Command c = player.Controls();
+        if (c != null) {
+            queuedCommand = c;
+        }
 
         if (state == State.TakingTurns) {
 			TakingTurns();
@@ -147,10 +147,15 @@ public class Game : MonoBehaviour
     void WaitingOnPlayer() {
         if (currentCommand == null) {
             currentCommand = player.Turn();
+            if (currentCommand != null) {
+                queuedCommand = null;
+            }
         }
 
-        //if (currentCommand == null)
-            //currentCommand = queuedCommand;
+        if (currentCommand == null) {
+            currentCommand = queuedCommand;
+            queuedCommand = null;
+        }
     
         if (currentCommand != null) {
             CommandResult result = currentCommand.perform();
