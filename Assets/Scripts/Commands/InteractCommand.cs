@@ -6,7 +6,7 @@ public class InteractCommand : Command
 {
     Interactable interactable;
 
-    public InteractCommand (UnitController owner, Interactable interactable) : base(owner)
+    public InteractCommand (UnitController owner, Interactable interactable, float animationDelay = 0f) : base(owner, animationDelay)
     {
         this.interactable = interactable;
     }

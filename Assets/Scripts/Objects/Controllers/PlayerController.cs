@@ -52,7 +52,7 @@ public class PlayerController : UnitController
         state = State.Controls;
     }
     
-	protected Command Controls() {
+	public Command Controls() {
 		playerVision.CheckTargetInput();
 
 		if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Keypad5)) {
@@ -116,21 +116,21 @@ public class PlayerController : UnitController
 	Command CheckKeyboardMovement() {
 		// Check for movement input
 		if (Input.GetKeyDown(KeyCode.Keypad4)) {
-			return new MoveCommand(this, x-1, y); //Left
+			return new MoveCommand(this, x-1, y, 0f, 0.1f); //Left
 		} else if (Input.GetKeyDown(KeyCode.Keypad6)) {
-			return new MoveCommand(this, x+1, y); // Right
+			return new MoveCommand(this, x+1, y, 0f, 0.1f); // Right
 		} else if (Input.GetKeyDown(KeyCode.Keypad8)) {
-			return new MoveCommand(this, x, y+1); // Up
+			return new MoveCommand(this, x, y+1, 0f, 0.1f); // Up
 		} else if (Input.GetKeyDown(KeyCode.Keypad2)) {
-			return new MoveCommand(this, x, y-1); // Down
+			return new MoveCommand(this, x, y-1, 0f, 0.1f); // Down
 		} else if (Input.GetKeyDown(KeyCode.Keypad7)) {
-			return new MoveCommand(this, x-1, y+1); // Up Left
+			return new MoveCommand(this, x-1, y+1, 0f, 0.1f); // Up Left
 		} else if (Input.GetKeyDown(KeyCode.Keypad9)) {
-			return new MoveCommand(this, x+1, y+1); // Up Right
+			return new MoveCommand(this, x+1, y+1, 0f, 0.1f); // Up Right
 		} else if (Input.GetKeyDown(KeyCode.Keypad1)) {
-			return new MoveCommand(this, x-1, y-1); // Down Left
+			return new MoveCommand(this, x-1, y-1, 0f, 0.1f); // Down Left
 		} else if (Input.GetKeyDown(KeyCode.Keypad3)) {
-			return new MoveCommand(this, x+1, y-1); // Down Right
+			return new MoveCommand(this, x+1, y-1, 0f, 0.1f); // Down Right
 		}
 
 		return null;

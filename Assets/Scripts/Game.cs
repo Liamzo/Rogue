@@ -19,6 +19,8 @@ public class Game : MonoBehaviour
     public GameObject itemGOPrefab;
 
     public PlayerController player;
+    public Command queuedCommand;
+
     public List<UnitController> units;
 
     public List<Enemy> enemyTypes;
@@ -47,6 +49,7 @@ public class Game : MonoBehaviour
     void Start() {
         state = State.TakingTurns;
         currentCommand = null;
+        queuedCommand = null;
 
         map.SpawnThings();
 
@@ -63,11 +66,17 @@ public class Game : MonoBehaviour
         }
         prevHighlightedTiles.Clear();
 
+        // Command c = player.Controls();
+        // if (c != null) {
+        //     queuedCommand = c;
+        // }
+
         if (state == State.TakingTurns) {
 			TakingTurns();
 		} else if (state == State.WaitingOnPlayer) {
 			WaitingOnPlayer();
 		}
+
 
         foreach (Tile t in highlightedTiles) {
             t.SetHighlight(HighlightType.red);
@@ -75,6 +84,7 @@ public class Game : MonoBehaviour
 
         prevHighlightedTiles = new List<Tile>(highlightedTiles);
         highlightedTiles.Clear();
+
 
         Shake();
     }
@@ -109,7 +119,12 @@ public class Game : MonoBehaviour
 			if (u == player) {
                 state = State.WaitingOnPlayer;
                 player.TurnStart();
+                return;
             } else {
+                // Whole thing will break if enemy is waiting on an animation
+                // because of the while true loop, time won't advance
+                // requires a whole rework, hopefully not 1 per frame
+
                 currentCommand = u.Turn();
 
                 while (true) {
@@ -127,13 +142,15 @@ public class Game : MonoBehaviour
                 currentCommand = null;
             }
 		}
-
-
     }
 
     void WaitingOnPlayer() {
-        if (currentCommand == null)
+        if (currentCommand == null) {
             currentCommand = player.Turn();
+        }
+
+        //if (currentCommand == null)
+            //currentCommand = queuedCommand;
     
         if (currentCommand != null) {
             CommandResult result = currentCommand.perform();

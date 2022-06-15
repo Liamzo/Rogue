@@ -7697,8 +7697,9 @@ MonoBehaviour:
   - sound: 0
     audioClip: {fileID: 8300000, guid: 4a578695dfac4422d81299af3481ea10, type: 3}
   - sound: 2
-    audioClip: {fileID: 8300000, guid: 7731629c744584f4485f376fa0bdfd9f, type: 3}
-  test: {fileID: 8300000, guid: fba95cafa5bba8649a7d269656e7317b, type: 3}
+    audioClip: {fileID: 8300000, guid: a5609e222de3d5340aa84ead0d42c3d9, type: 3}
+  - sound: 3
+    audioClip: {fileID: 8300000, guid: 0048c3f2e10006441bcff944e9dc2271, type: 3}
 --- !u!224 &1781289391 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1189993764414398656, guid: 60e030a29b1bc4542b2c74edfb788c1d,

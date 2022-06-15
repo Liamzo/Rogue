@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseRangedWeapon : BaseWeapon {
     public BaseRangedWeapon (GameObject itemGOPrefab, RangedWeapon item, int x, int y) : base(itemGOPrefab, item, x, y) {
-		this.item = item;
+		//this.item = item;
 	}
 
     public Tile Aim() {
