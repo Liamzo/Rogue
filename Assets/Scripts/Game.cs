@@ -66,9 +66,11 @@ public class Game : MonoBehaviour
         }
         prevHighlightedTiles.Clear();
 
-        Command c = player.Controls();
-        if (c != null) {
-            queuedCommand = c;
+        if (player.turn == false) {
+            Command c = player.Controls();
+            if (c != null) {
+                queuedCommand = c;
+            }
         }
 
         if (state == State.TakingTurns) {
