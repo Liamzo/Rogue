@@ -40,7 +40,7 @@ public class Dash : Skill
         
         targetCoords = path[path.Count - 1];        
         foreach(Vector2Int tPos in path) {
-            baseSkill.game.highlightedTiles.Add(baseSkill.game.map.GetTile(tPos.x,tPos.y));
+            TileHighlightManager.instance.AddTempHighlight(baseSkill.game.map.GetTile(tPos.x,tPos.y), HighlightType.blue);
         }
 
         int cost = path.Count;

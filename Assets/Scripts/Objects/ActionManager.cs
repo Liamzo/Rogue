@@ -39,11 +39,11 @@ public class ActionManager : MonoBehaviour
         // Check if the position of the cube and sphere are approximately equal.
         if (Vector2.Distance(sprite.transform.localPosition, aimPos.Value) < 0.001f) {
             if (aimPos == new Vector2(0.5f, 0.1f)) {
-                sprite.transform.localPosition = new Vector3(0.5f, 0.1f, 0f);
+                sprite.transform.localPosition = new Vector3(0.5f, 0.4f, 0f);
                 isAttacking = false;
                 aimPos = null;
             } else {
-                aimPos = new Vector2(0.5f, 0.1f);
+                aimPos = new Vector2(0.5f, 0.4f);
             }
         }
     }

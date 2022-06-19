@@ -16,7 +16,7 @@ public class FlowingSurge : Skill
 
 		// Highlight openTarget tiles
 		foreach(Vector2Int pos in baseSkill.openTargerts) {
-			baseSkill.game.highlightedTiles.Add(baseSkill.game.map.GetTile(pos.x,pos.y));
+			TileHighlightManager.instance.AddTempHighlight(baseSkill.game.map.GetTile(pos.x,pos.y), HighlightType.red);
 		}
 
 		if (Input.GetMouseButtonDown(0)) {

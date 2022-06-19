@@ -43,7 +43,7 @@ public class RangedWeapon : Weapon
         }
 
         foreach(Vector2Int tPos in path) {
-            baseWeapon.game.highlightedTiles.Add(baseWeapon.game.map.GetTile(tPos.x,tPos.y));
+            TileHighlightManager.instance.AddTempHighlight(baseWeapon.game.map.GetTile(tPos.x,tPos.y), HighlightType.red);
         }
 
         if (Input.GetMouseButtonDown(0)) {

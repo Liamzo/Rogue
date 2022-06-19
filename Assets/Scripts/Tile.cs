@@ -40,16 +40,11 @@ public class Tile
 		tileSprite.enabled = false;
 	}
 
-	public void SetHighlight(HighlightType highlight) {
-		if (highlight == HighlightType.none) {
+	public void SetHighlight(Color? highlight) {
+		if (highlight == null) {
 			tileSprite.material.color = baseColour;
-		} else if (highlight == HighlightType.red) {
-			tileSprite.material.color = Color.red;
+		} else {
+			tileSprite.material.color = highlight.Value;
 		}
 	}
-}
-
-public enum HighlightType {
-	none,
-	red
 }

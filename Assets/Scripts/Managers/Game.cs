@@ -9,10 +9,6 @@ public class Game : MonoBehaviour
     public Map map;
 	public Texture2D mapImgFile;
 	public List<GameObject> tilePrefabs = new List<GameObject>();
-    public Material baseTileMaterial;
-    public Material redHighlight;
-    public List<Tile> highlightedTiles = new List<Tile>();
-    public List<Tile> prevHighlightedTiles = new List<Tile>();
 
     public List<BaseItem> items;
 	public List<Item> itemPrefabs = new List<Item>();
@@ -61,10 +57,7 @@ public class Game : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        foreach (Tile t in prevHighlightedTiles) {
-            t.SetHighlight(HighlightType.none);
-        }
-        prevHighlightedTiles.Clear();
+        TileHighlightManager.instance.ClearPrevHighlights();
 
         if (player.turn == false) {
             Command c = player.Controls();
@@ -80,12 +73,7 @@ public class Game : MonoBehaviour
 		}
 
 
-        foreach (Tile t in highlightedTiles) {
-            t.SetHighlight(HighlightType.red);
-        }
-
-        prevHighlightedTiles = new List<Tile>(highlightedTiles);
-        highlightedTiles.Clear();
+        TileHighlightManager.instance.ClearHighlights();
 
 
         Shake();
