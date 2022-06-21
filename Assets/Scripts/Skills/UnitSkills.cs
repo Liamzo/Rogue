@@ -5,25 +5,29 @@ using UnityEngine;
 public class UnitSkills : MonoBehaviour {
     
     Game game;
+
+    public BaseUnitSkills baseUnitSkills;
+
     public UnitController unitController;
 
-    protected List<BaseSkill> unlockedSkillsList;
-    public event System.Action OnSkillUnlocked;
+    protected List<BaseSkill> unlockedSkillsList = new List<BaseSkill>();
 
     // Start is called before the first frame update
     protected virtual void Start() {
         game = Game.instance;
-
-        unlockedSkillsList = new List<BaseSkill>();
     }
 
-    public void UnlockSkill (BaseSkill skill) {
+    public void SetDefaultSkills() {
+        foreach (Skill skill in baseUnitSkills.skills) {
+            UnlockSkill(new BaseSkill(skill));
+        }
+    }
+
+    public virtual void UnlockSkill (BaseSkill skill) {
         unlockedSkillsList.Add(skill);
 
         skill.OnUnlock();
-        skill.hotKey = (KeyCode) (48+unlockedSkillsList.Count);
         skill.owner = unitController;
-        OnSkillUnlocked();
     }
 
     public bool TryUnlockSkill (BaseSkill skill) {

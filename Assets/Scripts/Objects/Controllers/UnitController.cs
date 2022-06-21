@@ -29,6 +29,8 @@ public class UnitController : Object
 
 	public BaseSkill usedSkill;
 
+	public Command queuedCommand;
+
 	public event System.Action OnTurnStart = delegate { };
 	public event System.Action OnTurnEnd = delegate { };
 
@@ -46,6 +48,7 @@ public class UnitController : Object
 		//unitStats.unitController = this; // not needed atm
 
 		equipmentManager.SetDefaultEquipment();
+		unitSkills.SetDefaultSkills();
 
 		unitState = UnitState.None;
 

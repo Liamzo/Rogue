@@ -10,7 +10,7 @@ public class SkillSlot : MonoBehaviour
 
     public static PlayerSkills playerSkills;
 
-    void Start () {
+    void Awake () {
         if (playerSkills == null) {
             playerSkills = FindObjectOfType<PlayerSkills>();
         }

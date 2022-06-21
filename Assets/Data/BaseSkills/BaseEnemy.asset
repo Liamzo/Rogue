@@ -9,13 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef8849d2535d19f478f48433edbf5900, type: 3}
-  m_Name: Double Shot
+  m_Script: {fileID: 11500000, guid: 2db703f8f1ebec142bc68f44dc4984f0, type: 3}
+  m_Name: BaseEnemy
   m_EditorClassIdentifier: 
-  name: Double Shot
-  icon: {fileID: -2727657493149837164, guid: 30c9f1deb9848bc4c9003ce89df2108d, type: 3}
-  requiredSkills: []
-  graceCost: 2
-  requiredWeapon: 5
-  coolDown: 2
-  attacks: 2
+  skills: []

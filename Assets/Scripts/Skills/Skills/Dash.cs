@@ -7,7 +7,7 @@ public class Dash : Skill
 {
     public override CommandResult Use (BaseSkill baseSkill) {    
         // Find and highlight path
-        Tile tile = baseSkill.game.map.GetTileUnderMouse();
+        Tile tile = Game.instance.map.GetTileUnderMouse();
         Vector2Int targetCoords = new Vector2Int(tile.x, tile.y);
 
         int xDistance = targetCoords.x - baseSkill.owner.x;
@@ -31,7 +31,7 @@ public class Dash : Skill
             int yPos = Mathf.RoundToInt(yStep * i) + baseSkill.owner.y;
             Vector2Int tPos = new Vector2Int(xPos,yPos);
 
-            if (!baseSkill.game.map.IsPositionClear(baseSkill.game.map.GetXY(tPos))) {
+            if (!Game.instance.map.IsPositionClear(Game.instance.map.GetXY(tPos))) {
                 break;
             }
 
@@ -40,7 +40,7 @@ public class Dash : Skill
         
         targetCoords = path[path.Count - 1];        
         foreach(Vector2Int tPos in path) {
-            TileHighlightManager.instance.AddTempHighlight(baseSkill.game.map.GetTile(tPos.x,tPos.y), HighlightType.blue);
+            TileHighlightManager.instance.AddTempHighlight(Game.instance.map.GetTile(tPos.x,tPos.y), HighlightType.blue);
         }
 
         int cost = path.Count;
