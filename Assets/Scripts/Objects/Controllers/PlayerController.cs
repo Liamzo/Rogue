@@ -10,19 +10,9 @@ public class PlayerController : UnitController
 	protected PlayerSkills playerSkills;
 	protected Moveable moveable;
 	public PlayerVision playerVision;
-	//public new PlayerVision vision;
-
-    public enum State {
-		Controls,
-		Range,
-        Skill
-	};
-	public State state;
 
 	protected override void Start() {
 		base.Start();
-
-        state = State.Controls;
 
         unitStats = (PlayerStats) unitStats;
 		this.playerSkills = (PlayerSkills) base.unitSkills;
@@ -36,20 +26,17 @@ public class PlayerController : UnitController
             return new Command(this);
         }
 
-        if (state == State.Controls) {
-			Command c = Controls();
-            if (c != null) {
-                return c;
-            }
-        }
+		Command c = Controls();
+		if (c != null) {
+			return c;
+		}
+        
 
         return null;
 	}
 
     public override void TurnEnd() {
         base.TurnEnd();
-
-        state = State.Controls;
     }
     
 	public Command Controls() {
@@ -74,9 +61,6 @@ public class PlayerController : UnitController
 		}
 
 		if (Input.GetKeyDown(KeyCode.R)) {
-			if (Input.GetKeyDown(KeyCode.LeftControl)) {
-				Debug.Log("boop");
-			}
 			if (equipmentManager.GetRangedWeapon() != null) {
 				Tile target = null;
 				if (vision.currentTarget != null) {
@@ -84,6 +68,8 @@ public class PlayerController : UnitController
 				}
 				return new RangedAttackCommand(this, target, equipmentManager.GetRangedWeapon());
 			}
+		} else if (Input.GetKeyDown(KeyCode.R) && Input.GetKeyDown(KeyCode.LeftControl)) {
+			Debug.Log("boop");
 		}
 
 		if (Input.GetKeyDown(KeyCode.G)) {
@@ -141,6 +127,7 @@ public class PlayerController : UnitController
 		BaseSkill skill = playerSkills.CheckSkillInput();
 
 		if (skill != null) {
+			// Do we need used skill at all here?
 			usedSkill = skill;
 			if (vision.currentTarget != null) {
 				usedSkill.target = game.map.GetTile(vision.currentTarget.x, vision.currentTarget.y);

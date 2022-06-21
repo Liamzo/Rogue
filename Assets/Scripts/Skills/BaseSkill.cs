@@ -12,6 +12,8 @@ public class BaseSkill {
 
 	public Tile target;
 
+	public int coolDownTimer;
+
 	// For Flowing Strike, need a better way to structure this
 	public List<Vector2Int> openTargerts;
 	public List<UnitController> closedTargerts;
@@ -27,18 +29,26 @@ public class BaseSkill {
 
 	public void OnUnlock () {
 		skill.OnUnlock();
+		coolDownTimer = 0;
+	}
+
+	public void TickCoolDown() {
+		coolDownTimer -= 1;
+		if (coolDownTimer <= 0) {
+			owner.OnTurnStart -= TickCoolDown;
+		}
 	}
 
 	public CommandResult Use () {
 		if (Input.GetKeyDown(KeyCode.Escape)) {
+			Reset();
 			return new CommandResult(CommandResult.CommandState.Failed, null);
 		}
 
         CommandResult done = skill.Use(this);
-		if (done.state == CommandResult.CommandState.Pending) {
-
-		}
-		if (done.state == CommandResult.CommandState.Succeeded) {
+		if (done.state == CommandResult.CommandState.Failed) {
+			Reset();
+		} else if (done.state == CommandResult.CommandState.Succeeded) {
             Reset();
 			owner.unitStats.AddOrRemoveGrace(-skill.graceCost);
 			Logger.instance.AddLog("Used " + skill.name);
@@ -49,6 +59,8 @@ public class BaseSkill {
 	public virtual void Reset() {
 		target = null;
 		openTargerts.Clear();
+		coolDownTimer = skill.coolDown;
+		owner.OnTurnStart += TickCoolDown;
     }
 
     public void Effects () {
@@ -56,7 +68,7 @@ public class BaseSkill {
     }
 
 	public bool CanBeActivated() {
-		if (owner.unitStats.currentGrace >= skill.graceCost && skill.CanActivate(this)) {
+		if (owner.unitStats.currentGrace >= skill.graceCost && skill.CanActivate(this) && coolDownTimer <= 0) {
 			return true;
 		}
 

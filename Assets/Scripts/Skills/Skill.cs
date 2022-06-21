@@ -12,6 +12,8 @@ public class Skill : ScriptableObject
     public int graceCost;
     public WeaponType requiredWeapon;
 
+    public int coolDown;
+
     public virtual CommandResult Use (BaseSkill baseSkill) {
         //Debug.Log("Using " + name);
 
@@ -27,7 +29,7 @@ public class Skill : ScriptableObject
 	}
 
     public virtual bool CanActivate (BaseSkill baseSkill) {
-        if ( (requiredWeapon == baseSkill.owner.equipmentManager.GetMainWeapon().item.weaponType) || (requiredWeapon == baseSkill.owner.equipmentManager.GetRangedWeapon().item.weaponType) || (requiredWeapon == WeaponType.None) ) {
+        if ( (requiredWeapon == baseSkill.owner.equipmentManager.GetMainWeapon().item.weaponType) || (requiredWeapon == baseSkill.owner.equipmentManager.GetRangedWeapon().item.weaponType) || (requiredWeapon == WeaponType.None) ) { // Weapon type
             return true;
         }
 
