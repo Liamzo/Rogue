@@ -31,9 +31,9 @@ public class MultiStrike : Skill
             int yDistance = target.y - baseSkill.owner.y;
             int dist = Mathf.Max(Mathf.Abs(xDistance), Mathf.Abs(yDistance));
 
-            if (dist <= baseSkill.owner.equipmentManager.GetMainWeapon().item.range) {
+            if (dist <= baseSkill.owner.equipmentManager.GetMeleeWeapon().item.range) {
                 for (int i = 0; i < attacks; i++) {
-                    baseSkill.owner.equipmentManager.GetMainWeapon().Attack(target);
+                    baseSkill.owner.equipmentManager.GetMeleeWeapon().Attack(target);
                 }
                 return new CommandResult(CommandResult.CommandState.Succeeded, null);
             }

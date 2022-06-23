@@ -32,7 +32,7 @@ public class FlowingSurge : Skill
 					if (tile.occupiedBy is UnitController) {
 						UnitController targetUnit = (UnitController)tile.occupiedBy;
 
-						baseSkill.owner.equipmentManager.GetMainWeapon().Attack(targetUnit);
+						baseSkill.owner.equipmentManager.GetMeleeWeapon().Attack(targetUnit);
 						baseSkill.closedTargerts.Add(targetUnit);
 
 						// Find move position
@@ -56,7 +56,7 @@ public class FlowingSurge : Skill
 						return new CommandResult(CommandResult.CommandState.Succeeded, null);
 					}
 
-					baseSkill.owner.equipmentManager.GetMainWeapon().Attack((UnitController)tile.occupiedBy);
+					baseSkill.owner.equipmentManager.GetMeleeWeapon().Attack((UnitController)tile.occupiedBy);
 					baseSkill.closedTargerts.Add((UnitController)tile.occupiedBy);
 
 					baseSkill.owner.GetComponent<Moveable>().BaseMove(clickedPos.x, clickedPos.y);

@@ -37,7 +37,7 @@ public class Lunge : Skill
                 if (Game.instance.map.IsPositionClear(new Vector2Int(baseSkill.owner.x + moveX, baseSkill.owner.y + moveY))) {
                     baseSkill.owner.GetComponent<Moveable>().BaseMove(baseSkill.owner.x + moveX, baseSkill.owner.y + moveY);
 
-                    baseSkill.owner.equipmentManager.GetMainWeapon().Attack(target);
+                    baseSkill.owner.equipmentManager.GetMeleeWeapon().Attack(target);
 
                     return new CommandResult(CommandResult.CommandState.Succeeded, null);
                 }

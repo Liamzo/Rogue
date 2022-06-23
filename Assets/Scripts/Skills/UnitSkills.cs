@@ -68,14 +68,14 @@ public class UnitSkills : MonoBehaviour {
         return true;
     }
 
-    public BaseSkill GetFirstSkill() {
-        if (unlockedSkillsList.Count == 0) {
+    public BaseSkill GetSkill(int i) {
+        if (unlockedSkillsList.Count == 0 || unlockedSkillsList.Count <= i) {
             return null;
         }
-        BaseSkill skill = unlockedSkillsList[0];
+        BaseSkill skill = unlockedSkillsList[i];
 
         if (skill.CanBeActivated()) {
-            return unlockedSkillsList[0];
+            return unlockedSkillsList[i];
         }
 
         return null;

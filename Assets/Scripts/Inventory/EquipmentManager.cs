@@ -75,7 +75,7 @@ public class EquipmentManager : MonoBehaviour
         return currentEquipment[slot];
     }
 
-    public BaseWeapon GetMainWeapon() {
+    public BaseWeapon GetMeleeWeapon() {
         //FIX
         if (currentEquipment == null) {
             return defaultMeleeWeapon;

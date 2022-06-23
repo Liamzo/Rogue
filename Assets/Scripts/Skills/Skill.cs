@@ -29,8 +29,20 @@ public class Skill : ScriptableObject
 	}
 
     public virtual bool CanActivate (BaseSkill baseSkill) {
-        if ( (requiredWeapon == baseSkill.owner.equipmentManager.GetMainWeapon().item.weaponType) || (requiredWeapon == baseSkill.owner.equipmentManager.GetRangedWeapon().item.weaponType) || (requiredWeapon == WeaponType.None) ) { // Weapon type
+        if (requiredWeapon == WeaponType.None) {
             return true;
+        }
+
+        if (baseSkill.owner.equipmentManager.GetMeleeWeapon() != null) {
+            if (requiredWeapon == baseSkill.owner.equipmentManager.GetMeleeWeapon().item.weaponType) {
+                return true;
+            }
+        }
+
+        if (baseSkill.owner.equipmentManager.GetRangedWeapon() != null) {
+            if (requiredWeapon == baseSkill.owner.equipmentManager.GetRangedWeapon().item.weaponType) {
+                return true;
+            }
         }
 
 		return false;

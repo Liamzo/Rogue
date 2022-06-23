@@ -19,7 +19,7 @@ public class BigEnemy : Enemy {
 				// If in melee range, and can use our skill, then do so
 				Vector2Int diff = new Vector2Int(controller.vision.currentTarget.x, controller.vision.currentTarget.y) - new Vector2Int(controller.x, controller.y);
 				if (Mathf.Abs(diff.x) <= 1 && Mathf.Abs(diff.y) <= 1) {
-					BaseSkill skill = controller.unitSkills.GetFirstSkill();
+					BaseSkill skill = controller.unitSkills.GetSkill(1);
 
 					if (skill != null) {
 						skill.target = Game.instance.map.GetTile(controller.vision.currentTarget.x, controller.vision.currentTarget.y);

@@ -17,7 +17,7 @@ public class AttackCommand : Command
             return CheckWait();
         }
 
-        owner.equipmentManager.GetMainWeapon().Attack(target);
+        owner.equipmentManager.GetMeleeWeapon().Attack(target);
 
 		if (animationDelay > 0f) {
             waiting = true;
