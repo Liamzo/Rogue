@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad87d642762a6f947a0c5dd1876be614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseUnitSkills: {fileID: 11400000, guid: ee7c9e6b705fd8849acf3051e44aa486, type: 2}
+  baseUnitSkills: {fileID: 0}
   unitController: {fileID: 0}
 --- !u!114 &2026859118851392670
 MonoBehaviour:

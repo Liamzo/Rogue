@@ -439,13 +439,15 @@ public class Map
 		if (GetTile(x,y) != null) {
             // Make tile visible
 			map[x,y].tileSprite.enabled = true;
-            map[x,y].tileSprite.material.color = map[x,y].baseColour;
 			map[x,y].visible = true;
             map[x,y].explored = true;
+            if (map[x,y].highlighted == false) {
+                map[x,y].tileSprite.material.color = map[x,y].baseColour;
+            }
 
             // If an object is here, make visible
             if (map[x,y].occupiedBy != null) {
-                map[x,y].occupiedBy.spriteRenderer.enabled = true;
+                map[x,y].occupiedBy.spriteRenderer.gameObject.SetActive(true);
             }
 
             // If an item is here, make visible
@@ -460,11 +462,13 @@ public class Map
     public void SetLightOff(int x, int y) {
 		if (GetTile(x,y) != null) {
 			map[x,y].visible = false;
-            map[x,y].tileSprite.material.color = new Color(0.18f, 0.18f, 0.18f);
+            if (map[x,y].highlighted == false) {
+                map[x,y].tileSprite.material.color = new Color(0.18f, 0.18f, 0.18f);
+            }
 
             // If an object is here, make invisible
             if (map[x,y].occupiedBy != null) {
-                map[x,y].occupiedBy.spriteRenderer.enabled = false;
+                map[x,y].occupiedBy.spriteRenderer.gameObject.SetActive(false);
             }
 
             // If an item is here, make invisible

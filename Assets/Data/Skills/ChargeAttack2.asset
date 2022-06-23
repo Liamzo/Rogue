@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 383e0804361862b47b1f62f2b5ddc0ba, type: 3}
-  m_Name: BigZombie
+  m_Script: {fileID: 11500000, guid: 801cb25592334fa429559314d5a96411, type: 3}
+  m_Name: ChargeAttack2
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: cf0d091aebba79141b881a189863ccb7, type: 2}
-  skills: {fileID: 11400000, guid: eea53609f73b59347add8a038fa2f34a, type: 2}
+  name: Charge2
+  icon: {fileID: 7805335646520212899, guid: 30c9f1deb9848bc4c9003ce89df2108d, type: 3}
+  requiredSkills: []
+  graceCost: 0
+  requiredWeapon: 0
+  coolDown: 0

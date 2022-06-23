@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb2db98e4cadd544198576683323116c, type: 3}
+  m_Name: ChargeAttack1
+  m_EditorClassIdentifier: 
+  name: Charge
+  icon: {fileID: 7805335646520212899, guid: 30c9f1deb9848bc4c9003ce89df2108d, type: 3}
+  requiredSkills: []
+  graceCost: 0
+  requiredWeapon: 0
+  coolDown: 5
+  part2: {fileID: 11400000, guid: 579c343a5e3bc064397b95cff9415078, type: 2}

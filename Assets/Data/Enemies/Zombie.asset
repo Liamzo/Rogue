@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Zombie
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: c4bd92f341342ae469cf35742c87bef2, type: 2}
+  skills: {fileID: 11400000, guid: eea53609f73b59347add8a038fa2f34a, type: 2}

@@ -37,7 +37,7 @@ public class PlayerVision : Vision
                 continue;
             }
 
-            if (unit.spriteRenderer.enabled == true) {
+            if (unit.spriteRenderer.gameObject.activeSelf == true) {
                 visibleTargets.Add(unit);
             }
         }

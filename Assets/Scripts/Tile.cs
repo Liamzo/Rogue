@@ -27,6 +27,8 @@ public class Tile
 	public bool visible = false;
 	public bool explored = false;
 
+	public bool highlighted = false;
+
     public Tile(int x, int y, GameObject tilePrefab, bool isWalkable = true, bool isViewable = true) {
 		this.x = x;
 		this.y = y;
@@ -42,9 +44,19 @@ public class Tile
 
 	public void SetHighlight(Color? highlight) {
 		if (highlight == null) {
-			tileSprite.material.color = baseColour;
+			if (visible == true) {
+				tileSprite.material.color = baseColour;
+			} else {
+				tileSprite.material.color = new Color(0.18f, 0.18f, 0.18f);
+			}
+			highlighted = false;
 		} else {
 			tileSprite.material.color = highlight.Value;
+			highlighted = true;
 		}
+	}
+
+	public Vector2Int GetPos() {
+		return new Vector2Int(x,y);
 	}
 }

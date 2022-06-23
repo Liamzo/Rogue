@@ -11,7 +11,7 @@ public abstract class Object : MonoBehaviour
 
     protected Game game;
 
-    public SpriteRenderer spriteRenderer;
+    public Transform spriteRenderer;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -20,16 +20,16 @@ public abstract class Object : MonoBehaviour
 
         game = Game.instance;
 
-        spriteRenderer = transform.Find("Sprite").GetComponent<SpriteRenderer>();
+        spriteRenderer = transform.Find("Sprite");
 
         if (blocking == true) {
             game.map.map[x,y].occupiedBy = this;
         }
 
         if (game.map.map[x,y].visible == false) {
-            spriteRenderer.enabled = false;
+            spriteRenderer.gameObject.SetActive(false);
         } else if (game.map.map[x,y].visible == true) {
-            spriteRenderer.enabled = true;
+            spriteRenderer.gameObject.SetActive(true);
         }
     }
 }

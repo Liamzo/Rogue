@@ -8,6 +8,8 @@ public class EnemyController : UnitController {
     public Moveable moveable;
 
     protected override void Start() {
+        GetComponent<UnitSkills>().baseUnitSkills = enemyType.skills;
+
 		base.Start();
 
 		moveable = GetComponent<Moveable>();
@@ -17,10 +19,15 @@ public class EnemyController : UnitController {
 		TurnStart();
 
         if (turn == false) {
+            queuedCommand = null;
             return new Command(this);
         }
 
-        Command c = enemyType.Controls(this);
+        Command c = queuedCommand;
+        queuedCommand = null;
+        if (c == null) {
+            c = enemyType.Controls(this);
+        }
 
         return c;
     }

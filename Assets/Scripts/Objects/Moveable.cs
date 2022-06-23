@@ -34,9 +34,9 @@ public class Moveable : MonoBehaviour
 			gameObject.transform.position = new Vector3 (x,y,0);
 
         	if (Game.instance.map.map[x,y].visible == false) {
-				parent.spriteRenderer.enabled = false;
+				parent.spriteRenderer.gameObject.SetActive(false);
 			} else if (Game.instance.map.map[x,y].visible == true) {
-				parent.spriteRenderer.enabled = true;
+				parent.spriteRenderer.gameObject.SetActive(true);
 			}
         }
 	}

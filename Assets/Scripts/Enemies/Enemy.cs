@@ -5,8 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Enemy", menuName = "Enemies/Enemy")]
 public class Enemy : ScriptableObject {
     public BaseUnitStats stats;
+	public BaseUnitSkills skills;
 
-    public Command Controls(EnemyController controller) {
+    public virtual Command Controls(EnemyController controller) {
         if (controller.vision.currentTarget == null) {
 			controller.vision.currentTarget = controller.vision.FindTarget();
 		}

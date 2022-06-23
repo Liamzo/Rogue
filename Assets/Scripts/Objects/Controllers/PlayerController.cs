@@ -23,16 +23,17 @@ public class PlayerController : UnitController
 
 	public override Command Turn() {
         if (turn == false) {
+			queuedCommand = null;
             return new Command(this);
         }
 
-		Command c = Controls();
-		if (c != null) {
-			return c;
-		}
+		Command c = queuedCommand;
+        queuedCommand = null;
+        if (c == null) {
+            c = Controls();
+        }
         
-
-        return null;
+        return c;
 	}
 
     public override void TurnEnd() {
@@ -133,7 +134,7 @@ public class PlayerController : UnitController
 				usedSkill.target = game.map.GetTile(vision.currentTarget.x, vision.currentTarget.y);
 			}
 			skill.skill.Activate(usedSkill);
-			return new SkillCommand(this, skill);
+			return new SkillCommand(this, skill, 1f);
 		}
 
 		return null;
