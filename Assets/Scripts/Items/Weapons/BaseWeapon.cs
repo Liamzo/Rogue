@@ -5,8 +5,8 @@ using UnityEngine;
 public class BaseWeapon : BaseEquipment {
     public new Weapon item;
 
-    public BaseWeapon (GameObject itemGOPrefab, Weapon item, int x, int y) : base(itemGOPrefab, item, x, y) {
-		this.item = item;
+    public BaseWeapon (GameObject itemGOPrefab, Weapon item, int x, int y, EquipmentManager equipmentManager = null) : base(itemGOPrefab, item, x, y, equipmentManager) {
+        this.item = item;
 	}
 
     public virtual void Attack(UnitController target) {

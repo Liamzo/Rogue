@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseRangedWeapon : BaseWeapon {
-    public BaseRangedWeapon (GameObject itemGOPrefab, RangedWeapon item, int x, int y) : base(itemGOPrefab, item, x, y) {
-		//this.item = item;
+    public BaseRangedWeapon (GameObject itemGOPrefab, RangedWeapon item, int x, int y, EquipmentManager equipmentManager = null) : base(itemGOPrefab, item, x, y, equipmentManager) {
+        this.item = item;
 	}
 
     public Tile Aim() {
@@ -12,6 +12,8 @@ public class BaseRangedWeapon : BaseWeapon {
     }
 
     public void Attack(Tile target) {
+        Debug.Log(item);
+        Debug.Log(target);
         ((RangedWeapon)item).Attack(this, target, out bool killed);
         owner.GetComponent<ActionManager>().SetAimPos(new Vector2Int(target.x, target.y));
         AudioManager.instance.PlaySoundOnce(owner.gameObject, item.soundType);

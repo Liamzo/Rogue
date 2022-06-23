@@ -3274,32 +3274,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2132117461}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &793039210 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2065640094, guid: 01987ecb68ffcba4c88c5a5daaf78aeb,
-    type: 3}
-  m_PrefabInstance: {fileID: 2286442327277921136}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &793039212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 793039210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 1
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 1
-  m_LightLayerMask: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &808617851
 GameObject:
   m_ObjectHideFlags: 0
@@ -8220,6 +8194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitController: {fileID: 0}
   defaultEquipmentData: {fileID: 0}
+  startingEquipment: {fileID: 0}
 --- !u!114 &1740349262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10170,19 +10145,6 @@ PrefabInstance:
       propertyPath: skillsUI
       value: 
       objectReference: {fileID: 129378991}
-    - target: {fileID: 1005960626, guid: 01987ecb68ffcba4c88c5a5daaf78aeb, type: 3}
-      propertyPath: baseUnitSkills
-      value: 
-      objectReference: {fileID: 11400000, guid: a157a19432937454aab32ef9cce2abc2,
-        type: 2}
-    - target: {fileID: 2065640096, guid: 01987ecb68ffcba4c88c5a5daaf78aeb, type: 3}
-      propertyPath: m_Range
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2065640096, guid: 01987ecb68ffcba4c88c5a5daaf78aeb, type: 3}
-      propertyPath: m_Intensity
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2286442326377422528, guid: 01987ecb68ffcba4c88c5a5daaf78aeb,
         type: 3}
       propertyPath: m_RootOrder
@@ -10242,11 +10204,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2286442326956811539, guid: 01987ecb68ffcba4c88c5a5daaf78aeb,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01987ecb68ffcba4c88c5a5daaf78aeb, type: 3}

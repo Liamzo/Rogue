@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2065640095}
   - component: {fileID: 2065640096}
+  - component: {fileID: 793039212}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -128,8 +129,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.95686275, g: 0.42745098, b: 0.13725491, a: 0.5686275}
-  m_Intensity: 1
-  m_Range: 20
+  m_Intensity: 2
+  m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -178,6 +179,26 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &793039212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065640094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 1
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &2286442326377422558
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,7 +270,6 @@ MonoBehaviour:
   turn: 0
   unitState: 0
   playerVision: {fileID: 0}
-  state: 0
 --- !u!114 &2286442326377422529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,6 +300,7 @@ MonoBehaviour:
   unitController: {fileID: 0}
   defaultEquipmentData: {fileID: 11400000, guid: 44ccd051b48112c429395ad700743ae1,
     type: 2}
+  startingEquipment: {fileID: 11400000, guid: 6681b1c0a901fca4fa9e953f3aecadb0, type: 2}
 --- !u!114 &1005960626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,6 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0351a7e77f07f474d9aa8eb1746bdbcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseUnitSkills: {fileID: 11400000, guid: a157a19432937454aab32ef9cce2abc2, type: 2}
   unitController: {fileID: 0}
   skillsUI: {fileID: 0}
 --- !u!61 &2016171418
@@ -603,7 +625,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2286442326956811538}
   m_LocalRotation: {x: -0.19936797, y: 0, z: 0, w: 0.97992474}
-  m_LocalPosition: {x: 0.5, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0.5, y: 0.4, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:

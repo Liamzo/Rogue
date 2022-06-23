@@ -48,6 +48,7 @@ public class UnitController : Object
 		//unitStats.unitController = this; // not needed atm
 
 		equipmentManager.SetDefaultEquipment();
+		equipmentManager.SetStartingEquipment();
 		unitSkills.SetDefaultSkills();
 
 		unitState = UnitState.None;

@@ -11,6 +11,7 @@ public class EquipmentManager : MonoBehaviour
 
     public DefaultEquipment defaultEquipmentData;
     //public BaseEquipment[] defaultEquipment; Soon
+    public StartingEquipment startingEquipment;
 
     public BaseWeapon defaultMeleeWeapon;
 
@@ -22,8 +23,8 @@ public class EquipmentManager : MonoBehaviour
     void Start () {
         inventory = Inventory.instance;
 
-        int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
-        currentEquipment = new BaseEquipment[numSlots];
+        // int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
+        // currentEquipment = new BaseEquipment[numSlots];
         //defaultEquipment = new BaseEquipment[numSlots]; Soon
 
         // Eventually, Loop for each given default equipment data and create a new BaseWeapon
@@ -32,6 +33,31 @@ public class EquipmentManager : MonoBehaviour
     public void SetDefaultEquipment() {
         defaultMeleeWeapon = new BaseWeapon(Game.instance.itemGOPrefab, defaultEquipmentData.defaultMeleeWeapon, unitController.x, unitController.y);
         defaultMeleeWeapon.owner = unitController;
+    }
+
+    public void SetStartingEquipment() {
+        int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
+        currentEquipment = new BaseEquipment[numSlots];
+
+        if (startingEquipment == null) {
+            return;
+        }
+
+        foreach (Equipment equipment in startingEquipment.equipment) {
+            if (equipment.equipSlot == EquipmentSlot.Melee) {
+                BaseWeapon baseWeapon = new BaseWeapon(Game.instance.itemGOPrefab, (Weapon)equipment, 0, 0, this);
+                baseWeapon.owner = unitController;
+                Equip(baseWeapon);
+            } else if (equipment.equipSlot == EquipmentSlot.Ranged) {
+                BaseRangedWeapon baseRangedWeapon = new BaseRangedWeapon(Game.instance.itemGOPrefab, (RangedWeapon)equipment, 0, 0, this);
+                baseRangedWeapon.owner = unitController;
+                Equip(baseRangedWeapon);
+            } else {
+                BaseEquipment baseEquipment = new BaseEquipment(Game.instance.itemGOPrefab, equipment, 0, 0, this);
+                baseEquipment.owner = unitController;
+                Equip(baseEquipment);
+            }
+        }
     }
 
     public void Equip (BaseEquipment newItem) {
