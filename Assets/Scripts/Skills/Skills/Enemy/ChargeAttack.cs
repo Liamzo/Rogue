@@ -13,7 +13,7 @@ public class ChargeAttack : Skill
         skill.target = baseSkill.target;
 
         skill.openTargerts.Add(baseSkill.target.GetPos());
-        TileHighlightManager.instance.AddHighlight(baseSkill.target, HighlightType.red);
+        TileHighlightManager.instance.AddOneTurnHighlight(baseSkill.target, baseSkill.owner, HighlightType.red);
 
         // Get diff to target
         Vector2Int diff = new Vector2Int(baseSkill.target.x, baseSkill.target.y) - new Vector2Int(baseSkill.owner.x, baseSkill.owner.y);
@@ -43,7 +43,7 @@ public class ChargeAttack : Skill
             Vector2Int target = new Vector2Int(baseSkill.owner.x, baseSkill.owner.y) + possibleTarget;
             if (Game.instance.map.IsWithinMap(target)) {
                 Tile t = Game.instance.map.GetTile(target.x, target.y);
-                TileHighlightManager.instance.AddHighlight(t, HighlightType.red);
+                TileHighlightManager.instance.AddOneTurnHighlight(t, baseSkill.owner, HighlightType.red);
                 skill.openTargerts.Add(target);
             }
         }

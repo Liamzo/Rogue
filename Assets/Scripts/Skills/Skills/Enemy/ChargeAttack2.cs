@@ -11,7 +11,6 @@ public class ChargeAttack2 : Skill
         // Damage all 3 targets
         foreach (Vector2Int targetPos in baseSkill.openTargerts) {
             Tile tile = Game.instance.map.GetTile(targetPos.x, targetPos.y);
-            TileHighlightManager.instance.RemoveHighlight(tile);
 
             if (tile.occupiedBy == null) {
                 continue;

@@ -56,6 +56,31 @@ public class TileHighlightManager : MonoBehaviour
     public void RemoveHighlight(Tile t) {
         t.SetHighlight(null);
     }
+
+    public void AddOneTurnHighlight(Tile t, UnitController owner, HighlightType type) {
+        new TileHighlight(t, owner, type);
+    }
+
+
+    public class TileHighlight {
+        public Tile tile;
+        public UnitController owner;
+
+        public TileHighlight (Tile t, UnitController owner, HighlightType type) {
+            tile = t;
+            this.owner = owner;
+            owner.OnTurnStart += RemoveHighlight;
+            owner.unitStats.OnDie += RemoveHighlight;
+
+            TileHighlightManager.instance.AddHighlight(tile, type);
+        }
+
+        void RemoveHighlight() {
+            tile.SetHighlight(null);
+            owner.OnTurnStart -= RemoveHighlight;
+            owner.unitStats.OnDie -= RemoveHighlight;
+        }
+    }
 }
 
 public enum HighlightType {

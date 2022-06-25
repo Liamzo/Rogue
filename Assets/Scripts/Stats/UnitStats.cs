@@ -16,6 +16,7 @@ public class UnitStats : MonoBehaviour {
     public event System.Action OnUIChange;
 
     public event System.Action<Damage> OnTakeDamage = delegate { };
+    public event System.Action OnDie;
 
     void Awake() {
         unitName = baseUnitStats.unitName;
@@ -96,6 +97,11 @@ public class UnitStats : MonoBehaviour {
     public virtual void Die() {
         // This should be overwritten
         Game.instance.units.Remove(GetComponent<UnitController>());
+
+        if (OnDie != null) {
+            OnDie();
+        }
+
         Destroy(this.gameObject);
     }
 }
