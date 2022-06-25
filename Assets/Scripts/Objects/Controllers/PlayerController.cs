@@ -11,6 +11,8 @@ public class PlayerController : UnitController
 	protected Moveable moveable;
 	public PlayerVision playerVision;
 
+	public event System.Action UpdateUI;
+
 	protected override void Start() {
 		base.Start();
 
@@ -19,6 +21,15 @@ public class PlayerController : UnitController
 
         moveable = GetComponent<Moveable>();
 		playerVision = (PlayerVision)vision;
+	}
+
+	public override void TurnStart()
+	{
+		base.TurnStart();
+
+		if (UpdateUI != null) {
+			UpdateUI();
+		}
 	}
 
 	public override Command Turn() {

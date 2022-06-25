@@ -33,7 +33,6 @@ public class LoSVision : Vision
                 }
 
                 if (Game.instance.map.GetTile(tPos.x,tPos.y).occupiedBy == target) {
-                    Debug.Log("found target");
                     break;
                 }
             }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7108916541402356382}
   - component: {fileID: 7108916541402356383}
   - component: {fileID: 7108916541402356368}
+  - component: {fileID: 574639218}
   m_Layer: 5
   m_Name: SkillButton
   m_TagString: Untagged
@@ -122,8 +123,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 574639218}
+        m_TargetAssemblyTypeName: SkillSlot, Assembly-CSharp
         m_MethodName: ClickSlot
         m_Mode: 1
         m_Arguments:
@@ -134,6 +135,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &574639218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7108916541402356370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f69b06ba4809a4b85e333a77fcb5a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 7108916541984750659}
+  skill: {fileID: 11400000, guid: d11d9212d8e5f854589124767625ae3c, type: 2}
 --- !u!1 &7108916541845317330
 GameObject:
   m_ObjectHideFlags: 0

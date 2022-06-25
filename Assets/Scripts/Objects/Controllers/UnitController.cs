@@ -56,10 +56,6 @@ public class UnitController : Object
         turnTimer = turnTime;
 	}
 
-    protected virtual void Update() {
-
-	}
-
 	public virtual void TurnStart() {
 		turn = true;
 		OnTurnStart();
