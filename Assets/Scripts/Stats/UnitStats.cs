@@ -46,14 +46,17 @@ public class UnitStats : MonoBehaviour {
         damage.damage -=  stats[(int)Stats.Armour].GetValue();
         damage.damage = Mathf.Clamp(damage.damage, 0, int.MaxValue);
 
-        if (currentGrace > 0) {
+        if (damage.damage < currentGrace) {
             AddOrRemoveGrace(-damage.damage);
             Logger.instance.AddLog(unitName + " parries the blow");
-            return;
+        } else {
+            int dam = damage.damage - currentGrace;
+
+            AddOrRemoveGrace(-currentGrace);
+            currentGrit -= dam;
+            Logger.instance.AddLog(unitName + " was hit for " + dam + " damage");
         }
 
-        currentGrit -= damage.damage;
-        Logger.instance.AddLog(unitName + " was hit for " + damage.damage + " damage");
 
         if (OnUIChange != null) {
             OnUIChange();
