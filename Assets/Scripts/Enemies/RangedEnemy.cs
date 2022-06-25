@@ -1,9 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Big Enemy", menuName = "Enemies/Big Enemy")]
-public class BigEnemy : Enemy {
+public class RangedEnemy : Enemy 
+{
     public override Command Controls(EnemyController controller) {
 		controller.vision.currentTarget = controller.vision.FindTarget(FindObjectOfType<PlayerController>());
 		

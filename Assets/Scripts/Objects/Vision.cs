@@ -10,7 +10,24 @@ public abstract class Vision : MonoBehaviour
 
     public UnitController currentTarget;
 
-    public abstract UnitController FindTarget();
+    public virtual UnitController FindTarget(UnitController tryTarget) {
+        UnitController target  = tryTarget;
+
+        if (target == null) {
+            return null;
+        }
+
+        int dx = target.x - parent.x;
+        int dy = target.y - parent.y;
+
+        float dist = Mathf.Sqrt((dx * dx) + (dy * dy));
+
+        if (dist < parent.unitStats.stats[(int) Stats.Sight].GetValue()) {
+            return target;
+        } else {
+            return null;
+        }
+    }
 
     public virtual void ChangeTargetUnit(UnitController unit) {
         currentTarget = unit;

@@ -8,9 +8,8 @@ public class Enemy : ScriptableObject {
 	public BaseUnitSkills skills;
 
     public virtual Command Controls(EnemyController controller) {
-        if (controller.vision.currentTarget == null) {
-			controller.vision.currentTarget = controller.vision.FindTarget();
-		}
+		controller.vision.currentTarget = controller.vision.FindTarget(FindObjectOfType<PlayerController>());
+		
 
 		if (controller.vision.currentTarget != null) {
 			List<Vector2Int> targetPath = Game.instance.map.FindPath(new Vector2Int(controller.x, controller.y), new Vector2Int(controller.vision.currentTarget.x, controller.vision.currentTarget.y));

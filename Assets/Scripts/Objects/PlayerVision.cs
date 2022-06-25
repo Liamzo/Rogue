@@ -59,11 +59,6 @@ public class PlayerVision : Vision
         }
     }
 
-    public override UnitController FindTarget() {
-        // TODO: Cycle through visible targets using Tab
-        return currentTarget;
-    }
-
     public override void ChangeTargetUnit(UnitController unit) {
         if (unit == null) {
             UpdateTargetUnit(-1);
