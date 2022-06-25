@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Double Shot
   m_EditorClassIdentifier: 
   name: Double Shot
-  icon: {fileID: -2727657493149837164, guid: 30c9f1deb9848bc4c9003ce89df2108d, type: 3}
+  icon: {fileID: -570087146, guid: 88da97783cfc26842922b768fb06b40d, type: 3}
   requiredSkills: []
   graceCost: 2
   requiredWeapon: 5

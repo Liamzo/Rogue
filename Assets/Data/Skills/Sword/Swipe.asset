@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Swipe
   m_EditorClassIdentifier: 
   name: Swipe
-  icon: {fileID: -2159788051528262250, guid: 30c9f1deb9848bc4c9003ce89df2108d, type: 3}
+  icon: {fileID: 76098950, guid: 88da97783cfc26842922b768fb06b40d, type: 3}
   requiredSkills: []
   graceCost: 1
   requiredWeapon: 2
+  coolDown: 0

@@ -12,8 +12,6 @@ public class BaseRangedWeapon : BaseWeapon {
     }
 
     public void Attack(Tile target) {
-        Debug.Log(item);
-        Debug.Log(target);
         ((RangedWeapon)item).Attack(this, target, out bool killed);
         owner.GetComponent<ActionManager>().SetAimPos(new Vector2Int(target.x, target.y));
         AudioManager.instance.PlaySoundOnce(owner.gameObject, item.soundType);

@@ -61,6 +61,9 @@ public class PlayerController : UnitController
 			return c;
 		}
 
+		if (Input.GetKeyDown(KeyCode.R) && Input.GetKeyDown(KeyCode.LeftControl)) {
+			Debug.Log("boop");
+		}
 		if (Input.GetKeyDown(KeyCode.R)) {
 			if (equipmentManager.GetRangedWeapon() != null) {
 				Tile target = null;
@@ -69,8 +72,6 @@ public class PlayerController : UnitController
 				}
 				return new RangedAttackCommand(this, target, equipmentManager.GetRangedWeapon());
 			}
-		} else if (Input.GetKeyDown(KeyCode.R) && Input.GetKeyDown(KeyCode.LeftControl)) {
-			Debug.Log("boop");
 		}
 
 		if (Input.GetKeyDown(KeyCode.G)) {
@@ -134,7 +135,7 @@ public class PlayerController : UnitController
 				usedSkill.target = game.map.GetTile(vision.currentTarget.x, vision.currentTarget.y);
 			}
 			skill.skill.Activate(usedSkill);
-			return new SkillCommand(this, skill, 1f);
+			return new SkillCommand(this, skill, 0.1f);
 		}
 
 		return null;

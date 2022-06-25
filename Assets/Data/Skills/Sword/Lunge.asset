@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Lunge
   m_EditorClassIdentifier: 
   name: Lunge
-  icon: {fileID: -7179747390046970846, guid: 30c9f1deb9848bc4c9003ce89df2108d, type: 3}
+  icon: {fileID: 8685077388864575728, guid: 88da97783cfc26842922b768fb06b40d, type: 3}
   requiredSkills: []
   graceCost: 2
   requiredWeapon: 2
+  coolDown: 0

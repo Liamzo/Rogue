@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69951603ec352ad459893a3fbdfc86ee, type: 3}
-  m_Name: Keen Eye
+  m_Name: Counter
   m_EditorClassIdentifier: 
-  name: Keen Eye
-  icon: {fileID: 2782842509926484858, guid: 30c9f1deb9848bc4c9003ce89df2108d, type: 3}
+  name: Counter
+  icon: {fileID: -664626886, guid: 88da97783cfc26842922b768fb06b40d, type: 3}
   requiredSkills: []
   graceCost: 2
   requiredWeapon: 2
+  coolDown: 0
   duration: 1

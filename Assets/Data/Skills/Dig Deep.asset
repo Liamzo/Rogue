@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Dig Deep
   m_EditorClassIdentifier: 
   name: Dig Deep
-  icon: {fileID: -1140953881901911216, guid: 88da97783cfc26842922b768fb06b40d, type: 3}
+  icon: {fileID: 143559194, guid: 88da97783cfc26842922b768fb06b40d, type: 3}
   requiredSkills:
   - {fileID: 11400000, guid: e11337df3b363f24394b6a270951164a, type: 2}
   graceCost: 0
   requiredWeapon: 0
+  coolDown: 0

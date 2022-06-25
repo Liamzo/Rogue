@@ -33,6 +33,6 @@ public class CounterEffect : BaseEffect
 		}
         damage.damage = 0;
 
-        damage.attacker.unitStats.TakeDamge(new Damage(null, owner.unitStats.stats[(int)Stats.Strength].GetValue() + owner.unitStats.stats[(int)Stats.MeleeDamage].GetValue()));
+        damage.attacker.unitStats.TakeDamge(new Damage(owner, owner.unitStats.stats[(int)Stats.Strength].GetValue() + owner.unitStats.stats[(int)Stats.MeleeDamage].GetValue()));
 	}
 }

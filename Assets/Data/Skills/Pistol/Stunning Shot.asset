@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Stunning Shot
   m_EditorClassIdentifier: 
   name: Stunning Shot
-  icon: {fileID: 4529624592183953458, guid: 30c9f1deb9848bc4c9003ce89df2108d, type: 3}
+  icon: {fileID: 125477249, guid: 88da97783cfc26842922b768fb06b40d, type: 3}
   requiredSkills: []
   graceCost: 1
   requiredWeapon: 5
+  coolDown: 0
   duration: 2
