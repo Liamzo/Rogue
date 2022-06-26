@@ -143,5 +143,9 @@ public class UnitStats : MonoBehaviour {
                 }
             }
         }
+
+        if (OnUIChange != null) {
+            OnUIChange();
+        }
     }
 }
