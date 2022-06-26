@@ -7152,6 +7152,7 @@ MonoBehaviour:
   enemyTypes:
   - {fileID: 11400000, guid: 879712f969a7618499f195ef06506da8, type: 2}
   - {fileID: 11400000, guid: 2a173929d2d7bbb4fbcdcf2104312840, type: 2}
+  - {fileID: 11400000, guid: 87f7470f970550840ace121781a29844, type: 2}
   unitStats:
   - {fileID: 11400000, guid: 322d5d930a8242c468d7eb9d5e67f618, type: 2}
   enemyGOPrefab: {fileID: 1118905159591673171, guid: 18a24a73d3821ee4da2e6e9af9c804e7,

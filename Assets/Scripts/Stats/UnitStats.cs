@@ -18,6 +18,8 @@ public class UnitStats : MonoBehaviour {
     public event System.Action<Damage> OnTakeDamage = delegate { };
     public event System.Action OnDie;
 
+    EquipmentManager equipmentManager;
+
     void Awake() {
         unitName = baseUnitStats.unitName;
 
@@ -39,7 +41,13 @@ public class UnitStats : MonoBehaviour {
 
         currentGrit = stats[(int)Stats.Grit].GetValue();
         currentGrace = stats[(int)Stats.Grace].GetValue();
+
+        equipmentManager = GetComponent<EquipmentManager>();
+        equipmentManager.onEquipmentChanged += OnEquipmentChanged;
     }
+
+    void Start() {
+	}
 
     public void TakeDamge (Damage damage) {
         OnTakeDamage(damage);
@@ -103,5 +111,37 @@ public class UnitStats : MonoBehaviour {
         }
 
         Destroy(this.gameObject);
+    }
+
+    void OnEquipmentChanged (BaseEquipment newItem, BaseEquipment oldItem) {
+        if (newItem != null) {
+            // Set stats using item
+            foreach (StatValue sv in newItem.item.stats) {
+                int slot = (int) sv.stat;
+
+                if (stats[slot] == null) {
+                    Stat stat = new Stat();
+                    stat.SetBaseValue(0);
+                    stat.AddModifier(sv.value);
+                    stats[slot] = stat;
+                } else {
+                    stats[slot].AddModifier(sv.value);
+                }
+            }
+        }
+
+        if (oldItem != null) {
+            // Set stats using item
+            foreach (StatValue sv in oldItem.item.stats) {
+                int slot = (int) sv.stat;
+
+                if (stats[slot] == null) {
+                    Debug.LogError("Removing modifier from Stat which doesn't exisit");
+                    continue;
+                } else {
+                    stats[slot].RemoveModifier(sv.value);
+                }
+            }
+        }
     }
 }

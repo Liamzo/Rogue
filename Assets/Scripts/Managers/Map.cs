@@ -62,10 +62,11 @@ public class Map
         CreateEnemy(game.enemyTypes[0], 2, 6);
         CreateEnemy(game.enemyTypes[0], 4, 7);
         CreateEnemy(game.enemyTypes[1], 3, 9);
+        CreateEnemy(game.enemyTypes[2], 10, 3);
 
 
         // Top Left Room
-        CreateEnemy(game.enemyTypes[0], 1, 18);
+        CreateEnemy(game.enemyTypes[2], 1, 18);
         CreateEnemy(game.enemyTypes[1], 3, 18);
         CreateEnemy(game.enemyTypes[0], 5, 18);
         CreateEnemy(game.enemyTypes[0], 1, 14);
@@ -73,11 +74,11 @@ public class Map
 
 
         // Middle
-        CreateEnemy(game.enemyTypes[0], 11, 13);
+        CreateEnemy(game.enemyTypes[1], 11, 13);
         CreateEnemy(game.enemyTypes[0], 1, 14);
         CreateEnemy(game.enemyTypes[0], 9, 9);
         CreateEnemy(game.enemyTypes[0], 15, 9);
-        CreateEnemy(game.enemyTypes[1], 15, 10);
+        CreateEnemy(game.enemyTypes[2], 15, 10);
 
 
         // Corridor
@@ -213,8 +214,6 @@ public class Map
                 } else {
                     pathNode.isWalkable = false;
                 }
-
-                //pathNode.isWalkable = map[x,y].isWalkable;
 
                 pathNode.cameFromNodeIndex = -1;
 

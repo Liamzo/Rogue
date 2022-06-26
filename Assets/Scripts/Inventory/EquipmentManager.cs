@@ -22,15 +22,13 @@ public class EquipmentManager : MonoBehaviour
 
     void Start () {
         inventory = Inventory.instance;
-
-        // int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
-        // currentEquipment = new BaseEquipment[numSlots];
-        //defaultEquipment = new BaseEquipment[numSlots]; Soon
-
-        // Eventually, Loop for each given default equipment data and create a new BaseWeapon
     }
 
     public void SetDefaultEquipment() {
+        // Eventually, Loop for each given default equipment data and create a new BaseWeapon
+        // int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
+        // currentEquipment = new BaseEquipment[numSlots];
+        //defaultEquipment = new BaseEquipment[numSlots]; Soon
         defaultMeleeWeapon = new BaseWeapon(Game.instance.itemGOPrefab, defaultEquipmentData.defaultMeleeWeapon, unitController.x, unitController.y);
         defaultMeleeWeapon.owner = unitController;
     }

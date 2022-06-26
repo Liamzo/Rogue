@@ -182,6 +182,7 @@ MonoBehaviour:
   unitController: {fileID: 0}
   defaultEquipmentData: {fileID: 11400000, guid: 4082a635dc48b7b4ba53b8ededc1ade2,
     type: 2}
+  startingEquipment: {fileID: 11400000, guid: 86412569840613d45816fa89afeb6578, type: 2}
 --- !u!114 &1302891775132655262
 MonoBehaviour:
   m_ObjectHideFlags: 0

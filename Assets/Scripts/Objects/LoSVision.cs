@@ -41,6 +41,42 @@ public class LoSVision : Vision
         }
 
         return null;
+    }
 
+    public bool CheckClearLoS(UnitController target) {
+        if (target == null) {
+            return false;
+        }
+
+        if (base.FindTarget(target) != null) {
+            // Target in range
+            int dx = target.x - parent.x;
+            int dy = target.y - parent.y;
+            int max = Mathf.Max(Mathf.Abs(dx), Mathf.Abs(dy));
+
+            float xStep = dx / (float) max;
+            float yStep = dy / (float) max;
+
+            List<Vector2Int> path = new List<Vector2Int>();
+
+            for (int i = 1; i <= parent.unitStats.stats[(int)Stats.Sight].GetValue(); i++) {
+                int xPos = Mathf.RoundToInt(xStep * i) + parent.x;
+                int yPos = Mathf.RoundToInt(yStep * i) + parent.y;
+
+                Vector2Int tPos = new Vector2Int(xPos,yPos);
+
+                if (!Game.instance.map.IsPositionClear(tPos)) {
+                    return false;
+                }
+
+                if (Game.instance.map.GetTile(tPos.x,tPos.y).occupiedBy == target) {
+                    break;
+                }
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }

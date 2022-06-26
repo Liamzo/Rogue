@@ -10,10 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49a1c263c79422441823ff5a80c43ea0, type: 3}
-  m_Name: Player
+  m_Name: PlayerSE
   m_EditorClassIdentifier: 
   equipment:
   - {fileID: 11400000, guid: 20dd0cba664d79445bd0deb7156d51ce, type: 2}
   - {fileID: 11400000, guid: ba47e9121c9552d4c8a63181b3293826, type: 2}
-  - {fileID: 11400000, guid: 47d7ad152fe28604fa23d12618094b60, type: 2}
-  - {fileID: 11400000, guid: 0d7d5e10bc42de74988295503fda71c9, type: 2}
