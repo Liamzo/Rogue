@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerStatsUI : MonoBehaviour
 {
@@ -12,13 +13,20 @@ public class PlayerStatsUI : MonoBehaviour
     public Text gritNum;
     public Text graceNum;
 
+    public TextMeshProUGUI ammoCount;
+    public BaseRangedWeapon rangedWeapon;
+
+    public PlayerController player;
     public PlayerStats playerStats;
     // Start is called before the first frame update
     void Start()
     {
-        playerStats = FindObjectOfType<PlayerStats>();
+        player = FindObjectOfType<PlayerController>();
 
+        playerStats = FindObjectOfType<PlayerStats>();
         playerStats.OnUIChange += UpdateVisuals;
+
+        player.GetComponent<EquipmentManager>().onEquipmentChanged += ChangeRangedWeapon;
 
 
         playerGrit = playerParent.Find("GritSlider").GetComponent<Slider>();
@@ -31,6 +39,8 @@ public class PlayerStatsUI : MonoBehaviour
         playerGrace.maxValue = playerStats.stats[(int)Stats.Grace].GetValue();
 
         UpdateVisuals();
+
+        ammoCount = playerParent.Find("AmmoCount").GetComponent<TextMeshProUGUI>();
     }
 
     public void UpdateVisuals () {
@@ -45,4 +55,24 @@ public class PlayerStatsUI : MonoBehaviour
         gritNum.text = playerGrit.value + " / " + playerGrit.maxValue;
         graceNum.text = playerStats.currentGrace + " / " + playerGrace.maxValue;
     }
+
+    public void UpdateAmmo () {
+        ammoCount.text = rangedWeapon.ammo.ToString();
+    }
+
+    public void ChangeRangedWeapon(BaseEquipment newItem, BaseEquipment oldItem) {
+        if (oldItem is BaseRangedWeapon) {
+            ((BaseRangedWeapon)oldItem).OnAmmoChange -= UpdateAmmo;
+        }
+        
+        if (newItem is BaseRangedWeapon) {
+            ((BaseRangedWeapon)newItem).OnAmmoChange += UpdateAmmo;
+            rangedWeapon = (BaseRangedWeapon)newItem;
+            UpdateAmmo();
+        } else {
+            rangedWeapon = null;
+            ammoCount.text = "-";
+        }
+    }
+
 }

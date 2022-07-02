@@ -72,16 +72,22 @@ public class PlayerController : UnitController
 			return c;
 		}
 
-		if (Input.GetKeyDown(KeyCode.R) && Input.GetKeyDown(KeyCode.LeftControl)) {
+		if (Input.GetKeyDown(KeyCode.F) && Input.GetKeyDown(KeyCode.LeftControl)) {
 			Debug.Log("boop");
 		}
-		if (Input.GetKeyDown(KeyCode.R)) {
+		if (Input.GetKeyDown(KeyCode.F)) {
 			if (equipmentManager.GetRangedWeapon() != null) {
 				Tile target = null;
 				if (vision.currentTarget != null) {
 					target = game.map.GetTile(vision.currentTarget.x, vision.currentTarget.y);
 				}
 				return new RangedAttackCommand(this, target, equipmentManager.GetRangedWeapon());
+			}
+		}
+
+		if (Input.GetKeyDown(KeyCode.R)) {
+			if (equipmentManager.GetRangedWeapon() != null) {
+				return new ReloadCommand(this, equipmentManager.GetRangedWeapon());
 			}
 		}
 

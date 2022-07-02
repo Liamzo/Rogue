@@ -22,3 +22,5 @@ MonoBehaviour:
   weaponType: 5
   soundType: 1
   range: 6
+  ammoCapacity: 3
+  ammoCost: 1

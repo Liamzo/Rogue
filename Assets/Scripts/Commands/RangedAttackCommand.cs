@@ -19,6 +19,12 @@ public class RangedAttackCommand : Command
 			return new CommandResult(CommandResult.CommandState.Failed, null);
 		}
 
+        // Check for ammo
+        if (rangedWeapon.ammo < rangedWeapon.item.ammoCost) {
+            // Return a reload command
+            return new CommandResult(CommandResult.CommandState.Alternative, new ReloadCommand(owner, rangedWeapon));
+        }
+
         Tile tempTarget = null;
         if (target != null) {
             tempTarget = target;

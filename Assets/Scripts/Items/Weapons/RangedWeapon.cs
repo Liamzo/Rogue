@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New RangedWeapom", menuName = "Inventory/RangedWeapom")]
 public class RangedWeapon : Weapon 
 {
+    public int ammoCapacity;
+    public int ammoCost;
+
     public virtual Tile Aim (BaseWeapon baseWeapon) {
         Vector2Int targetCoords;
 
