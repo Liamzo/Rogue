@@ -8,5 +8,7 @@ public class BaseUnitStats : ScriptableObject {
 
     public Sprite sprite;
 
+    public int turnTime;
+
     public List<StatValue> stats;
 }

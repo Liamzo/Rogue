@@ -15,7 +15,7 @@ public class UnitController : Object
 
 	public string unitName;
 
-    public int turnTime = 10;
+    public int turnTime;
 	public int turnTimer;
 	public bool turn = false;
 
@@ -53,6 +53,7 @@ public class UnitController : Object
 
 		unitState = UnitState.None;
 
+		turnTime = unitStats.baseUnitStats.turnTime;
         turnTimer = turnTime;
 	}
 
