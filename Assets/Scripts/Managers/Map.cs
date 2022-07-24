@@ -76,9 +76,9 @@ public class Map
         // Middle
         CreateEnemy(game.enemyTypes[1], 11, 13);
         CreateEnemy(game.enemyTypes[0], 1, 14);
-        CreateEnemy(game.enemyTypes[0], 9, 9);
         CreateEnemy(game.enemyTypes[0], 15, 9);
         CreateEnemy(game.enemyTypes[2], 15, 10);
+        CreateEnemy(game.enemyTypes[3], 9, 9);
 
 
         // Corridor
@@ -98,7 +98,7 @@ public class Map
         UnitStats us = enemy.GetComponent<UnitStats>();
         us.baseUnitStats = enemyType.stats;
 
-        game.units.Add(ec);
+        // game.units.Add(ec);
 
         enemy.SetActive(true);
     }
@@ -428,6 +428,29 @@ public class Map
     }
     
     public void SetLight(int x, int y, float distanceSquared) {
+		if (GetTile(x,y) != null) {
+            // Make tile visible
+			map[x,y].tileSprite.enabled = true;
+			map[x,y].visible = true;
+            map[x,y].explored = true;
+            if (map[x,y].highlighted == false) {
+                map[x,y].tileSprite.material.color = map[x,y].baseColour;
+            }
+
+            // If an object is here, make visible
+            if (map[x,y].occupiedBy != null) {
+                map[x,y].occupiedBy.spriteRenderer.gameObject.SetActive(true);
+            }
+
+            // If an item is here, make visible
+            foreach(BaseItem item in game.items) {
+                if (item.x == x && item.y == y) {
+                    item.itemGO.GetComponent<SpriteRenderer>().enabled = true;
+                }
+            }
+		}
+	}
+    public void SetLight(int x, int y) {
 		if (GetTile(x,y) != null) {
             // Make tile visible
 			map[x,y].tileSprite.enabled = true;

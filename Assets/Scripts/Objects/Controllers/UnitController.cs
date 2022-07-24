@@ -55,6 +55,8 @@ public class UnitController : Object
 
 		turnTime = unitStats.baseUnitStats.turnTime;
         turnTimer = turnTime;
+
+		game.units.Add(this);
 	}
 
 	public virtual void TurnStart() {
@@ -63,7 +65,6 @@ public class UnitController : Object
 		if (unitStats.currentGrace < unitStats.stats[(int)Stats.Grace].GetValue()) {
 			unitStats.AddOrRemoveGrace(1);
 		}
-		turnTimer = turnTime;
 	}
 
 
@@ -74,5 +75,6 @@ public class UnitController : Object
 
 	public virtual void TurnEnd() {
 		turn = false;
+		turnTimer = turnTime;
 	}
 }

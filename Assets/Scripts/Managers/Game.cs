@@ -17,7 +17,7 @@ public class Game : MonoBehaviour
     public PlayerController player;
     public Command queuedCommand;
 
-    public List<UnitController> units;
+    public List<UnitController> units = new List<UnitController>();
 
     public List<Enemy> enemyTypes;
     public List<BaseUnitStats> unitStats;
@@ -49,7 +49,7 @@ public class Game : MonoBehaviour
 
         map.SpawnThings();
 
-        units = new List<UnitController>(FindObjectsOfType<UnitController>());
+        //units = new List<UnitController>(FindObjectsOfType<UnitController>());
 
         // Should be moved, see at bottom
         initialPosition = Camera.main.transform.localPosition;
@@ -99,12 +99,6 @@ public class Game : MonoBehaviour
 				}
 			}
 
-			// Decrease other units turn times
-			foreach (UnitController unit in units) {
-				if (!unit.Equals(u)) {
-					unit.turnTimer -= u.turnTimer;
-				}
-			}
 
 			if (u == player) {
                 state = State.WaitingOnPlayer;
@@ -126,6 +120,13 @@ public class Game : MonoBehaviour
                         break;
                     }
                     // TODO: Failed
+                }
+
+                // Decrease other units turn times
+                foreach (UnitController unit in units) {
+                    if (!unit.Equals(u)) {
+                        unit.turnTimer -= u.turnTimer;
+                    }
                 }
 
                 u.TurnEnd();
@@ -154,6 +155,13 @@ public class Game : MonoBehaviour
                 currentCommand = result.alternative;
                 return;
             } else if (result.state == CommandResult.CommandState.Succeeded) {
+                // Decrease other units turn times
+                foreach (UnitController unit in units) {
+                    if (!unit.Equals(player)) {
+                        unit.turnTimer -= player.turnTimer;
+                    }
+                }
+
                 player.TurnEnd();
                 state = State.TakingTurns;
                 currentCommand = null;
