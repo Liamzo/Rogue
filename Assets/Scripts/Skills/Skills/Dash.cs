@@ -8,6 +8,9 @@ public class Dash : Skill
     public override CommandResult Use (BaseSkill baseSkill) {    
         // Find and highlight path
         Tile tile = Game.instance.map.GetTileUnderMouse();
+        if (tile == null) {
+            return new CommandResult(CommandResult.CommandState.Pending, null);
+        }
         Vector2Int targetCoords = new Vector2Int(tile.x, tile.y);
 
         int xDistance = targetCoords.x - baseSkill.owner.x;
@@ -38,6 +41,10 @@ public class Dash : Skill
             path.Add(tPos);
         }
         
+        if (path.Count == 0) {
+            return new CommandResult(CommandResult.CommandState.Pending, null);
+        }
+
         targetCoords = path[path.Count - 1];        
         foreach(Vector2Int tPos in path) {
             TileHighlightManager.instance.AddTempHighlight(Game.instance.map.GetTile(tPos.x,tPos.y), HighlightType.blue);
