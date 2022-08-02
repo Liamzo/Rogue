@@ -19,6 +19,7 @@ public class PlayerVision : Vision
 
         parent.OnTurnStart += OnTurnStartEnd;
         parent.OnTurnEnd += OnTurnStartEnd;
+        currentTargetHighlight.transform.localPosition = new Vector3((1f - Game.instance.map.cellSize) / 2f, (1f - Game.instance.map.cellSize) / 2f, -0.01f);
         currentTargetHighlight.SetActive(false);
     }
 
@@ -43,7 +44,11 @@ public class PlayerVision : Vision
             }
         }
 
-        visibleTargets.Sort((a,b) => ((a.x - parent.x) + (a.y - parent.y)).CompareTo(((b.x - parent.x) + (b.y - parent.y))));
+        visibleTargets.Sort((a,b) => (Mathf.Abs((a.x - parent.x) + (a.y - parent.y))).CompareTo(Mathf.Abs(((b.x - parent.x) + (b.y - parent.y)))));
+
+        // foreach(UnitController c in visibleTargets) {
+        //     Debug.Log((c.x - parent.x) + (c.y - parent.y));
+        // }
 
         if (currentIndex == -1 && visibleTargets.Count > 0) {
             UpdateTargetUnit(0);

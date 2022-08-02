@@ -29,14 +29,14 @@ public class Tile
 
 	public bool highlighted = false;
 
-    public Tile(int x, int y, GameObject tilePrefab, bool isWalkable = true, bool isViewable = true) {
+    public Tile(int x, int y, GameObject tilePrefab, float cellSize = 1f, bool isWalkable = true, bool isViewable = true) {
 		this.x = x;
 		this.y = y;
 		this.tilePrefab = tilePrefab;
 		this.isWalkable = isWalkable;
 		this.isViewable = isViewable;
 
-		tile = GameObject.Instantiate(tilePrefab, new Vector3(x+0.5f, y+0.5f, 0), Quaternion.Euler(0, 0, 0));
+		tile = GameObject.Instantiate(tilePrefab, new Vector3((x * cellSize)+0.5f, (y * cellSize)+0.5f, 0), Quaternion.Euler(0, 0, 0), Game.instance.transform);
 		tileSprite = tile.GetComponentInChildren<MeshRenderer>();
 		baseColour = tileSprite.material.color;
 		tileSprite.enabled = false;

@@ -38,7 +38,7 @@ public class Game : MonoBehaviour
 
         items = new List<BaseItem>();
 
-        map = new Map(mapImgFile,1f);
+        map = new Map(mapImgFile,0.8f);
     }
 
     // Start is called before the first frame update

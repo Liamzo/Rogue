@@ -14,7 +14,7 @@ public class Map
 	public Tile[,] map;
 	public int width;
 	public int height;
-    float cellSize;
+    public float cellSize;
 
 
 	public Map(Texture2D mapImgFile, float cellSize) {
@@ -41,13 +41,13 @@ public class Map
 				Color32 floor = new Color32(255,255,255,255);
 
 				if (pixel.Equals(floor)) {
-					map[i, j] = new Tile(i, j, game.tilePrefabs[0]);
+					map[i, j] = new Tile(i, j, game.tilePrefabs[0], cellSize);
 				} else if (pixel.Equals(wall)) {
-					map[i, j] = new Tile(i, j, game.tilePrefabs[1], false, false);
+					map[i, j] = new Tile(i, j, game.tilePrefabs[1], cellSize, false, false);
 				}
 
-                Debug.DrawLine(GetWorldPosition(i,j), GetWorldPosition(i,j+1), Color.white, 10000f);
-                Debug.DrawLine(GetWorldPosition(i,j), GetWorldPosition(i+1,j), Color.white, 10000f);
+                // Debug.DrawLine(GetWorldPosition(i,j), GetWorldPosition(i,j+1), Color.white, 10000f);
+                // Debug.DrawLine(GetWorldPosition(i,j), GetWorldPosition(i+1,j), Color.white, 10000f);
 			}
 		}
 	}

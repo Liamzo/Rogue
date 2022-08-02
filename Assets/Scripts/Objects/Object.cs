@@ -16,10 +16,10 @@ public abstract class Object : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        gameObject.transform.position = new Vector3 (x,y,0);
-
         game = Game.instance;
 
+        gameObject.transform.position = new Vector3 (x*game.map.cellSize,y*game.map.cellSize,0);
+     
         spriteRenderer = transform.Find("Sprite");
 
         if (blocking == true) {

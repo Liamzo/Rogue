@@ -738,6 +738,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1005960623}
+    - target: {fileID: 2703639812172952870, guid: b741e744b8dcc614f89ec63d4302d989,
+        type: 3}
+      propertyPath: mapImgFile
+      value: 
+      objectReference: {fileID: 2800000, guid: d0742098a3429004b9544e92beaec505, type: 3}
     - target: {fileID: 2703639812172952871, guid: b741e744b8dcc614f89ec63d4302d989,
         type: 3}
       propertyPath: m_RootOrder
