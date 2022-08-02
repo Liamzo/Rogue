@@ -7,7 +7,6 @@ public class BigEnemy : Enemy {
     public override Command Controls(EnemyController controller) {
 		controller.vision.currentTarget = controller.vision.FindTarget(FindObjectOfType<PlayerController>());
 		
-
 		if (controller.vision.currentTarget != null) {
 			List<Vector2Int> targetPath = Game.instance.map.FindPath(new Vector2Int(controller.x, controller.y), new Vector2Int(controller.vision.currentTarget.x, controller.vision.currentTarget.y));
 

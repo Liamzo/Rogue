@@ -40,9 +40,9 @@ public class RangedWeapon : Weapon
 
             path.Add(tPos);
 
-            if (tPos == targetCoords) {
-                break;
-            }
+            // if (tPos == targetCoords) {
+            //     break;
+            // }
         }
 
         foreach(Vector2Int tPos in path) {

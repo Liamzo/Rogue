@@ -8,7 +8,6 @@ public class RangedEnemy : Enemy
     public override Command Controls(EnemyController controller) {
 		controller.vision.currentTarget = controller.vision.FindTarget(FindObjectOfType<PlayerController>());
 		
-
 		if (controller.vision.currentTarget != null) {
 			// If player is close, run away
 			// If player can be shot, aim
