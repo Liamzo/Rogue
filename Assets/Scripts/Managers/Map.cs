@@ -86,6 +86,32 @@ public class Map
         CreateEnemy(game.enemyTypes[0], 13, 16);
     }
 
+    public void SpawnThings2() {
+        CreateEnemy(game.enemyTypes[0], 3, 1);
+        CreateEnemy(game.enemyTypes[0], 5, 1);
+        CreateEnemy(game.enemyTypes[0], 9, 1);
+        CreateEnemy(game.enemyTypes[0], 13, 1);
+        CreateEnemy(game.enemyTypes[0], 15, 1);
+
+        CreateEnemy(game.enemyTypes[0], 3, 17);
+        CreateEnemy(game.enemyTypes[0], 5, 17);
+        CreateEnemy(game.enemyTypes[0], 9, 17);
+        CreateEnemy(game.enemyTypes[0], 13, 17);
+        CreateEnemy(game.enemyTypes[0], 15, 17);
+
+        CreateEnemy(game.enemyTypes[0], 1, 3);
+        CreateEnemy(game.enemyTypes[0], 1, 6);
+        CreateEnemy(game.enemyTypes[0], 1, 9);
+        CreateEnemy(game.enemyTypes[0], 1, 12);
+        CreateEnemy(game.enemyTypes[0], 1, 15);
+
+        CreateEnemy(game.enemyTypes[0], 17, 3);
+        CreateEnemy(game.enemyTypes[0], 17, 6);
+        CreateEnemy(game.enemyTypes[0], 17, 9);
+        CreateEnemy(game.enemyTypes[0], 17, 12);
+        CreateEnemy(game.enemyTypes[0], 17, 15);
+    }
+
     public void CreateEnemy (Enemy enemyType, int x, int y) {
         game.enemyGOPrefab.SetActive(false);
 

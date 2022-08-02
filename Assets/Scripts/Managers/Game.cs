@@ -47,7 +47,7 @@ public class Game : MonoBehaviour
         currentCommand = null;
         queuedCommand = null;
 
-        map.SpawnThings();
+        map.SpawnThings2();
 
         //units = new List<UnitController>(FindObjectsOfType<UnitController>());
 
