@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Counter
   icon: {fileID: -664626886, guid: 88da97783cfc26842922b768fb06b40d, type: 3}
   requiredSkills: []
-  graceCost: 2
+  graceCost: 3
   requiredWeapon: 2
-  coolDown: 0
+  coolDown: 5
   duration: 1

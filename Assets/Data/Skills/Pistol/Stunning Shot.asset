@@ -17,5 +17,5 @@ MonoBehaviour:
   requiredSkills: []
   graceCost: 1
   requiredWeapon: 5
-  coolDown: 0
+  coolDown: 3
   duration: 2
