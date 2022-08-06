@@ -11,8 +11,8 @@ public class Game : MonoBehaviour
 	public List<GameObject> tilePrefabs = new List<GameObject>();
 
     public List<BaseItem> items;
-	public List<Item> itemPrefabs = new List<Item>();
     public GameObject itemGOPrefab;
+	public List<Item> itemPrefabs = new List<Item>(); // For spawning items in game, probably change later
 
     public PlayerController player;
     public Command queuedCommand;
@@ -20,10 +20,7 @@ public class Game : MonoBehaviour
     public List<UnitController> units = new List<UnitController>();
 
     public List<Enemy> enemyTypes;
-    public List<BaseUnitStats> unitStats;
     public GameObject enemyGOPrefab;
-
-    public Skill[] allSkills;
 
     public enum State {
 		TakingTurns,
@@ -42,21 +39,19 @@ public class Game : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start() {
+    protected virtual void Start() {
         state = State.TakingTurns;
         currentCommand = null;
         queuedCommand = null;
 
-        map.SpawnThings2();
-
-        //units = new List<UnitController>(FindObjectsOfType<UnitController>());
+        //map.SpawnThings2();
 
         // Should be moved, see at bottom
         initialPosition = Camera.main.transform.localPosition;
     }
 
     // Update is called once per frame
-    void Update() {
+    protected virtual void Update() {
         TileHighlightManager.instance.ClearPrevHighlights();
 
         if (player.turn == false) {

@@ -265,7 +265,7 @@ MonoBehaviour:
   unitStats: {fileID: 0}
   vision: {fileID: 0}
   unitName: Alpha
-  turnTime: 5
+  turnTime: 10
   turnTimer: 0
   turn: 0
   unitState: 0
