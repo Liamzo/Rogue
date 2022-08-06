@@ -44,7 +44,8 @@ public class PlayerVision : Vision
             }
         }
 
-        visibleTargets.Sort((a,b) => (Mathf.Abs((a.x - parent.x) + (a.y - parent.y))).CompareTo(Mathf.Abs(((b.x - parent.x) + (b.y - parent.y)))));
+        //visibleTargets.Sort((a,b) => (Mathf.Abs((a.x - parent.x) + (a.y - parent.y))).CompareTo(Mathf.Abs(((b.x - parent.x) + (b.y - parent.y)))));
+        visibleTargets.Sort((a,b) => (Mathf.Max(Mathf.Abs((a.x - parent.x)), Mathf.Abs((a.y - parent.y)))).CompareTo(Mathf.Max(Mathf.Abs((b.x - parent.x)), Mathf.Abs((b.y - parent.y)))));
 
         // foreach(UnitController c in visibleTargets) {
         //     Debug.Log((c.x - parent.x) + (c.y - parent.y));
