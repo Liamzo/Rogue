@@ -45,9 +45,6 @@ public class Map
 				} else if (pixel.Equals(wall)) {
 					map[i, j] = new Tile(i, j, game.tilePrefabs[1], cellSize, false, false);
 				}
-
-                // Debug.DrawLine(GetWorldPosition(i,j), GetWorldPosition(i,j+1), Color.white, 10000f);
-                // Debug.DrawLine(GetWorldPosition(i,j), GetWorldPosition(i+1,j), Color.white, 10000f);
 			}
 		}
 	}
@@ -123,8 +120,6 @@ public class Map
 
         UnitStats us = enemy.GetComponent<UnitStats>();
         us.baseUnitStats = enemyType.stats;
-
-        // game.units.Add(ec);
 
         enemy.SetActive(true);
     }
