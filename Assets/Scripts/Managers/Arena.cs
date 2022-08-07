@@ -7,6 +7,8 @@ public class Arena : Game
 	public List<Vector2Int> SpawnPoints = new List<Vector2Int>();
 	public int spawnNumber = 10;
 
+    public int[] spawnChance;
+
 	override protected void Start() {
 		base.Start();
 
@@ -51,8 +53,26 @@ public class Arena : Game
 
 
 	public void SpawnWave() {
+        int spawnChanceMax = 0;
+
+        for (int i = 0; i < spawnChance.Length; i++) {
+            spawnChanceMax += spawnChance[i];
+        }
+
+
 		for (int i = 0; i < spawnNumber; i++) {
-			map.CreateEnemy(enemyTypes[0], SpawnPoints[i].x, SpawnPoints[i].y);
+            int rng = Random.Range(0, spawnChanceMax);
+
+            int j;
+            for (j = 0; j < spawnChance.Length; j++) {
+                rng -= spawnChance[j];
+
+                if (rng < 0) {
+                    break;
+                }
+            }
+
+			map.CreateEnemy(enemyTypes[j], SpawnPoints[i].x, SpawnPoints[i].y);
 		}
 	}
 
