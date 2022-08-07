@@ -7,8 +7,7 @@ public class SkillBarUI : MonoBehaviour
 {
     public Transform skillbarTransform;
 
-    GameObject[] slots;
-    public Image[] icons;
+    public SkillBarSlot[] slots;
 
     public PlayerSkills playerSkills;
     public PlayerController playerController;
@@ -33,20 +32,26 @@ public class SkillBarUI : MonoBehaviour
 
         if (skills != null) {
             for (i = 0; i < skills.Count; i++) {
-                icons[i].sprite = skills[i].skill.icon;
-                icons[i].enabled = true;
+                slots[i].icon.sprite = skills[i].skill.icon;
+                slots[i].icon.enabled = true;
 
                 if (skills[i].CanBeActivated()) {
-                    icons[i].material = null;
+                    slots[i].icon.material = null;
+                    slots[i].coolDown.SetActive(false);
                 } else {
-                    icons[i].material = skillUnusableMaterial;
+                    slots[i].icon.material = skillUnusableMaterial;
+
+                    if (skills[i].coolDownTimer > 0) {
+                        slots[i].coolDown.SetActive(true);
+                        slots[i].coolDownText.text = skills[i].coolDownTimer.ToString();
+                    }
                 }
             }
         }
 
         for (int j = i; j < 9; j++) {
-            icons[i].sprite = null;
-            icons[i].enabled = false;
+            slots[i].icon.sprite = null;
+            slots[i].icon.enabled = false;
         }
         
     }
