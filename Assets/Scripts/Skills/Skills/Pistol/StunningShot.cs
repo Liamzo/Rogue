@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "New StunningShot", menuName = "Skills/Pistol/StunBlow")]
-public class StunningShot : Skill
+public class StunningShot : SkillRanged
 {
     public int duration;
 

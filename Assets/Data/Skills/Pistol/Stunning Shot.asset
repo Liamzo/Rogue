@@ -18,4 +18,5 @@ MonoBehaviour:
   graceCost: 2
   requiredWeapon: 5
   coolDown: 3
+  ammoCost: 1
   duration: 2

@@ -37,14 +37,15 @@ public class SkillBarUI : MonoBehaviour
 
                 if (skills[i].CanBeActivated()) {
                     slots[i].icon.material = null;
-                    slots[i].coolDown.SetActive(false);
                 } else {
                     slots[i].icon.material = skillUnusableMaterial;
-
-                    if (skills[i].coolDownTimer > 0) {
-                        slots[i].coolDown.SetActive(true);
-                        slots[i].coolDownText.text = skills[i].coolDownTimer.ToString();
-                    }
+                }
+                
+                if (skills[i].coolDownTimer > 0) {
+                    slots[i].coolDown.SetActive(true);
+                    slots[i].coolDownText.text = skills[i].coolDownTimer.ToString();
+                } else {
+                    slots[i].coolDown.SetActive(false);
                 }
             }
         }

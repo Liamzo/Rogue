@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Multi Shot", menuName = "Skills/Pistol/MultiShot")]
-public class MultiShot : Skill
+public class MultiShot : SkillRanged
 {
     public int attacks;
 
