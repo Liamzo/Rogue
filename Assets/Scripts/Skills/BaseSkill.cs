@@ -51,6 +51,8 @@ public class BaseSkill {
 		} else if (done.state == CommandResult.CommandState.Succeeded) {
             Reset();
 			owner.unitStats.AddOrRemoveGrace(-skill.graceCost);
+			coolDownTimer = skill.coolDown;
+			owner.OnTurnStart += TickCoolDown;
 			Logger.instance.AddLog("Used " + skill.name);
         }
         return done;
@@ -59,8 +61,6 @@ public class BaseSkill {
 	public virtual void Reset() {
 		target = null;
 		openTargerts.Clear();
-		coolDownTimer = skill.coolDown;
-		owner.OnTurnStart += TickCoolDown;
     }
 
     public void Effects () {
