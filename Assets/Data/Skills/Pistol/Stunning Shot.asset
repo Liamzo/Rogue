@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Stunning Shot
   icon: {fileID: 125477249, guid: 88da97783cfc26842922b768fb06b40d, type: 3}
   requiredSkills: []
-  graceCost: 1
+  graceCost: 2
   requiredWeapon: 5
   coolDown: 3
   duration: 2

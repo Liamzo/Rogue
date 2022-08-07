@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Double Shot
   icon: {fileID: -570087146, guid: 88da97783cfc26842922b768fb06b40d, type: 3}
   requiredSkills: []
-  graceCost: 2
+  graceCost: 1
   requiredWeapon: 5
   coolDown: 2
   attacks: 2
