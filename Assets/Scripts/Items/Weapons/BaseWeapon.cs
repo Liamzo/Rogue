@@ -11,14 +11,11 @@ public class BaseWeapon : BaseEquipment {
 
     public virtual void Attack(UnitController target) {
         owner.vision.ChangeTargetUnit(target);
-        item.Attack(this, target, out bool killed);
+        item.Attack(this, target);
         owner.GetComponent<ActionManager>().SetAimPos(new Vector2Int(target.x, target.y)); // Attack animation Bump
         AudioManager.instance.PlaySoundOnce(owner.gameObject, item.soundType);
-
-        if (killed == true && owner is PlayerController) {
-            owner.vision.ChangeTargetUnit(null);
-            ((PlayerController)owner).KilledEnemy();
-        }
+        
+        owner.CallOnAttackEnd(target, this);
 
         Reset();
     }

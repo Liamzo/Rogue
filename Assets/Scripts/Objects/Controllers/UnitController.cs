@@ -34,6 +34,9 @@ public class UnitController : Object
 	public event System.Action OnTurnStart = delegate { };
 	public event System.Action OnTurnEnd = delegate { };
 
+	public event System.Action<UnitController, Damage> OnAttackStart = delegate { };
+	public event System.Action<UnitController, BaseWeapon> OnAttackEnd = delegate { };
+
 	// Start is called before the first frame update
 	protected override void Start() {
 		base.Start();
@@ -76,5 +79,21 @@ public class UnitController : Object
 	public virtual void TurnEnd() {
 		turn = false;
 		turnTimer = turnTime;
+	}
+
+	//
+	// For events (should probably be extracted to own class, along with events at top)
+	//
+
+	public void CallOnAttackStart(UnitController target, Damage damage) {
+		if (OnAttackStart != null) {
+			OnAttackStart(target, damage);
+		}
+	}
+
+	public void CallOnAttackEnd(UnitController target, BaseWeapon weapon) {
+		if (OnAttackEnd != null) {
+			OnAttackEnd(target, weapon);
+		}
 	}
 }

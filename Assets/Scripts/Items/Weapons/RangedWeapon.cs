@@ -55,9 +55,9 @@ public class RangedWeapon : Weapon
         return null;
     }
 
-    public void Attack(BaseWeapon baseWeapon, Tile target, out bool killed) {
+    public void Attack(BaseWeapon baseWeapon, Tile target, out UnitController targetUnit) {
         // MAYBE return bool if target is in range, so the player won't shoot at a target out of range. Would only happen with auto target, is sight > range
-        killed = false;
+        targetUnit = null;
 
         int xDistance = target.x - baseWeapon.owner.x;
         int yDistance = target.y - baseWeapon.owner.y;
@@ -79,7 +79,9 @@ public class RangedWeapon : Weapon
                     }
                     baseWeapon.owner.vision.ChangeTargetUnit(hit);
 
-                    base.Attack(baseWeapon, hit, out killed);
+                    targetUnit = hit;
+
+                    base.Attack(baseWeapon, hit);
                 }
 
                 break;

@@ -18,7 +18,7 @@ public class BaseRangedWeapon : BaseWeapon {
     }
 
     public void Attack(Tile target) {
-        ((RangedWeapon)item).Attack(this, target, out bool killed);
+        ((RangedWeapon)item).Attack(this, target, out UnitController targetUnit);
         owner.GetComponent<ActionManager>().SetAimPos(new Vector2Int(target.x, target.y));
         AudioManager.instance.PlaySoundOnce(owner.gameObject, item.soundType);
 
@@ -27,10 +27,7 @@ public class BaseRangedWeapon : BaseWeapon {
             OnAmmoChange();
         }
 
-        if (killed == true && owner is PlayerController) {
-            owner.vision.ChangeTargetUnit(null);
-            ((PlayerController)owner).KilledEnemy();
-        }
+        owner.CallOnAttackEnd(targetUnit, this);
         
         Reset();
     }

@@ -19,12 +19,8 @@ public class ChargeAttack2 : Skill
                 UnitController target = (UnitController)tile.occupiedBy;
                 target.unitStats.TakeDamge(new Damage(baseSkill.owner, baseSkill.owner.unitStats.stats[(int)Stats.Strength].GetValue() + baseSkill.owner.unitStats.stats[(int)Stats.MeleeDamage].GetValue()));
 
-                if (target.unitStats.currentGrit <= 0 && baseSkill.owner is PlayerController) {
-                    ((PlayerController) baseSkill.owner).KilledEnemy();
-
-                    if (tile == baseSkill.target) {
-                        baseSkill.owner.vision.ChangeTargetUnit(null);
-                    }
+                if (baseSkill.owner is PlayerController) {
+                    ((PlayerController) baseSkill.owner).CheckKilledEnemy(target, null);
                 }
             }
         }

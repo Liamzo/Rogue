@@ -21,6 +21,8 @@ public class PlayerController : UnitController
 
         moveable = GetComponent<Moveable>();
 		playerVision = (PlayerVision)vision;
+
+		OnAttackEnd += CheckKilledEnemy;
 	}
 
 	public override void TurnStart()
@@ -169,7 +171,10 @@ public class PlayerController : UnitController
 	// 	TargetUnitChange();
     // }
 
-    public void KilledEnemy() {
-        unitStats.AddOrRemoveGrace(1);
+    public void CheckKilledEnemy(UnitController target, BaseWeapon weapon) {
+		if (target.unitStats.currentGrit <= 0) {
+        	unitStats.AddOrRemoveGrace(1);
+			vision.ChangeTargetUnit(null);
+		}
     }
 }
