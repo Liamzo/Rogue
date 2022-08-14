@@ -26,8 +26,8 @@ public class UnitSkills : MonoBehaviour {
     public virtual void UnlockSkill (BaseSkill skill) {
         unlockedSkillsList.Add(skill);
 
-        skill.OnUnlock();
         skill.owner = unitController;
+        skill.OnUnlock(skill);
     }
 
     public bool TryUnlockSkill (BaseSkill skill) {

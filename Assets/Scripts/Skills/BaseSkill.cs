@@ -27,8 +27,8 @@ public class BaseSkill {
 		closedTargerts = new List<UnitController>();
 	}
 
-	public void OnUnlock () {
-		skill.OnUnlock();
+	public void OnUnlock (BaseSkill baseSkill) {
+		skill.OnUnlock(baseSkill);
 		coolDownTimer = 0;
 	}
 
@@ -61,10 +61,6 @@ public class BaseSkill {
 	public virtual void Reset() {
 		target = null;
 		openTargerts.Clear();
-    }
-
-    public void Effects () {
-        skill.Effects();
     }
 
 	public bool CanBeActivated() {

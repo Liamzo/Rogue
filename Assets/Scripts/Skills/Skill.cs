@@ -15,16 +15,10 @@ public class Skill : ScriptableObject
     public int coolDown;
 
     public virtual CommandResult Use (BaseSkill baseSkill) {
-        //Debug.Log("Using " + name);
-
         return new CommandResult(CommandResult.CommandState.Succeeded, null);
     }
 
-    public virtual void Effects () {
-        // For timed effects
-    }
-
-    public virtual void OnUnlock () {
+    public virtual void OnUnlock (BaseSkill baseSkill) {
         Logger.instance.AddLog("Learned " + name);
 	}
 
