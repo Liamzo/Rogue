@@ -146,7 +146,7 @@ public class PlayerController : UnitController
 		if (skill != null) {
 			// Do we need used skill at all here?
 			usedSkill = skill;
-			if (vision.currentTarget != null) {
+			if (vision.currentTarget != null && !Input.GetKey(KeyCode.LeftShift)) {
 				usedSkill.target = game.map.GetTile(vision.currentTarget.x, vision.currentTarget.y);
 			}
 			skill.skill.Activate(usedSkill);

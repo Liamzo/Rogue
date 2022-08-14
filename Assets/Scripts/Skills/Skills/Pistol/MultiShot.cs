@@ -27,7 +27,7 @@ public class MultiShot : SkillRanged
             int yDistance = target.y - baseSkill.owner.y;
             int dist = Mathf.Max(Mathf.Abs(xDistance), Mathf.Abs(yDistance));
 
-            if (target.occupiedBy != null && dist <= baseSkill.owner.equipmentManager.GetRangedWeapon().item.range) {
+            if (dist <= baseSkill.owner.equipmentManager.GetRangedWeapon().item.range) {
                 for (int i = 0; i < attacks; i++) {
                     baseSkill.owner.equipmentManager.GetRangedWeapon().Attack(target);
                 }
