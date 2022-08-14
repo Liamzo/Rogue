@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d2b93d025ae3947a2d1a809a36d859, type: 3}
   m_Name: Fast Hands
   m_EditorClassIdentifier: 
-  name: New Skill
-  icon: {fileID: 0}
+  name: Fast Hands
+  icon: {fileID: -6246062721824389004, guid: 88da97783cfc26842922b768fb06b40d, type: 3}
   requiredSkills: []
   graceCost: 0
   requiredWeapon: 0

@@ -74,19 +74,15 @@ public class PlayerController : UnitController
 			return c;
 		}
 
-		if (Input.GetKeyDown(KeyCode.F) && Input.GetKeyDown(KeyCode.LeftControl)) {
-			Debug.Log("boop");
-		}
 		if (Input.GetKeyDown(KeyCode.F)) {
 			if (equipmentManager.GetRangedWeapon() != null) {
 				Tile target = null;
-				if (vision.currentTarget != null) {
+				if (vision.currentTarget != null && !Input.GetKey(KeyCode.LeftShift)) {
 					target = game.map.GetTile(vision.currentTarget.x, vision.currentTarget.y);
 				}
 				return new RangedAttackCommand(this, target, equipmentManager.GetRangedWeapon());
 			}
 		}
-
 		if (Input.GetKeyDown(KeyCode.R)) {
 			if (equipmentManager.GetRangedWeapon() != null) {
 				return new ReloadCommand(this, equipmentManager.GetRangedWeapon());
@@ -172,6 +168,10 @@ public class PlayerController : UnitController
     // }
 
     public void CheckKilledEnemy(UnitController target, BaseWeapon weapon) {
+		if (target == null) {
+			return;
+		}
+
 		if (target.unitStats.currentGrit <= 0) {
         	unitStats.AddOrRemoveGrace(1);
 			vision.ChangeTargetUnit(null);

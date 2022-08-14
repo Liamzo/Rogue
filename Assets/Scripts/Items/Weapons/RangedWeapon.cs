@@ -50,7 +50,7 @@ public class RangedWeapon : Weapon
         }
 
         if (Input.GetMouseButtonDown(0)) {
-            return baseWeapon.game.map.GetTile(path[path.Count-1]);
+            return baseWeapon.game.map.GetTile(path[path.Count-1].x, path[path.Count-1].y);
         }
         return null;
     }

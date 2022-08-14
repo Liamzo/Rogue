@@ -306,7 +306,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 1070990205}
-  coolDown: {fileID: 1925385151}
+  coolDown: {fileID: 0}
+  coolDownText: {fileID: 0}
 --- !u!114 &708674989 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5785321252833950700, guid: 1c7e88aadbbe252479d5a705f2faa0a0,
@@ -544,12 +545,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ee04e01a5f3814cb984f18500497a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1925385151 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8326785113743032479, guid: 1c7e88aadbbe252479d5a705f2faa0a0,
-    type: 3}
-  m_PrefabInstance: {fileID: 4071314965189626184}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1960220754 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3361962041279314325, guid: 1c7e88aadbbe252479d5a705f2faa0a0,
@@ -1391,6 +1386,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1005960623}
+    - target: {fileID: 8265189350340889486, guid: de98334a1eb90dd4cbcc8ec2cf280014,
+        type: 3}
+      propertyPath: spawnNumber
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8265189350340889486, guid: de98334a1eb90dd4cbcc8ec2cf280014,
         type: 3}
       propertyPath: spawnChance.Array.size

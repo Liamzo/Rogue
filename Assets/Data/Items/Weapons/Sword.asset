@@ -18,6 +18,7 @@ MonoBehaviour:
   equipSlot: 2
   stats:
   - stat: 5
-    value: 3
+    value: 2
   weaponType: 2
+  soundType: 0
   range: 1
